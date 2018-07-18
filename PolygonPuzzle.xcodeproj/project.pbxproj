@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */; };
+		1CA6C88620FF7C4A0076E557 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88520FF7C4A0076E557 /* ViewController.swift */; };
+		1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88720FF7C4A0076E557 /* Main.storyboard */; };
+		1CA6C88C20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88A20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld */; };
+		1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */; };
+		1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */; };
+		1CA6C89C20FF7C4A0076E557 /* PolygonPuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C89B20FF7C4A0076E557 /* PolygonPuzzleTests.swift */; };
+		1CA6C8A720FF7C4A0076E557 /* PolygonPuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1CA6C89820FF7C4A0076E557 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA6C87820FF7C490076E557 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CA6C87F20FF7C490076E557;
+			remoteInfo = PolygonPuzzle;
+		};
+		1CA6C8A320FF7C4A0076E557 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1CA6C87820FF7C490076E557 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CA6C87F20FF7C490076E557;
+			remoteInfo = PolygonPuzzle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1CA6C88520FF7C4A0076E557 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1CA6C88820FF7C4A0076E557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1CA6C88B20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PolygonPuzzle.xcdatamodel; sourceTree = "<group>"; };
+		1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1CA6C89020FF7C4A0076E557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1CA6C89220FF7C4A0076E557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CA6C89720FF7C4A0076E557 /* PolygonPuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolygonPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA6C89B20FF7C4A0076E557 /* PolygonPuzzleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonPuzzleTests.swift; sourceTree = "<group>"; };
+		1CA6C89D20FF7C4A0076E557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CA6C8A220FF7C4A0076E557 /* PolygonPuzzleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PolygonPuzzleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonPuzzleUITests.swift; sourceTree = "<group>"; };
+		1CA6C8A820FF7C4A0076E557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CA6C87D20FF7C490076E557 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C89420FF7C4A0076E557 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C89F20FF7C4A0076E557 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CA6C87720FF7C490076E557 = {
+			isa = PBXGroup;
+			children = (
+				1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */,
+				1CA6C89A20FF7C4A0076E557 /* PolygonPuzzleTests */,
+				1CA6C8A520FF7C4A0076E557 /* PolygonPuzzleUITests */,
+				1CA6C88120FF7C4A0076E557 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1CA6C88120FF7C4A0076E557 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */,
+				1CA6C89720FF7C4A0076E557 /* PolygonPuzzleTests.xctest */,
+				1CA6C8A220FF7C4A0076E557 /* PolygonPuzzleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */,
+				1CA6C88520FF7C4A0076E557 /* ViewController.swift */,
+				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
+				1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */,
+				1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */,
+				1CA6C89220FF7C4A0076E557 /* Info.plist */,
+				1CA6C88A20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld */,
+			);
+			path = PolygonPuzzle;
+			sourceTree = "<group>";
+		};
+		1CA6C89A20FF7C4A0076E557 /* PolygonPuzzleTests */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C89B20FF7C4A0076E557 /* PolygonPuzzleTests.swift */,
+				1CA6C89D20FF7C4A0076E557 /* Info.plist */,
+			);
+			path = PolygonPuzzleTests;
+			sourceTree = "<group>";
+		};
+		1CA6C8A520FF7C4A0076E557 /* PolygonPuzzleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */,
+				1CA6C8A820FF7C4A0076E557 /* Info.plist */,
+			);
+			path = PolygonPuzzleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1CA6C87F20FF7C490076E557 /* PolygonPuzzle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CA6C8AB20FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzle" */;
+			buildPhases = (
+				1CA6C87C20FF7C490076E557 /* Sources */,
+				1CA6C87D20FF7C490076E557 /* Frameworks */,
+				1CA6C87E20FF7C490076E557 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PolygonPuzzle;
+			productName = PolygonPuzzle;
+			productReference = 1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1CA6C89620FF7C4A0076E557 /* PolygonPuzzleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CA6C8AE20FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzleTests" */;
+			buildPhases = (
+				1CA6C89320FF7C4A0076E557 /* Sources */,
+				1CA6C89420FF7C4A0076E557 /* Frameworks */,
+				1CA6C89520FF7C4A0076E557 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CA6C89920FF7C4A0076E557 /* PBXTargetDependency */,
+			);
+			name = PolygonPuzzleTests;
+			productName = PolygonPuzzleTests;
+			productReference = 1CA6C89720FF7C4A0076E557 /* PolygonPuzzleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1CA6C8A120FF7C4A0076E557 /* PolygonPuzzleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CA6C8B120FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzleUITests" */;
+			buildPhases = (
+				1CA6C89E20FF7C4A0076E557 /* Sources */,
+				1CA6C89F20FF7C4A0076E557 /* Frameworks */,
+				1CA6C8A020FF7C4A0076E557 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CA6C8A420FF7C4A0076E557 /* PBXTargetDependency */,
+			);
+			name = PolygonPuzzleUITests;
+			productName = PolygonPuzzleUITests;
+			productReference = 1CA6C8A220FF7C4A0076E557 /* PolygonPuzzleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1CA6C87820FF7C490076E557 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Andrew Fenner";
+				TargetAttributes = {
+					1CA6C87F20FF7C490076E557 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					1CA6C89620FF7C4A0076E557 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1CA6C87F20FF7C490076E557;
+					};
+					1CA6C8A120FF7C4A0076E557 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 1CA6C87F20FF7C490076E557;
+					};
+				};
+			};
+			buildConfigurationList = 1CA6C87B20FF7C490076E557 /* Build configuration list for PBXProject "PolygonPuzzle" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1CA6C87720FF7C490076E557;
+			productRefGroup = 1CA6C88120FF7C4A0076E557 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1CA6C87F20FF7C490076E557 /* PolygonPuzzle */,
+				1CA6C89620FF7C4A0076E557 /* PolygonPuzzleTests */,
+				1CA6C8A120FF7C4A0076E557 /* PolygonPuzzleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CA6C87E20FF7C490076E557 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */,
+				1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */,
+				1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C89520FF7C4A0076E557 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C8A020FF7C4A0076E557 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CA6C87C20FF7C490076E557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA6C88620FF7C4A0076E557 /* ViewController.swift in Sources */,
+				1CA6C88C20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld in Sources */,
+				1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C89320FF7C4A0076E557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA6C89C20FF7C4A0076E557 /* PolygonPuzzleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1CA6C89E20FF7C4A0076E557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA6C8A720FF7C4A0076E557 /* PolygonPuzzleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1CA6C89920FF7C4A0076E557 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CA6C87F20FF7C490076E557 /* PolygonPuzzle */;
+			targetProxy = 1CA6C89820FF7C4A0076E557 /* PBXContainerItemProxy */;
+		};
+		1CA6C8A420FF7C4A0076E557 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1CA6C87F20FF7C490076E557 /* PolygonPuzzle */;
+			targetProxy = 1CA6C8A320FF7C4A0076E557 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1CA6C88720FF7C4A0076E557 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CA6C88820FF7C4A0076E557 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CA6C89020FF7C4A0076E557 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1CA6C8A920FF7C4A0076E557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1CA6C8AA20FF7C4A0076E557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1CA6C8AC20FF7C4A0076E557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1CA6C8AD20FF7C4A0076E557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1CA6C8AF20FF7C4A0076E557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PolygonPuzzle.app/PolygonPuzzle";
+			};
+			name = Debug;
+		};
+		1CA6C8B020FF7C4A0076E557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PolygonPuzzle.app/PolygonPuzzle";
+			};
+			name = Release;
+		};
+		1CA6C8B220FF7C4A0076E557 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PolygonPuzzle;
+			};
+			name = Debug;
+		};
+		1CA6C8B320FF7C4A0076E557 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U44FL526BD;
+				INFOPLIST_FILE = PolygonPuzzleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PolygonPuzzle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CA6C87B20FF7C490076E557 /* Build configuration list for PBXProject "PolygonPuzzle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA6C8A920FF7C4A0076E557 /* Debug */,
+				1CA6C8AA20FF7C4A0076E557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CA6C8AB20FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA6C8AC20FF7C4A0076E557 /* Debug */,
+				1CA6C8AD20FF7C4A0076E557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CA6C8AE20FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA6C8AF20FF7C4A0076E557 /* Debug */,
+				1CA6C8B020FF7C4A0076E557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CA6C8B120FF7C4A0076E557 /* Build configuration list for PBXNativeTarget "PolygonPuzzleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA6C8B220FF7C4A0076E557 /* Debug */,
+				1CA6C8B320FF7C4A0076E557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1CA6C88A20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1CA6C88B20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodel */,
+			);
+			currentVersion = 1CA6C88B20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodel */;
+			path = PolygonPuzzle.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 1CA6C87820FF7C490076E557 /* Project object */;
+}
