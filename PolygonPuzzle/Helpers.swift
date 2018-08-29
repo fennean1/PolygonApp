@@ -52,6 +52,56 @@ func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
 }
 
 
+
+// Finds duplicates in an array based on an arbitrary criteria
+extension Array {
+    
+    func filterDuplicates(includeElement: (_ lhs:Element, _ rhs:Element) -> Bool) -> [Element]{
+        
+        // Empty array that we'll populate with unique elements.
+        var results = [Element]()
+        
+        forEach { (element) in
+            // Check to see if element is already in the array by removing everything that's not equal to the element.
+            let existingElements = results.filter {
+                return includeElement(element, $0)
+            }
+            // Append to the results array if it has no matches in our existing array.d
+            if existingElements.count == 0 {
+                results.append(element)
+            }
+        }
+        
+        return results
+    }
+}
+
+// Removes duplicate nodes if they are m
+func removeDuplicateNodes(nodes: [Node]) -> [Node] {
+    
+    
+    
+    // Function that gives the criteria for duplicates
+    func duplicateCriteria(pointA: CGPoint, pointB: CGPoint) -> Bool
+    {
+        // Points are duplicates if the distance between them is non zero and less than one pixel.
+        
+        let d = distance(a: pointA, b: pointB)
+        
+        return abs(d) < 0.05
+        
+    }
+    
+    let filteredArray = nodes.filterDuplicates(includeElement: {duplicateCriteria(pointA: $0.location, pointB: $1.location)})
+    
+    print("NODES REMOVED:",nodes.count-filteredArray.count)
+    
+    return filteredArray
+    
+    
+}
+
+
 // Computes the origin for a polygon defined by an array of points
 func frame(of points: [CGPoint])-> CGRect {
     let xValues = points.map({p in p.x})
@@ -140,5 +190,14 @@ func distance(a: CGPoint,b: CGPoint) -> CGFloat {
     
     return CGFloat(d)
     
+}
+
+func pointsEqual(first: CGPoint,second: CGPoint) -> Bool {
+    if distance(a: first, b: second) < 1{
+        return true
+    }
+    else {
+        return false
+    }
 }
 

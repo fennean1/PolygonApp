@@ -44,12 +44,13 @@ class GameViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     
 
-    
     @IBAction func cut(sender: UIButton){
     
         // Needs to be in front of the "invisible" cutting view
         view.bringSubview(toFront: cuttingView)
         view.bringSubview(toFront: cutButton)
+        view.bringSubview(toFront: markerOne)
+        view.bringSubview(toFront: markerTwo)
         
         if !Cutting {
             // Need to get the polygon origin so we can convert its points to
@@ -58,24 +59,33 @@ class GameViewController: UIViewController {
             cutButton.setImage(UIImage(named: "scissors-clipart"), for: .normal)
             let nodesForLines = mapPointsWithOffset(offSet: polygonOrigin, points: AllPolygons[ActivePolygonIndex].vertices())
             LinesToCut = makeLinesFromPoints(points: nodesForLines)
+            IntersectionNodes = []
             hideInactivePolygons()
-            
         }
         else if Cutting {
             
             // Returns all the old polygons
             returnPolygonsToView()
             
+            UIView.animate(withDuration: 1, animations: {
+                markerOne.frame.styleHideMarker(container: self.view.frame)
+                markerTwo.frame.styleHideMarker(container: self.view.frame)
+            })
             
-            // HELLO THESE NODES ARE NOT IN THE SAME COORDINATE SYSTEM AS THE INTERSECTION POINTS NEED TO CONVERT USING ACTIVE POLYGON ORIGIN.
+            cuttingView.clear()
+            
+            // Make sure we don't cut if there's nothing
+       
+            if IntersectionNodes.count == 2 {
+            
             let ActivePolygon = AllPolygons[ActivePolygonIndex]
             let origin = ActivePolygon.frame.origin
             let nodes = ActivePolygon.nodes
             // This converts the nodes to the main coordinate system.
             let transformedNodes = nodes?.map( {(n: Node) -> Node in
                 let newLocation = addPoints(a: n.location, b: origin)
-                let returnNode = Node(_location: newLocation, _sister: n.sister)
-                return returnNode})
+                n.location = newLocation
+                return n})
             
             let newNodes = splitNodes(cutNodes: IntersectionNodes, nodes: transformedNodes!)
             
@@ -120,6 +130,7 @@ class GameViewController: UIViewController {
             AllPolygons.remove(at: ActivePolygonIndex)
         
             AllPolygons += [topPolygon,bottomPolygon]
+            }
 
             cutButton.setImage(UIImage(named: "closed-scissors-clipart"), for: .normal)
      

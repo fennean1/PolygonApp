@@ -27,8 +27,6 @@ class Line {
     
     func containsPoint(point: CGPoint) -> Bool {
         
-        print("inside containsPoint, point, self.y(x)",point,self.y(x: point.x))
-        print("point.y-self.b",point.y - self.b,self.isHorizontal)
         // HELLO! What if...?
         if self.isHorizontal {
             if abs(point.y - self.b) < 2 {
@@ -37,7 +35,7 @@ class Line {
         }
         
         if self.isVertical {
-            if abs(point.x - self.firstPoint!.x)<2{
+            if abs(point.x - self.firstPoint!.x) < 2 {
                 if self.inRange(val: point.y){
                     return true
                 }
@@ -65,7 +63,7 @@ class Line {
     }
     
     func inRange(val: CGFloat!)-> Bool {
-        if (val < maxY!) && (val > minY!) {
+        if (val <= maxY!) && (val >= minY!) {
             return true
         }
         else{
@@ -74,7 +72,7 @@ class Line {
     }
     
     func inRangeX(xVal: CGFloat)-> Bool {
-        if (xVal < maxX!) && (xVal > minX!) {
+        if (xVal <= maxX!) && (xVal >= minX!) {
             return true
         }
         else{
@@ -86,6 +84,7 @@ class Line {
         return m*x+b
     }
     
+    // Takes another line and returns the intersection point.
     func intersectionPoint(line: Line) -> CGPoint? {
         
         var x: CGFloat = 0
@@ -94,32 +93,26 @@ class Line {
         var returnMe: CGPoint? = nil
         
         if line.isVertical == true && self.isVertical == true {
-            print("BOTH VERTICAL")
             return nil
         }
         else if line.isHorizontal == true && self.isHorizontal == true {
-            print("BOTH HORIZONTAL")
             return nil
         }
         else if line.isVertical {
-            print("INPUT IS VERTICAL")
             x = line.firstPoint!.x
             y = self.y(x: x)
-            if self.inRange(val: y){
+            if self.inRange(val: y) && line.inRange(val: y){
                 returnMe = CGPoint(x: x,y: y)
             }
-            
         }
         else if self.isVertical {
-            print("SELF IS VERTICAL")
             x = self.firstPoint!.x
             y = line.y(x: x)
-            if line.inRange(val: y){
+            if line.inRange(val: y) && self.inRange(val: y){
                 returnMe = CGPoint(x: x,y: y)
             }
         }
         else if line.isHorizontal {
-            print("INPUT HORIZONTAL")
             y = line.firstPoint!.y
             x = (line.b-self.b)/(self.m-line.m)
             if self.inRange(val: y) && line.inRangeX(xVal: x){
@@ -128,7 +121,6 @@ class Line {
             
         }
         else if self.isHorizontal {
-            print("SELF HORIZONTAL")
             y = self.firstPoint!.y
             x = (line.b-self.b)/(self.m-line.m)
             if line.inRange(val: y) && self.inRangeX(xVal: x) {
@@ -136,13 +128,11 @@ class Line {
             }
         }
         else {
-            print("NORMAL CASE")
             x = (line.b-self.b)/(self.m-line.m)
             y = self.y(x: x)
             
             if self.inRange(val: y) && line.inRange(val: y)
             {
-                print("REGULAR ASS MATCH FOUND!")
                 returnMe = CGPoint(x: x,y: y)
             }
             else {
@@ -150,6 +140,15 @@ class Line {
                 returnMe = nil
             }
             
+        }
+        
+        if returnMe != nil {
+            if distance(a: returnMe!, b: self.firstPoint!) < 10 {
+                returnMe = self.firstPoint
+            }
+            else if distance(a: returnMe!, b: self.secondPoint!) < 10 {
+                returnMe = self.secondPoint
+            }
         }
         
         return returnMe

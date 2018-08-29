@@ -11,9 +11,6 @@ import UIKit
 
 // HOW DO THESE POLYGONS KNOW THEIR FRAME? NEEDS TO BE COMPUTED FROM NODES.
 func redrawPolygons(){
-    
-     let origins = AllPolygonOrigins
-    
     for p in AllPolygons {
         p.drawTheLayer()
     }    

@@ -32,7 +32,6 @@
 		1CA6C89C20FF7C4A0076E557 /* PolygonPuzzleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C89B20FF7C4A0076E557 /* PolygonPuzzleTests.swift */; };
 		1CA6C8A720FF7C4A0076E557 /* PolygonPuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */; };
 		1CA6C8B520FF8F890076E557 /* DraggablePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */; };
-		1CB685B12129CFBE00FA5A59 /* LinkedNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB685B02129CFBE00FA5A59 /* LinkedNodes.swift */; };
 		1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905D2122135C000FCB9D /* Nodes.swift */; };
 		1CBA9060212213FF000FCB9D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905F212213FF000FCB9D /* Line.swift */; };
 		1CBA9062212346C4000FCB9D /* DrawPolygons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA9061212346C4000FCB9D /* DrawPolygons.swift */; };
@@ -90,7 +89,6 @@
 		1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonPuzzleUITests.swift; sourceTree = "<group>"; };
 		1CA6C8A820FF7C4A0076E557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePolygon.swift; sourceTree = "<group>"; };
-		1CB685B02129CFBE00FA5A59 /* LinkedNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedNodes.swift; sourceTree = "<group>"; };
 		1CBA905D2122135C000FCB9D /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 		1CBA905F212213FF000FCB9D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1CBA9061212346C4000FCB9D /* DrawPolygons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawPolygons.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 				1CFB47FD211A34CF00635139 /* CuttingView.swift */,
 				1CFB47FF211A371800635139 /* CuttingMethods.swift */,
 				1CBA905D2122135C000FCB9D /* Nodes.swift */,
-				1CB685B02129CFBE00FA5A59 /* LinkedNodes.swift */,
 				1CBA905F212213FF000FCB9D /* Line.swift */,
 				1C74E29C210676F700EBECC5 /* DataModel.swift */,
 			);
@@ -389,7 +386,6 @@
 				1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */,
 				1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */,
 				1CA6C88C20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld in Sources */,
-				1CB685B12129CFBE00FA5A59 /* LinkedNodes.swift in Sources */,
 				1C74E2712103869400EBECC5 /* Shapes.swift in Sources */,
 				1CA6C8B520FF8F890076E557 /* DraggablePolygon.swift in Sources */,
 				1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */,
@@ -563,7 +559,7 @@
 				DEVELOPMENT_TEAM = U44FL526BD;
 				INFOPLIST_FILE = PolygonPuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numbersalive.puzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -580,7 +576,7 @@
 				DEVELOPMENT_TEAM = U44FL526BD;
 				INFOPLIST_FILE = PolygonPuzzle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = NumberShapeLLC.PolygonPuzzle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.numbersalive.puzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

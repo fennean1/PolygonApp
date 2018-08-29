@@ -15,6 +15,7 @@ var Cutting = false
 var AllPolygons: [DraggablePolygon] = []
 var LinesToCut: [Line] = []
 var LineToCutWith: Line!
+var OtherLineToCutWith: Line!
 var IntersectionNodes: [Node] = []
 var ActivePolygonIndex = 0
 
@@ -44,11 +45,8 @@ func hideInactivePolygons(){
 
 func returnPolygonsToView(){
     
-    print("original origins",OriginalLocations)
-    
     UIView.animate(withDuration: 1, animations: {
         for (i,p) in AllPolygons.enumerated() {
-            print("entering the loop that animates the polygons being removed",i)
             if p != ActivePolygon {
                p.frame.origin = OriginalLocations[i]
             }

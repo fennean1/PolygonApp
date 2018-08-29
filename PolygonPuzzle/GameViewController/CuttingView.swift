@@ -28,6 +28,12 @@ class CuttingView: UIView {
         return Cutting
     }
     
+    func clear(){
+        let context = UIGraphicsGetCurrentContext()
+        context?.clear(self.bounds)
+        self.setNeedsDisplay()
+    }
+    
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.setStrokeColor(UIColor.yellow.cgColor)
@@ -37,8 +43,6 @@ class CuttingView: UIView {
             
             context?.move(to: cutStart)
             context?.addLine(to: cutEnd)
-            
-            
             context?.strokePath()
         }
         else {
@@ -68,7 +72,7 @@ class CuttingView: UIView {
         if pan.state == .ended {
             
             LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
-            
+            IntersectionNodes = []
             // Cut points may not exist so we have to check if we can unwrap it.
             if let cutPoints = getCutPoints(lines: LinesToCut, cuttingLine: LineToCutWith){
                 IntersectionNodes = cutPoints

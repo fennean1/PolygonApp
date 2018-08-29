@@ -17,17 +17,16 @@ func splitNodes(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     // Used for assigning location states
     for n in nodes {
         // Number of bottom arrays and number of top arrays.
-        if n.location.y > cutter.y(x: n.location.x){
+        if pointsEqual(first: n.location,second: cutNodes[0].location) || pointsEqual(first: n.location,second: cutNodes[1].location)   {
+            print("This node is on the border")
+            n.locationState = LocationState.onborder
+        }
+        else if n.location.y > cutter.y(x: n.location.x){
             n.locationState = LocationState.above
-        } else {
+        } else if n.location.y < cutter.y(x: n.location.x){
             n.locationState = LocationState.below
         }
-        
     }
-    
-    // IDEA: Map Filter to find the thing something like $1 = $0 + 1
-    
-    print("This is the location state of the first node",nodes[0].locationState!)
     
     // indices at which we need to break our function
     var breakAtIndices: [Int] = []
@@ -35,7 +34,6 @@ func splitNodes(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     var nodesWithCutPointsInserted: [Node] = []
     
     let nodeCount = nodes.count
-    
     
     for (i,n) in nodes.enumerated(){
         
@@ -49,31 +47,50 @@ func splitNodes(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
         nodesWithCutPointsInserted.append(currentNode)
         let nodeCount = nodesWithCutPointsInserted.count
         
-        if currentNode.locationState != nextNode.locationState {
-            // Construct a line between the nodes...fuck - what coordinate system is this in?
+        if currentNode.locationState == LocationState.onborder {
+            print("Found a border node!")
+            breakAtIndices.append(nodeCount-1)
+        }
+        else if nextNode.locationState == LocationState.onborder {
+            // Do nothing right now.
+        }
+        else if currentNode.locationState != nextNode.locationState {
+            
+            // Construct a line between the nodes.
+            
             let connectingLine = Line(_firstPoint: currentNode.location, _secondPoint: nextNode.location)
             
+            
             let intersectsAtFirstCutNode = connectingLine.containsPoint(point: cutNodes[0].location)
+            print("Line intersects with the first cut node?", intersectsAtFirstCutNode)
             let intersectsAtSecondCutNode = connectingLine.containsPoint(point: cutNodes[1].location)
+            print("Line intersects with the second cut node?",intersectsAtSecondCutNode )
             
             if intersectsAtFirstCutNode {
-                breakAtIndices.append(nodeCount)
-                nodesWithCutPointsInserted.append(cutNodes[0])
+                    breakAtIndices.append(nodeCount)
+                    nodesWithCutPointsInserted.append(cutNodes[0])
             }
             
             if intersectsAtSecondCutNode {
-                breakAtIndices.append(nodeCount)
-                nodesWithCutPointsInserted.append(cutNodes[1])
+                    breakAtIndices.append(nodeCount)
+                    nodesWithCutPointsInserted.append(cutNodes[1])
             }
         }
     }
     
-    // It's possible that these don't exist (sort of)
+    // It's possible that these don't exist.
+    print("First Index to Break At",breakAtIndices[0])
+    print("Second Index to Break At",breakAtIndices[1])
+    
+    
+    // HELLO Need a safegaurd here so it doesn't toally crash
     let firstIndexToBreakAt = breakAtIndices[0]
     let secondIndexToBreakAt = breakAtIndices[1]
     
     let firstNodesToDraw = Array(nodesWithCutPointsInserted[...firstIndexToBreakAt] + nodesWithCutPointsInserted[secondIndexToBreakAt...])
+        print("First Nodes to Draw Count",firstNodesToDraw.count)
     let secondNodesToDraw = Array(nodesWithCutPointsInserted[firstIndexToBreakAt...secondIndexToBreakAt])
+    print("Second Nodes to Draw Count",secondNodesToDraw.count)
     
     return (firstNodesToDraw,secondNodesToDraw)
     
@@ -81,12 +98,12 @@ func splitNodes(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
 
 
 // On No! The location states need to be reset or..managed...or something.
-
 enum LocationState
 {
     case above
     case below
     case inactive
+    case onborder
 }
 
 class Node {

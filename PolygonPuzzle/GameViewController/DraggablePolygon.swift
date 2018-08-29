@@ -9,17 +9,8 @@
 import Foundation
 import UIKit
 
-func coordinates(inRect rect: CGRect){
-    print("This is my Rect:",rect)
-}
-
-func callingCoordinates(){
-    coordinates(inRect: CGRect(x: 0, y: 0, width: 10, height: 10))
-}
-
 
 class PolygonLayer: CAShapeLayer {
-    
     
     public var myColor: CGColor!
     
@@ -28,7 +19,6 @@ class PolygonLayer: CAShapeLayer {
         // Calculate the color based on the number of nodes
         myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
         
-     
         var tempNodes = _nodes
 
         self.opacity = 1
@@ -78,7 +68,6 @@ class DraggablePolygon: UIView {
         super.point(inside: point, with: event)
         if let p = polygonLayer.path {
             if p.contains(point) {
-                print("contains the point! about to set the ")
                 ActivePolygonIndex = AllPolygons.index(of: self)!
                 applyShadows()
                 viewWithTag(0)?.bringSubview(toFront: ActivePolygon)
