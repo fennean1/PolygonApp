@@ -42,7 +42,7 @@ class Line {
             }
         }
         
-        
+        // Ugly If statement
         if abs(self.y(x: point.x) - point.y) < 2 {
             if self.inRange(val: point.y) {
                 if self.inRangeX(xVal: point.x){
@@ -136,7 +136,6 @@ class Line {
                 returnMe = CGPoint(x: x,y: y)
             }
             else {
-                print("returning nil from the final case")
                 returnMe = nil
             }
             

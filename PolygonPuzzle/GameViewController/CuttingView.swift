@@ -13,17 +13,20 @@ import UIKit
 // Need this for drawing over the view.
 class CuttingView: UIView {
     
+    var myPan: UIPanGestureRecognizer!
+    
     public var cutStart = CGPoint(x: 0,y: 0)
     
     public var cutEnd = CGPoint(x: 0,y:0)
     {
         didSet {
-            self.setNeedsDisplay()
+            if myPan.state != .ended {
+                self.setNeedsDisplay()
+            }
         }
     }
     
     // point inside isn't recognized if cutting is false - there has to be a better way to do this. Oh, no because it has to pass touches...maybe bring in the view after cutting is clicked?
-    
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         return Cutting
     }
@@ -35,58 +38,86 @@ class CuttingView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+        
+        
         let context = UIGraphicsGetCurrentContext()
         context?.setStrokeColor(UIColor.yellow.cgColor)
         context?.setLineWidth(4)
         
         if Cutting {
             
-            context?.move(to: cutStart)
-            context?.addLine(to: cutEnd)
-            context?.strokePath()
+            if FirstStrokeHasBeenMade {
+                context?.move(to: cutStart)
+                // HELLO! This fails when there is no interior point.
+                context?.addLine(to: IntersectionNodes[1].location)
+                context?.addLine(to: cutEnd)
+                context?.strokePath()
+            }
+            else if !FirstStrokeHasBeenMade {
+                context?.move(to: cutStart)
+                context?.addLine(to: cutEnd)
+                context?.strokePath()
+            }
         }
+        // Do I need this?
         else {
             context?.clear(self.bounds)
         }
-        
-        
     }
-    
-    var translation = CGPoint(x: 0, y: 0)
-    
     
     @objc func panHandler(pan: UIPanGestureRecognizer){
         
         if pan.state == .began {
-            cutStart = pan.location(in: self)
-        
+            if FirstStrokeHasBeenMade {
+                // Don't reset the cut start, I want the old cut start.
+            }
+            else {
+                cutStart = pan.location(in: self)
+            }
         }
     
-        translation = pan.translation(in: self)
-        
-        cutEnd = addPoints(a: cutStart, b: translation)
-        
-        // Not sure if I need to do this
-        translation = CGPoint(x: 0, y: 0)
-        
+        cutEnd = pan.location(in: self)
+   
         if pan.state == .ended {
             
-            LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
-            IntersectionNodes = []
-            // Cut points may not exist so we have to check if we can unwrap it.
-            if let cutPoints = getCutPoints(lines: LinesToCut, cuttingLine: LineToCutWith){
-                IntersectionNodes = cutPoints
-            
-                UIView.animate(withDuration: 1, animations: {
-                    markerOne.center = IntersectionNodes[0].location
-                    markerTwo.center = IntersectionNodes[1].location
-                })
-                
+            if !FirstStrokeHasBeenMade {
+                LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
             }
-    
-        }
+            else {
+                LineToCutWith = Line(_firstPoint: (VertexOfTheCut?.location)!, _secondPoint: cutEnd)
+            }
+            
+            getIntersectionPoints(lines: LinesToCut, cuttingLine: LineToCutWith)
         
-        
+            
+            if IntersectionNodes.count <= 3 {
+            
+            UIView.animate(withDuration: 1, animations: {
+                if let first = IntersectionNodes.first?.location {
+                    markerOne.center = first
+                }
+                
+                if let second = IntersectionNodes[1].location {
+                    markerTwo.center = second
+                }
+                
+                if FirstStrokeHasBeenMade {
+                    if let third = IntersectionNodes[2].location {
+                        markerThree.center = third
+                    }
+                }
+            })
+            }
+            
+            // Set stroke state
+            if !FirstStrokeHasBeenMade {
+                FirstStrokeHasBeenMade = true
+            }
+            else if FirstStrokeHasBeenMade {
+                SecondStrokeHasBeenMade = true
+            }
+            
+         }
     }
     
     
@@ -100,9 +131,9 @@ class CuttingView: UIView {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
         
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panHandler))
+        myPan = UIPanGestureRecognizer(target: self, action: #selector(panHandler))
         
-        self.addGestureRecognizer(panRecognizer)
+        self.addGestureRecognizer(myPan)
         
         
     }

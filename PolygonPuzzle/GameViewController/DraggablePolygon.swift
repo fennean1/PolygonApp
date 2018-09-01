@@ -70,6 +70,7 @@ class DraggablePolygon: UIView {
             if p.contains(point) {
                 ActivePolygonIndex = AllPolygons.index(of: self)!
                 applyShadows()
+                print("Does this get executed on startup?")
                 viewWithTag(0)?.bringSubview(toFront: ActivePolygon)
                 self.layer.shadowPath = p
                 self.layer.shadowRadius = 15
@@ -96,37 +97,32 @@ class DraggablePolygon: UIView {
     
     @objc func panhandle(_ sender: UIPanGestureRecognizer)
     {
-        
         let translation = sender.translation(in: sender.view)
         
-        if let view = sender.view
-        {
+        if let view = sender.view {
             view.center = CGPoint(x: (view.center.x + translation.x),
                                   y: view.center.y + translation.y)
             sender.setTranslation(CGPoint.zero, in: sender.view)
         }
         
-        }
+    }
     
     func drawTheLayer() {
         // Nodes might not have been set yet
         if let _nodes = self.nodes {
             polygonLayer.frame = self.bounds
             polygonLayer.drawPolygon(at: _nodes)
-
-        self.layer.insertSublayer(polygonLayer, at: 0)
+            self.layer.insertSublayer(polygonLayer, at: 0)
         }
     }
 
 
     // Inits
-    required init(coder aDecoder: NSCoder)
-    {
+    required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
     }
     
-    override init(frame: CGRect)
-    {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panhandle))
@@ -135,7 +131,6 @@ class DraggablePolygon: UIView {
         self.addGestureRecognizer(pan)
         self.isUserInteractionEnabled = true
         self.layer.shadowColor = colorForNumber
-
     }
     
 }

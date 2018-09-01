@@ -23,6 +23,7 @@ import Foundation
 
 let markerOne = UIImageView(image: Marker)
 let markerTwo = UIImageView(image: Marker)
+let markerThree = UIImageView(image: Marker)
 
 
 class GameViewController: UIViewController {
@@ -42,7 +43,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var cutButton: UIButton!
     
     @IBOutlet weak var backButton: UIButton!
-    
+
 
     @IBAction func cut(sender: UIButton){
     
@@ -51,21 +52,26 @@ class GameViewController: UIViewController {
         view.bringSubview(toFront: cutButton)
         view.bringSubview(toFront: markerOne)
         view.bringSubview(toFront: markerTwo)
+        view.bringSubview(toFront: markerThree)
+        
+        /* Need to get the polygon origin so we can convert its points to
+        the coordinates of the containing view */
+        let polygonOrigin = AllPolygons[ActivePolygonIndex].frame.origin
+        cutButton.setImage(UIImage(named: "scissors-clipart"), for: .normal)
+        // Get coordinates in the main view.
+        let nodesForLines = mapPointsWithOffset(offSet: polygonOrigin, points: AllPolygons[ActivePolygonIndex].vertices())
+        LinesToCut = makeLinesFromPoints(points: nodesForLines)
         
         if !Cutting {
-            // Need to get the polygon origin so we can convert its points to
-            // the coordinates of the containing view
-            let polygonOrigin = AllPolygons[ActivePolygonIndex].frame.origin
-            cutButton.setImage(UIImage(named: "scissors-clipart"), for: .normal)
-            let nodesForLines = mapPointsWithOffset(offSet: polygonOrigin, points: AllPolygons[ActivePolygonIndex].vertices())
-            LinesToCut = makeLinesFromPoints(points: nodesForLines)
             IntersectionNodes = []
             hideInactivePolygons()
         }
         else if Cutting {
             
-            // Returns all the old polygons
+            // Returns all the old polygons to their original places.
             returnPolygonsToView()
+            FirstStrokeHasBeenMade = false
+            SecondStrokeHasBeenMade = false
             
             UIView.animate(withDuration: 1, animations: {
                 markerOne.frame.styleHideMarker(container: self.view.frame)
@@ -74,10 +80,8 @@ class GameViewController: UIViewController {
             
             cuttingView.clear()
             
-            // Make sure we don't cut if there's nothing
-       
-            if IntersectionNodes.count == 2 {
-            
+            // HELLO! Could use a gaurd statement here.
+
             let ActivePolygon = AllPolygons[ActivePolygonIndex]
             let origin = ActivePolygon.frame.origin
             let nodes = ActivePolygon.nodes
@@ -87,8 +91,14 @@ class GameViewController: UIViewController {
                 n.location = newLocation
                 return n})
             
-            let newNodes = splitNodes(cutNodes: IntersectionNodes, nodes: transformedNodes!)
+            var newNodes: ([Node],[Node])!
             
+            if IntersectionNodes.count == 2 {
+                newNodes = splitNodesWithSingleCut(cutNodes: IntersectionNodes, nodes: transformedNodes!)
+            } else if IntersectionNodes.count == 3 {
+                newNodes = splitNodesWithDualCut(cutNodes: IntersectionNodes, nodes: transformedNodes!)
+            }
+
             let topNodes = newNodes.0
             let bottomNodes = newNodes.1
             
@@ -130,25 +140,27 @@ class GameViewController: UIViewController {
             AllPolygons.remove(at: ActivePolygonIndex)
         
             AllPolygons += [topPolygon,bottomPolygon]
-            }
+      
 
             cutButton.setImage(UIImage(named: "closed-scissors-clipart"), for: .normal)
      
         }
         
         Cutting = !Cutting
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !Cutting {
-        view.bringSubview(toFront: ActivePolygon)
+            view.bringSubview(toFront: ActivePolygon)
         }
     }
     
     @objc func goBack(sender: UIButton) {
         
         AllPolygons = []
+        VertexOfTheCut = nil
+        FirstStrokeHasBeenMade = false
+        SecondStrokeHasBeenMade = false
         ActivePolygonIndex = 0
         
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "LandingViewController")
@@ -203,9 +215,11 @@ class GameViewController: UIViewController {
         
         view.addSubview(markerOne)
         view.addSubview(markerTwo)
+        view.addSubview(markerThree)
         
         markerOne.frame.styleHideMarker(container: view.frame)
         markerTwo.frame.styleHideMarker(container: view.frame)
+        markerThree.frame.styleHideMarker(container: view.frame)
         
         AllPolygons.append(initialPolygon)
         

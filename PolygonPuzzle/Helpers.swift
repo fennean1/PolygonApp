@@ -170,7 +170,18 @@ func subtractPoints(a: CGPoint,b: CGPoint) -> CGPoint {
     let by = b.y
     
     return CGPoint(x: ax-bx,y: ay-by)
+}
+
+// Defines an operation that adds two points together
+func subtractBminusA(a: CGPoint,b: CGPoint) -> CGPoint {
     
+    let ax = a.x
+    let ay = a.y
+    
+    let bx = b.x
+    let by = b.y
+    
+    return CGPoint(x: bx-ax,y: by-ay)
 }
 
 
@@ -189,11 +200,18 @@ func distance(a: CGPoint,b: CGPoint) -> CGFloat {
     let d = sqrt(rSquared)
     
     return CGFloat(d)
+}
+
+func midPoint(a: CGPoint,b: CGPoint) -> CGPoint {
+
+    let midX = (b.x+a.x)/2
+    let midY = (b.y+a.y)/2
     
+    return CGPoint(x: midX, y: midY)
 }
 
 func pointsEqual(first: CGPoint,second: CGPoint) -> Bool {
-    if distance(a: first, b: second) < 1{
+    if distance(a: first, b: second) < 1 {
         return true
     }
     else {
