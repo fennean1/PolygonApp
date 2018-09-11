@@ -11,6 +11,31 @@ import UIKit
 
 extension CGRect {
 
+mutating func styleTopRight(container: CGRect) {
+        
+    let dims = [container.width,container.height]
+    let h = dims.min()!/6
+    let w = h
+    
+    let x: CGFloat = container.width - 1.5*w
+    let y: CGFloat = 0.5*h
+    
+    self = CGRect(x: x, y: y, width: w, height: h)
+    
+}
+    
+    mutating func styleUnderTopRight(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/6
+        let w = h
+
+        let x: CGFloat = container.width - 1.5*w
+        let y: CGFloat = 1.5*h
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
 
 mutating func styleFillContainer(container: CGRect) {
     

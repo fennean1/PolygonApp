@@ -14,7 +14,6 @@ import UIKit
 // Takes an array of nodes that represent a figure as well as the nodes that it needs to be split at.
 func splitNodesWithSingleCut(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     
-
     // For a straight line, we let the vertex equal the mid point.
     let dummyVertex = midPoint(a: cutNodes[0].location, b: cutNodes[1].location)
     
@@ -107,37 +106,57 @@ func splitNodesWithDualCut(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     
     var nodesWithCutPointsInserted: [Node] = []
     
-    let nodeCount = nodes.count
+    let totalNodeCount = nodes.count
     
     for (i,n) in nodesWithState.enumerated(){
         
         // So that "next node" doesn't fall out of index range.
-        let nextIndex = (i+1) % nodeCount
+        let nextIndex = (i+1) % totalNodeCount
         
         // Check for when the location state changes
         let currentNode = n
         let nextNode = nodesWithState[nextIndex]
         
+        // Construct a line between the nodes.
+        let connectingLine = Line(_firstPoint: currentNode.location, _secondPoint: nextNode.location)
+        
+        let intersectsAtFirstCutNode = connectingLine.containsPoint(point: IntersectionNodes[0].location)
+        print("Line intersects with the first cut node?", intersectsAtFirstCutNode)
+        let intersectsAtSecondCutNode = connectingLine.containsPoint(point: IntersectionNodes[2].location)
+        print("Line intersects with the second cut node?",intersectsAtSecondCutNode )
+        let intersectsAtBothNodes = intersectsAtFirstCutNode && intersectsAtSecondCutNode
+
         nodesWithCutPointsInserted.append(currentNode)
         let nodeCount = nodesWithCutPointsInserted.count
-        
-        if currentNode.locationState == LocationState.onborder {
+  
+        if intersectsAtBothNodes {
+            print("OMG! It intersects at both cut nodes!!")
+            
+            let distanceOfFirst = distance(a: IntersectionNodes[0].location, b: currentNode.location)
+            let distanceOfSecond = distance(a: IntersectionNodes[2].location, b: currentNode.location)
+            
+            if distanceOfFirst < distanceOfSecond {
+                nodesWithCutPointsInserted.append(IntersectionNodes[0])
+                breakAtIndices.append(nodeCount)
+                nodesWithCutPointsInserted.append(IntersectionNodes[2])
+                breakAtIndices.append(nodeCount+1)
+            }
+            else if distanceOfFirst > distanceOfSecond {
+                nodesWithCutPointsInserted.append(IntersectionNodes[2])
+                breakAtIndices.append(nodeCount)
+                nodesWithCutPointsInserted.append(IntersectionNodes[0])
+                breakAtIndices.append(nodeCount+1)
+            }
+        }
+        else if currentNode.locationState == LocationState.onborder {
+            print("Entered On the Border")
             breakAtIndices.append(nodeCount-1)
         }
-        else if nextNode.locationState == LocationState.onborder {
-            // Do nothing right now. If the next node is on the border it will
-            // be added in the next iteration.
+        else if nextNode.locationState == LocationState.onborder{
+            // try not doing anything
         }
         else if currentNode.locationState != nextNode.locationState {
-            
-            // Construct a line between the nodes.
-            let connectingLine = Line(_firstPoint: currentNode.location, _secondPoint: nextNode.location)
-            
-            let intersectsAtFirstCutNode = connectingLine.containsPoint(point: IntersectionNodes[0].location)
-            print("Line intersects with the first cut node?", intersectsAtFirstCutNode)
-            let intersectsAtSecondCutNode = connectingLine.containsPoint(point: IntersectionNodes[2].location)
-            print("Line intersects with the second cut node?",intersectsAtSecondCutNode )
-            
+            print("Entered current not equal to next")
             if intersectsAtFirstCutNode {
                 breakAtIndices.append(nodeCount)
                 nodesWithCutPointsInserted.append(IntersectionNodes[0])
@@ -154,7 +173,6 @@ func splitNodesWithDualCut(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     let firstIndexToBreakAt = breakAtIndices[0]
     let secondIndexToBreakAt = breakAtIndices[1]
     
- 
     var firstNodesToDraw = Array(nodesWithCutPointsInserted[...firstIndexToBreakAt])
     firstNodesToDraw.append(VertexOfTheCut!)
     firstNodesToDraw = Array(firstNodesToDraw + nodesWithCutPointsInserted[secondIndexToBreakAt...])
@@ -162,20 +180,11 @@ func splitNodesWithDualCut(cutNodes: [Node],nodes: [Node])-> ([Node],[Node]){
     var secondNodesToDraw = Array(nodesWithCutPointsInserted[firstIndexToBreakAt...secondIndexToBreakAt])
     secondNodesToDraw.append(VertexOfTheCut!)
     
-    return (firstNodesToDraw,secondNodesToDraw)
+    // I don't want to need this but right now I do.
+    let firstNodesToDrawDeduped = removeDuplicateNodes(nodes: firstNodesToDraw)
+    let secondNodesToDrawDeduped = removeDuplicateNodes(nodes: secondNodesToDraw)
+    
+    return (firstNodesToDrawDeduped,secondNodesToDrawDeduped)
     
 }
 
-
-/* Used for assigning location states - this must be different for when we have three points.
- for n in nodes {
- // Is this node already equal to any of the cut points?
- if pointsEqual(first: n.location,second: cutNodes[0].location) || pointsEqual(first: n.location,second: cutNodes[1].location){
- n.locationState = LocationState.onborder
- } else if n.location.y > cutter.y(x: n.location.x){
- n.locationState = LocationState.above
- } else if n.location.y < cutter.y(x: n.location.x){
- n.locationState = LocationState.below
- }
- }
- */

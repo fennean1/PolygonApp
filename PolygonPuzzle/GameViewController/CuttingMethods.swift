@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 
+// Returns true if the intersection points are valid - I'm passing global variables to this. Really not necessary.
 func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
    
     var intersectionPoints: [Node] = []
@@ -25,6 +26,14 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
         }
     }
     
+    
+    // ... A new beginning...Attempting to deprecate the global "IntersectionNodes" which is currently combining both Start,End as well as vertices.
+    if intersectionPoints.count == 2 {
+        ValidCutHasBeenMade = true
+        StartOfCut = intersectionPoints.first
+        EndOfCut = intersectionPoints.last
+    }
+    
     //Assign vertext of cut. This may get reassigned to the same thing if this runs twice.
     if (ActivePolygon.polygonLayer.path?.contains(firstPointInActivePolygonsCoordinateSystem))! {
         VertexOfTheCut = Node(_location: cuttingLine.firstPoint! , _sister: SisterIndex)
@@ -36,10 +45,10 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
     }
     
     if intersectionPoints.count > 2 {
-        print("No, we're not dealing with more than 2 intersection points")
+        print("No, we're not dealing with more than 2 intersection points. This case doesn't count the vertex.")
     } else if intersectionPoints.count == 2 {
         if FirstStrokeHasBeenMade {
-            print("No, we're not dealing with two intersection points on the second stroke. Intersection points set to nil")
+            print("No, we're not dealing with two intersection points on the second stroke. Intersection points set to empty")
             intersectionPoints = []
         } else if !FirstStrokeHasBeenMade {
             // Bad Naming
@@ -57,10 +66,20 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
         }
     }
     
-    if IntersectionNodes.count > 3 {
+    // Failure cases
+    if IntersectionNodes.count > 3 || IntersectionNodes.count == 0 || IntersectionNodes.count == 1  {
+        IntersectionNodes = []
+        print("Not valid intersection nodes")
         return false
     }
-    else {
+    else if IntersectionNodes.count == 2 {
+        if abs(distance(a: IntersectionNodes[0].location, b: IntersectionNodes[1].location)) < 0.01 {
+            print("These two points are the same")
+            return false
+        } else {
+            return true
+        }
+    } else {
         return true
     }
     

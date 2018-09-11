@@ -70,6 +70,7 @@ class DraggablePolygon: UIView {
             if p.contains(point) {
                 ActivePolygonIndex = AllPolygons.index(of: self)!
                 applyShadows()
+                // Somehow this gets called twice
                 print("Does this get executed on startup?")
                 viewWithTag(0)?.bringSubview(toFront: ActivePolygon)
                 self.layer.shadowPath = p

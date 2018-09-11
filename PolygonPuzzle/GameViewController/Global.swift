@@ -11,19 +11,40 @@ import UIKit
 
 // Points are sisters if they share the same SisterIndex. Everytime we create new sisters, this index goes up so that the next pair of sisters get a new index.
 var SisterIndex = 0
-var Cutting = false // Will be deprecated for FirstCut and SecondCut
+
+// State Variables.
+var ValidCutHasBeenMade = false {
+    didSet {
+        if ValidCutHasBeenMade {
+            cutOrCancelButton.setImage(DoneImage, for: .normal)
+        }
+        else {
+            cutOrCancelButton.setImage(CancelImage, for: .normal)
+        }
+    }
+}
+
+
+
+
+var CuttingViewNeedsClearing = false
+var FinishedCutting = true
 var FirstStrokeHasBeenMade = false
 var SecondStrokeHasBeenMade = false
+
+
 var AllPolygons: [DraggablePolygon] = []
 var LinesToCut: [Line] = []
 var LineToCutWith: Line! // Deprecating for First and Second Line
-var FirstLineToCutWith: Line!
-var SecondLineToCutWith: Line!
 var VertexOfTheCut: Node? // Coordinate system????
-var FirstCutPoint: Node?
-var SecondCutPoint: Node?
+// To do multiple zigs we need to stored the vertices as an array.
+var ZigVertices: [Node] = []
+
+var StartOfCut: Node?
+var EndOfCut: Node?
+
 // Really should be called "CutNodes" because these are the nodes that are used to cut the view
-// Also, they may or may not intersect with the figure. 
+// Also, they may or may not intersect with the figure.
 var IntersectionNodes: [Node] = []
 var ActivePolygonIndex = 0
 var OriginalLocations: [CGPoint] = []
@@ -64,13 +85,6 @@ func applyShadows() {
         if p != ActivePolygon{
             p.layer.shadowOpacity = 0
         }
-    }
-}
-
-// HOW DO THESE POLYGONS KNOW THEIR FRAME? NEEDS TO BE COMPUTED FROM NODES.
-func redrawPolygons(){
-    for p in AllPolygons {
-        p.drawTheLayer()
     }
 }
 

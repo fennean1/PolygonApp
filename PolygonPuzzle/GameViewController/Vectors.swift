@@ -31,11 +31,8 @@ func assignNodeStatesBasedOnVertex(nodes: [Node],vertex: Node,cutPoints: [Node])
     let angleTwo = cutVectorTwo.theta
     
     let topAngle = [angleOne,angleTwo].max()
-    print("topAngle",topAngle)
     let bottomAngle = [angleOne,angleTwo].min()
-    print("bottomAngle",bottomAngle)
-    print("topMinusBottom",topAngle!-bottomAngle!)
-    
+
     for n in nodes {
         
         let v = vector(start: vertex.location, end: n.location!)
@@ -113,7 +110,6 @@ class vector {
         
         let rawAngle = atan(Double(dy/dx))
         var adjustedAngle = rawAngle
-        print("rawAngle",rawAngle)
         
         let vectorPosition = getVectorPosition(dx: dx,dy: dy)
         
@@ -129,10 +125,8 @@ class vector {
         case .negY:
                 adjustedAngle = rawAngle + Double.pi
         default:
-            print("default case of vector position")
+            let _ = adjustedAngle
         }
-        
-        print("adjustedAngle",adjustedAngle)
         
         return adjustedAngle
     }

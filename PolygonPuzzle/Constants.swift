@@ -20,5 +20,11 @@ let Nonagon = UIImage(named: "Nonagon")
 let ShapesArray = [Triangle,Square,Pentagon,Hexagon,Septagon,Octagon,Nonagon]
 let BackGround = UIImage(named: "light-blue-background")
 let Marker = UIImage(named: "marker")
+let DoneImage = UIImage(named: "DoneButton")
+let CancelImage = UIImage(named: "CancelButton")
+let UndoImage = UIImage(named: "UndoButton")
+let Scissors = UIImage(named: "scissors-clipart")
 
+// For putting markers out of sight.
+let OutOfSightTopLeft = CGPoint(x: -30, y: -30)
 

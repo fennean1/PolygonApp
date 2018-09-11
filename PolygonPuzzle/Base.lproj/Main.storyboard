@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoM-fX-ia5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoM-fX-ia5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="ChalkboardSE.ttc">
-            <string>ChalkboardSE-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -24,16 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYn-Vh-B1u">
-                                <rect key="frame" x="284" y="26" width="62" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="PYn-Vh-B1u" secondAttribute="height" multiplier="1:1" constant="-8" id="Exj-zt-0fE"/>
-                                </constraints>
-                                <state key="normal" title="Cut" image="closed-scissors-clipart.png"/>
-                                <connections>
-                                    <action selector="cutWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgw-NP-wM1"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faO-Pw-rYp">
                                 <rect key="frame" x="25" y="33" width="50" height="57"/>
                                 <constraints>
@@ -45,23 +30,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PYn-Vh-B1u" secondAttribute="trailing" constant="29" id="7Ud-Mm-tjL"/>
                             <constraint firstItem="faO-Pw-rYp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="bVx-vc-8xl"/>
                             <constraint firstItem="faO-Pw-rYp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="gYK-yP-CBu"/>
                             <constraint firstItem="faO-Pw-rYp" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="50:667" id="nc1-Qo-Xyc"/>
-                            <constraint firstItem="PYn-Vh-B1u" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="rpB-jy-wKS"/>
-                            <constraint firstItem="PYn-Vh-B1u" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="30:667" constant="31.999999999999996" id="sxt-YI-uha"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="faO-Pw-rYp" id="zVJ-3y-pkh"/>
-                        <outlet property="cutButton" destination="PYn-Vh-B1u" id="zVd-s9-ucT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="818" y="15"/>
+            <point key="canvasLocation" x="816.79999999999995" y="14.842578710644679"/>
         </scene>
         <!--Landing View Controller-->
         <scene sceneID="A9d-W4-AWy">
@@ -79,7 +60,4 @@
             <point key="canvasLocation" x="22" y="36"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="closed-scissors-clipart.png" width="512" height="512"/>
-    </resources>
 </document>

@@ -25,6 +25,8 @@ let markerOne = UIImageView(image: Marker)
 let markerTwo = UIImageView(image: Marker)
 let markerThree = UIImageView(image: Marker)
 
+var cutOrCancelButton: UIButton!
+var undoButton: UIButton!
 
 class GameViewController: UIViewController {
     
@@ -33,59 +35,110 @@ class GameViewController: UIViewController {
     var polygonWidth: CGFloat? = nil
     var polygonHeight: CGFloat? = nil
     var polygonRadius: CGFloat? = nil
-    
+
     let cuttingView = CuttingView()
 
     var points: [CGPoint] = []
     var detecting = true
     var polygons: [DraggablePolygon] = []
-
-    @IBOutlet weak var cutButton: UIButton!
     
+    func showCancelButton(){
+        view.bringSubview(toFront: undoButton)
+        undoButton.alpha = 1
+        undoButton.frame.styleUnderTopRight(container: view.frame)
+    }
+    
+    func hideCancelButton(){
+        UIView.animate(withDuration: 0.5, animations: {
+            undoButton.alpha = 0})
+    }
+    
+    func resetCutting(){
+        IntersectionNodes = []
+        ValidCutHasBeenMade = false
+        StartOfCut?.location = nil
+        EndOfCut?.location = nil
+        VertexOfTheCut?.location = nil
+        CuttingViewNeedsClearing = true
+        FirstStrokeHasBeenMade = false
+        SecondStrokeHasBeenMade = false
+        cuttingView.setNeedsDisplay()
+        markerOne.frame.styleHideMarker(container: view.frame)
+        markerTwo.frame.styleHideMarker(container: view.frame)
+        markerThree.frame.styleHideMarker(container: view.frame)
+    }
+    
+
+
     @IBOutlet weak var backButton: UIButton!
 
-
-    @IBAction func cut(sender: UIButton){
-    
+    @objc func cutOrCancel(sender: UIButton){
+     
+        print("cut clicked")
         // Needs to be in front of the "invisible" cutting view
         view.bringSubview(toFront: cuttingView)
-        view.bringSubview(toFront: cutButton)
+        view.bringSubview(toFront: cutOrCancelButton)
+        view.bringSubview(toFront: undoButton)
         view.bringSubview(toFront: markerOne)
         view.bringSubview(toFront: markerTwo)
         view.bringSubview(toFront: markerThree)
+        // There will now be many markers... need "addMarkerToNodes(nodes: [Node])" function
         
         /* Need to get the polygon origin so we can convert its points to
-        the coordinates of the containing view */
+         the coordinates of the containing view */
         let polygonOrigin = AllPolygons[ActivePolygonIndex].frame.origin
-        cutButton.setImage(UIImage(named: "scissors-clipart"), for: .normal)
+        
         // Get coordinates in the main view.
         let nodesForLines = mapPointsWithOffset(offSet: polygonOrigin, points: AllPolygons[ActivePolygonIndex].vertices())
         LinesToCut = makeLinesFromPoints(points: nodesForLines)
+
+        // NEED TO CHECK IF VALID CUT HAS BEEN MADE TO DETERMINE WHETHER A CLICK CANCELS EVERYTHING
         
-        if !Cutting {
+        // Go add the line on dragEnded to change the image to a check mark when valid cut has been made (maybe use did set on ValidCutHasBeenMade?
+        
+        if FinishedCutting {
+            FinishedCutting = false
+            
+            showCancelButton()
+            CuttingViewNeedsClearing = false
+            cutOrCancelButton.setImage(CancelImage, for: .normal)
+            print("not Cutting when clicked")
             IntersectionNodes = []
             hideInactivePolygons()
         }
-        else if Cutting {
+        // Ends the cut entirely.
+        else if !FinishedCutting {
             
-            // Returns all the old polygons to their original places.
-            returnPolygonsToView()
+            // Reset State Variables
+            ValidCutHasBeenMade = false
+            FinishedCutting = true
             FirstStrokeHasBeenMade = false
             SecondStrokeHasBeenMade = false
+            CuttingViewNeedsClearing = true
+            
+            hideCancelButton()
+            cutOrCancelButton.setImage(UIImage(named: "scissors-clipart"), for: .normal)
+            returnPolygonsToView()
             
             UIView.animate(withDuration: 1, animations: {
                 markerOne.frame.styleHideMarker(container: self.view.frame)
                 markerTwo.frame.styleHideMarker(container: self.view.frame)
+                markerThree.frame.styleHideMarker(container: self.view.frame)
             })
             
-            cuttingView.clear()
+            cuttingView.setNeedsDisplay()
             
-            // HELLO! Could use a gaurd statement here.
-
+            guard IntersectionNodes.count == 3 || IntersectionNodes.count == 2 else {
+                print("Failed guard for IntersectionNodes")
+                return
+            }
+            
+            print("passed guard for IntersectionNodes")
+            
             let ActivePolygon = AllPolygons[ActivePolygonIndex]
             let origin = ActivePolygon.frame.origin
             let nodes = ActivePolygon.nodes
-            // This converts the nodes to the main coordinate system.
+            // This converts the nodes to the main coordinate system - need to write a function for this.
             let transformedNodes = nodes?.map( {(n: Node) -> Node in
                 let newLocation = addPoints(a: n.location, b: origin)
                 n.location = newLocation
@@ -98,21 +151,20 @@ class GameViewController: UIViewController {
             } else if IntersectionNodes.count == 3 {
                 newNodes = splitNodesWithDualCut(cutNodes: IntersectionNodes, nodes: transformedNodes!)
             }
-
+            
             let topNodes = newNodes.0
             let bottomNodes = newNodes.1
             
             let topPolygon = DraggablePolygon()
             let bottomPolygon = DraggablePolygon()
-    
-            topPolygon.nodes = newNodes.0
-            bottomPolygon.nodes = newNodes.1
+            
+            topPolygon.nodes = topNodes
+            bottomPolygon.nodes = bottomNodes
             
             // This is a wonderful and useful function.
             let topPolygonFrame = frame(of: topPolygon.vertices())
             let bottomPolygonFrame = frame(of: bottomPolygon.vertices())
-
-
+            
             topPolygon.frame = topPolygonFrame
             bottomPolygon.frame = bottomPolygonFrame
             
@@ -127,7 +179,7 @@ class GameViewController: UIViewController {
                 let newLocation = subtractPoints(a: n.location, b: bottomPolygonFrame.origin)
                 let returnNode = Node(_location: newLocation, _sister: n.sister)
                 return returnNode})
-      
+            
             // THE NODES ARE NOT IN THE CORRECT COORDINATE SYSTEM WHEN THIS OCCURS (now they are)
             topPolygon.drawTheLayer()
             bottomPolygon.drawTheLayer()
@@ -138,29 +190,38 @@ class GameViewController: UIViewController {
             ActivePolygon.removeFromSuperview()
             
             AllPolygons.remove(at: ActivePolygonIndex)
-        
+            
             AllPolygons += [topPolygon,bottomPolygon]
-      
-
-            cutButton.setImage(UIImage(named: "closed-scissors-clipart"), for: .normal)
-     
+            
         }
         
-        Cutting = !Cutting
+        
     }
     
+    @objc func undo(sender: UIButton) {
+        
+        resetCutting()
+        
+    }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !Cutting {
+        print("touchesBegan")
+        if FinishedCutting {
+            print("touchesBegan but also not Cutting")
             view.bringSubview(toFront: ActivePolygon)
         }
     }
     
     @objc func goBack(sender: UIButton) {
         
+        print("segue to LandingViewController")
+        
         AllPolygons = []
         VertexOfTheCut = nil
         FirstStrokeHasBeenMade = false
         SecondStrokeHasBeenMade = false
+        CuttingViewNeedsClearing = true
         ActivePolygonIndex = 0
         
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "LandingViewController")
@@ -173,8 +234,33 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        view.tag = 0
+        if let _ = cutOrCancelButton {
+            // Do nothing, button already set up.
+            print("cut or cancel button already set up")
+        } else {
+            cutOrCancelButton = UIButton()
+            view.addSubview(cutOrCancelButton)
+            cutOrCancelButton.addTarget(self, action: #selector(cutOrCancel(sender:)), for: .touchUpInside)
+            
+            
+        }
+        
+        if let _ = undoButton {
+            // Do nothing, button already set up.
+            print("undo button already set up")
+        } else {
+            undoButton = UIButton()
+            view.addSubview(undoButton)
+            undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
+            
+        }
+        
 
+        CuttingViewNeedsClearing = false
+        ValidCutHasBeenMade = false
+        
+        view.tag = 0
+    
         let backGround = UIImageView()
         view.addSubview(backGround)
         backGround.frame.styleFillContainer(container: view.frame)
@@ -210,8 +296,11 @@ class GameViewController: UIViewController {
         cuttingView.frame.styleFillContainer(container: view.frame)
         view.addSubview(cuttingView)
 
-        view.bringSubview(toFront: cutButton)
+        view.bringSubview(toFront: cutOrCancelButton)
         view.bringSubview(toFront: backButton)
+        
+        view.bringSubview(toFront: cutOrCancelButton)
+        view.bringSubview(toFront: undoButton)
         
         view.addSubview(markerOne)
         view.addSubview(markerTwo)
@@ -221,8 +310,16 @@ class GameViewController: UIViewController {
         markerTwo.frame.styleHideMarker(container: view.frame)
         markerThree.frame.styleHideMarker(container: view.frame)
         
-        AllPolygons.append(initialPolygon)
+        cutOrCancelButton.frame.styleTopRight(container: view.frame)
+        undoButton.frame.styleUnderTopRight(container: view.frame)
+ 
+        cutOrCancelButton.setImage(Scissors, for: .normal)
+        undoButton.setImage(UndoImage, for: .normal)
+        undoButton.alpha = 0 // Initially not visible.
         
+        
+        AllPolygons.append(initialPolygon)
+ 
         backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         
     }

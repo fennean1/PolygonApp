@@ -11,7 +11,7 @@ import UIKit
 import Darwin
 
 
-
+// For drawing regular polygons on gameview startup.
 func getVerticesForType(numberOfSides: Int,radius: Double) -> [CGPoint] {
     
     let theta = 2*Double.pi/Double(numberOfSides)
@@ -29,7 +29,5 @@ func getVerticesForType(numberOfSides: Int,radius: Double) -> [CGPoint] {
             points.append(point)
             
         }
-
     return points
-    
 }

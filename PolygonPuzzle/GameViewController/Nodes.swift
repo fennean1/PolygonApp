@@ -26,6 +26,8 @@ class Node {
     // Node that must be matched with this one to put the puzzle together.
     var sister: Int?
     
+    var isaVertex = false
+    
     // Determines if the node is a top node or bottom node. Either above or below.
     // node might not have a LocationState if it's not part of a cutting process.
     var locationState: LocationState?

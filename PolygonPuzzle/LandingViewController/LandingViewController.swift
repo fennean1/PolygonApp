@@ -6,6 +6,47 @@
 //  Copyright © 2018 Andrew Fenner. All rights reserved.
 //
 
+
+// ----------- Action Items --------------
+
+/*
+ 
+ 
+ NEXT) Make it so that "ValidCutHasBeenMade" turns the cancel button to DoneButton
+ NEXT) Declare cut and cancel buttons as global so they can be accessed from dragEnded ( this check to see if state needs to change)
+ NEXT) Check to make sure vertexOfCut has been unwrapped when sent to makeLine or whichever it's called.
+ 
+ 1) Bug where an endpoint is inside of the polygon but it still tried to clip to node. Might need a function that tells me
+ if a point is on the border of the polygon
+ 
+ 2) Need to be able to cancel any cut.
+ 
+ 3) Hitting the cut button at any time will exit without failure.
+ 
+ 4) Characters on landing screen as well as on cutting view.
+ 
+ 5) Third dot goes away after cut.
+ 
+ 6) Disallow cutting after second cut has been made.
+ 
+ 7) Puzzle needs to detect when it's put together. (Sister nodes)
+ 
+ 8) Need support for when a cut crosses a gap. How?
+ 
+ */
+
+// ------------- Concerns ----------------
+
+/*
+ 
+ 1) VertexOfCut variable is a nuissance. Want to rely entirely on IntersectionNodesArray
+ 
+ 2) Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous
+ 
+ */
+
+
+
 import Foundation
 import UIKit
 import Darwin
@@ -15,7 +56,6 @@ var numberOfSides = 3
 class ShapeButton: UIButton {
     
     var n = 0
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,26 +69,9 @@ class ShapeButton: UIButton {
         self.center = CGPoint(x: cx, y: cy)
         self.frame.size = frame.size
         
-        
     }
     
 }
-
-class ShapeMenu: UIView {
-    
-    
-    
-    
-    
-    func drawMe(){
-        print("Draw called")
-    }
-    
-    
-    
-    
-}
-
 
 
 class LandingViewController: UIViewController {
@@ -58,7 +81,7 @@ class LandingViewController: UIViewController {
     
     
     @objc func segueViewController(sender: ShapeButton){
-        
+        print("segue to GameViewController")
         numberOfSides = sender.n
         
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "GameViewController")
@@ -96,16 +119,13 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("LandingViewController,viewDidLoad")
+        
         let backGround = UIImageView()
         view.addSubview(backGround)
         backGround.frame.styleFillContainer(container: view.frame)
         backGround.image = BackGround
   
-        
-        // Do any additional setup after loading the view, typically from a nib.
- 
-        print("view")
-        
         screenWidth = view.frame.width
         
         let r = screenWidth/3
@@ -115,12 +135,7 @@ class LandingViewController: UIViewController {
         for button in shapeButtons {
             button.addTarget(self, action: #selector(segueViewController(sender:)), for: .touchUpInside)
         }
-        
- 
     }
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,10 +143,5 @@ class LandingViewController: UIViewController {
         
         
     }
-    
-
-    
-    
-    
 }
 

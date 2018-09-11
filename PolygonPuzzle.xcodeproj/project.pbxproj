@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4FC5C1213A23D700652354 /* SplittingNodes.swift */; };
+		1C4FC5DA213C46E900652354 /* Four.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D0213C46E900652354 /* Four.png */; };
+		1C4FC5DB213C46E900652354 /* Nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D1213C46E900652354 /* Nine.png */; };
+		1C4FC5DC213C46E900652354 /* Eight.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D2213C46E900652354 /* Eight.png */; };
+		1C4FC5DD213C46E900652354 /* Five.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D3213C46E900652354 /* Five.png */; };
+		1C4FC5DE213C46E900652354 /* Seven.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D4213C46E900652354 /* Seven.png */; };
+		1C4FC5DF213C46E900652354 /* Six.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D5213C46E900652354 /* Six.png */; };
+		1C4FC5E0213C46E900652354 /* Zero.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D6213C46E900652354 /* Zero.png */; };
+		1C4FC5E1213C46E900652354 /* Three.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D7213C46E900652354 /* Three.png */; };
+		1C4FC5E2213C46E900652354 /* One.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D8213C46E900652354 /* One.png */; };
+		1C4FC5E3213C46E900652354 /* Two.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D9213C46E900652354 /* Two.png */; };
+		1C66F60E21470E18006AA656 /* UndoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C66F60D21470E18006AA656 /* UndoButton.png */; };
 		1C74E2712103869400EBECC5 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2702103869400EBECC5 /* Shapes.swift */; };
 		1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2722103A62F00EBECC5 /* Helpers.swift */; };
 		1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2742106281400EBECC5 /* LandingViewController.swift */; };
@@ -19,7 +30,7 @@
 		1C74E28621066B9500EBECC5 /* Pentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28021066B9400EBECC5 /* Pentagon.png */; };
 		1C74E28721066B9500EBECC5 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28121066B9400EBECC5 /* Triangle.png */; };
 		1C74E28821066B9500EBECC5 /* Septagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28221066B9400EBECC5 /* Septagon.png */; };
-		1C74E28A21066D7D00EBECC5 /* LandingControllerStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E28921066D7D00EBECC5 /* LandingControllerStyles.swift */; };
+		1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E28921066D7D00EBECC5 /* Styles.swift */; };
 		1C74E29B2106712500EBECC5 /* light-blue-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E29A2106712500EBECC5 /* light-blue-background.png */; };
 		1C74E29D210676F700EBECC5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E29C210676F700EBECC5 /* Global.swift */; };
 		1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E29E2108C82900EBECC5 /* scissors-clipart.png */; };
@@ -36,6 +47,8 @@
 		1CB98D17213705590020427F /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB98D16213705590020427F /* Vectors.swift */; };
 		1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905D2122135C000FCB9D /* Nodes.swift */; };
 		1CBA9060212213FF000FCB9D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905F212213FF000FCB9D /* Line.swift */; };
+		1CF6748D2142BB2300E0D0AC /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6748C2142BB2300E0D0AC /* CancelButton.png */; };
+		1CF6748F2142BBEE00E0D0AC /* DoneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6748E2142BBEE00E0D0AC /* DoneButton.png */; };
 		1CFB47FB211A0FEC00635139 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CFB47FA211A0FEC00635139 /* marker.png */; };
 		1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFB47FD211A34CF00635139 /* CuttingView.swift */; };
 		1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFB47FF211A371800635139 /* CuttingMethods.swift */; };
@@ -60,6 +73,17 @@
 
 /* Begin PBXFileReference section */
 		1C4FC5C1213A23D700652354 /* SplittingNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplittingNodes.swift; sourceTree = "<group>"; };
+		1C4FC5D0213C46E900652354 /* Four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Four.png; sourceTree = "<group>"; };
+		1C4FC5D1213C46E900652354 /* Nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nine.png; sourceTree = "<group>"; };
+		1C4FC5D2213C46E900652354 /* Eight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Eight.png; sourceTree = "<group>"; };
+		1C4FC5D3213C46E900652354 /* Five.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Five.png; sourceTree = "<group>"; };
+		1C4FC5D4213C46E900652354 /* Seven.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Seven.png; sourceTree = "<group>"; };
+		1C4FC5D5213C46E900652354 /* Six.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Six.png; sourceTree = "<group>"; };
+		1C4FC5D6213C46E900652354 /* Zero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zero.png; sourceTree = "<group>"; };
+		1C4FC5D7213C46E900652354 /* Three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Three.png; sourceTree = "<group>"; };
+		1C4FC5D8213C46E900652354 /* One.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = One.png; sourceTree = "<group>"; };
+		1C4FC5D9213C46E900652354 /* Two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Two.png; sourceTree = "<group>"; };
+		1C66F60D21470E18006AA656 /* UndoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UndoButton.png; sourceTree = "<group>"; };
 		1C74E2702103869400EBECC5 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		1C74E2722103A62F00EBECC5 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		1C74E2742106281400EBECC5 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +95,7 @@
 		1C74E28021066B9400EBECC5 /* Pentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pentagon.png; sourceTree = "<group>"; };
 		1C74E28121066B9400EBECC5 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle.png; sourceTree = "<group>"; };
 		1C74E28221066B9400EBECC5 /* Septagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Septagon.png; sourceTree = "<group>"; };
-		1C74E28921066D7D00EBECC5 /* LandingControllerStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingControllerStyles.swift; sourceTree = "<group>"; };
+		1C74E28921066D7D00EBECC5 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		1C74E29A2106712500EBECC5 /* light-blue-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-blue-background.png"; sourceTree = "<group>"; };
 		1C74E29C210676F700EBECC5 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		1C74E29E2108C82900EBECC5 /* scissors-clipart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scissors-clipart.png"; sourceTree = "<group>"; };
@@ -94,6 +118,8 @@
 		1CB98D16213705590020427F /* Vectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vectors.swift; sourceTree = "<group>"; };
 		1CBA905D2122135C000FCB9D /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
 		1CBA905F212213FF000FCB9D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		1CF6748C2142BB2300E0D0AC /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CancelButton.png; path = "../../../Polygon App Assets/CancelButton.png"; sourceTree = "<group>"; };
+		1CF6748E2142BBEE00E0D0AC /* DoneButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DoneButton.png; path = "../../../Polygon App Assets/DoneButton.png"; sourceTree = "<group>"; };
 		1CFB47FA211A0FEC00635139 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
 		1CFB47FD211A34CF00635139 /* CuttingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuttingView.swift; sourceTree = "<group>"; };
 		1CFB47FF211A371800635139 /* CuttingMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuttingMethods.swift; sourceTree = "<group>"; };
@@ -127,6 +153,19 @@
 		1C74E27C2106418A00EBECC5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1C4FC5D2213C46E900652354 /* Eight.png */,
+				1C4FC5D3213C46E900652354 /* Five.png */,
+				1CF6748C2142BB2300E0D0AC /* CancelButton.png */,
+				1CF6748E2142BBEE00E0D0AC /* DoneButton.png */,
+				1C4FC5D0213C46E900652354 /* Four.png */,
+				1C66F60D21470E18006AA656 /* UndoButton.png */,
+				1C4FC5D1213C46E900652354 /* Nine.png */,
+				1C4FC5D8213C46E900652354 /* One.png */,
+				1C4FC5D4213C46E900652354 /* Seven.png */,
+				1C4FC5D5213C46E900652354 /* Six.png */,
+				1C4FC5D7213C46E900652354 /* Three.png */,
+				1C4FC5D9213C46E900652354 /* Two.png */,
+				1C4FC5D6213C46E900652354 /* Zero.png */,
 				1C74E27D21066B9400EBECC5 /* Hexagon.png */,
 				1C74E27F21066B9400EBECC5 /* Nonagon.png */,
 				1C74E28021066B9400EBECC5 /* Pentagon.png */,
@@ -145,7 +184,7 @@
 		1C74E28B21066D8300EBECC5 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
-				1C74E28921066D7D00EBECC5 /* LandingControllerStyles.swift */,
+				1C74E28921066D7D00EBECC5 /* Styles.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -339,19 +378,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C4FC5E1213C46E900652354 /* Three.png in Resources */,
 				1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */,
 				1C74E27B2106417D00EBECC5 /* Octagon.png in Resources */,
+				1C4FC5E2213C46E900652354 /* One.png in Resources */,
 				1C74E29B2106712500EBECC5 /* light-blue-background.png in Resources */,
 				1C74E28321066B9500EBECC5 /* Hexagon.png in Resources */,
 				1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */,
+				1C4FC5DB213C46E900652354 /* Nine.png in Resources */,
 				1C74E28621066B9500EBECC5 /* Pentagon.png in Resources */,
 				1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */,
 				1C74E28421066B9500EBECC5 /* Square.png in Resources */,
+				1C4FC5DD213C46E900652354 /* Five.png in Resources */,
+				1C4FC5E3213C46E900652354 /* Two.png in Resources */,
 				1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */,
 				1C74E28721066B9500EBECC5 /* Triangle.png in Resources */,
+				1C4FC5E0213C46E900652354 /* Zero.png in Resources */,
+				1C4FC5DC213C46E900652354 /* Eight.png in Resources */,
 				1C74E2A12108CAB000EBECC5 /* closed-scissors-clipart.png in Resources */,
+				1C4FC5DF213C46E900652354 /* Six.png in Resources */,
+				1C4FC5DE213C46E900652354 /* Seven.png in Resources */,
 				1C74E28821066B9500EBECC5 /* Septagon.png in Resources */,
+				1C4FC5DA213C46E900652354 /* Four.png in Resources */,
+				1C66F60E21470E18006AA656 /* UndoButton.png in Resources */,
 				1C74E28521066B9500EBECC5 /* Nonagon.png in Resources */,
+				1CF6748F2142BBEE00E0D0AC /* DoneButton.png in Resources */,
+				1CF6748D2142BB2300E0D0AC /* CancelButton.png in Resources */,
 				1CFB47FB211A0FEC00635139 /* marker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C74E28A21066D7D00EBECC5 /* LandingControllerStyles.swift in Sources */,
+				1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */,
 				1C74E29D210676F700EBECC5 /* Global.swift in Sources */,
 				1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */,
 				1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */,
