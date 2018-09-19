@@ -31,8 +31,8 @@ class CuttingView: UIView {
     
     // point inside isn't recognized if cutting is false - there has to be a better way to do this. Oh, no because it has to pass touches...maybe bring in the view after cutting is clicked?
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        // Only registers point if the user is not finished cutting.    
-        return !FinishedCutting
+        // Only registers point if the user is not finished cutting.
+        return ActivelyCutting
     }
 
     // Draw is a single source of truth for our view. Everything drawn is a function of
@@ -44,20 +44,20 @@ class CuttingView: UIView {
         context?.setLineWidth(4)
         
         if CuttingViewNeedsClearing {
+            print("Cutting View is about to be cleared")
            CuttingViewNeedsClearing = false
            context?.clear(self.bounds)
         }
         else if ValidCutHasBeenMade {
             // do nothing. We're not drawing anymore because a valid cut is currently on the board.
-            print("Valid cut has been made")
         }
-        else if FirstStrokeHasBeenMade {
+        else if let _ = StartOfCut {
                 context?.move(to: cutStart)
-                context?.addLine(to: IntersectionNodes[1].location)
+                context?.addLine(to: (VertexOfTheCut?.location)!)
                 context?.addLine(to: cutEnd)
                 context?.strokePath()
         }
-        else if !FirstStrokeHasBeenMade {
+        else {
                 context?.move(to: cutStart)
                 context?.addLine(to: cutEnd)
                 context?.strokePath()
@@ -69,12 +69,10 @@ class CuttingView: UIView {
         
         if pan.state == .began {
             print("Pan Began")
-            if FirstStrokeHasBeenMade {
-                print("First Stroke Has Been Made")
+            if let _ = StartOfCut {
                 // Don't reset the cut start, I want the old cut start.
             }
             else {
-                print("Second Stroke Has Not Been Made")
                 cutStart = pan.location(in: self)
             }
         }
@@ -83,50 +81,44 @@ class CuttingView: UIView {
    
         if pan.state == .ended {
             
+            print("pan ended")
             // Need support for many strokes.
             if ValidCutHasBeenMade {
+                print("Not doing anything because valid cut has been made")
               // Do nothing
             }
-            else if !FirstStrokeHasBeenMade {
-                LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
+            else if let _ = StartOfCut {
+                print("creating line to cut with using vertex of cut and cut end")
+                LineToCutWith = Line(_firstPoint: (VertexOfTheCut?.location)!, _secondPoint: cutEnd)
             }
             else {
-                LineToCutWith = Line(_firstPoint: (VertexOfTheCut?.location)!, _secondPoint: cutEnd)
+                print("Creating First Line to Cut")
+               LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
             }
             
             // 1) I dont' like that I'm passing global variables to this.
-            // 2) I don't like that it returns a boolean  - or do I?
-            guard getIntersectionPoints(lines: LinesToCut, cuttingLine: LineToCutWith) else {return}
-            print("I'm past the guard statement")
+            // 2) I don't like that it returns a boolean  - or do I? - I a little bit do.
+
+            guard getIntersectionPoints(lines: LinesToCut, cuttingLine: LineToCutWith) else {
+                print("Failed getIntersectionPoints")
+                return}
             
-            // Does this contain the vertex? - Yes, getIntersectionPoints currently assigns a vertex.
-            if IntersectionNodes.count <= 3 {
+            // print("Passed getIntersectionPoints")
             
             UIView.animate(withDuration: 1, animations: {
-                if let first = IntersectionNodes.first?.location {
-                    markerOne.center = first
+                if let first = StartOfCut {
+                    markerOne.center = first.location
                 }
                 
-                if let second = IntersectionNodes[1].location {
-                    markerTwo.center = second
+                if let second = VertexOfTheCut {
+                    markerTwo.center = second.location
                 }
-                
-                if FirstStrokeHasBeenMade {
-                    if let third = IntersectionNodes.last?.location {
-                        markerThree.center = third
-                    }
+         
+                if let third = EndOfCut {
+                    markerThree.center = third.location
                 }
+            
             })
-            }
-            
-            // Set stroke state
-            if !FirstStrokeHasBeenMade {
-                FirstStrokeHasBeenMade = true
-            }
-            else if FirstStrokeHasBeenMade {
-                SecondStrokeHasBeenMade = true
-            }
-            
          }
     }
     
@@ -142,8 +134,6 @@ class CuttingView: UIView {
         myPan = UIPanGestureRecognizer(target: self, action: #selector(panHandler))
         
         self.addGestureRecognizer(myPan)
-        
-        
     }
     
     

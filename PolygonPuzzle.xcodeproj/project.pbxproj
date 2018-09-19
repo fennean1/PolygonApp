@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCCFB214C52BA00F92175 /* Parachute.swift */; };
+		1C0BCCFE214F321600F92175 /* DesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCCFD214F321600F92175 /* DesignViewController.swift */; };
+		1C0BCD01214F48FA00F92175 /* DesignViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C0BCD00214F48F900F92175 /* DesignViewButton.png */; };
+		1C0BCD3621500E2900F92175 /* DesignerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3521500E2900F92175 /* DesignerState.swift */; };
+		1C0BCD392150103700F92175 /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD382150103700F92175 /* SharedState.swift */; };
+		1C0BCD3B2150145500F92175 /* PalleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3A2150145500F92175 /* PalleteViewController.swift */; };
+		1C0BCD3E2150173300F92175 /* PalleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3D2150173300F92175 /* PalleteCell.swift */; };
+		1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B31D21518A7200C8EFA4 /* SaveIcon.png */; };
+		1C12B32021518F0600C8EFA4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B31F21518F0600C8EFA4 /* DataModel.swift */; };
+		1C12B3242152A8AE00C8EFA4 /* GoBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B3232152A8AE00C8EFA4 /* GoBack.png */; };
 		1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4FC5C1213A23D700652354 /* SplittingNodes.swift */; };
 		1C4FC5DA213C46E900652354 /* Four.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D0213C46E900652354 /* Four.png */; };
 		1C4FC5DB213C46E900652354 /* Nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D1213C46E900652354 /* Nine.png */; };
@@ -32,7 +42,7 @@
 		1C74E28821066B9500EBECC5 /* Septagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28221066B9400EBECC5 /* Septagon.png */; };
 		1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E28921066D7D00EBECC5 /* Styles.swift */; };
 		1C74E29B2106712500EBECC5 /* light-blue-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E29A2106712500EBECC5 /* light-blue-background.png */; };
-		1C74E29D210676F700EBECC5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E29C210676F700EBECC5 /* Global.swift */; };
+		1C74E29D210676F700EBECC5 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E29C210676F700EBECC5 /* GameState.swift */; };
 		1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E29E2108C82900EBECC5 /* scissors-clipart.png */; };
 		1C74E2A12108CAB000EBECC5 /* closed-scissors-clipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E2A02108CAB000EBECC5 /* closed-scissors-clipart.png */; };
 		1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */; };
@@ -72,6 +82,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0BCCFB214C52BA00F92175 /* Parachute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parachute.swift; sourceTree = "<group>"; };
+		1C0BCCFD214F321600F92175 /* DesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignViewController.swift; sourceTree = "<group>"; };
+		1C0BCD00214F48F900F92175 /* DesignViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DesignViewButton.png; sourceTree = "<group>"; };
+		1C0BCD3521500E2900F92175 /* DesignerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerState.swift; sourceTree = "<group>"; };
+		1C0BCD382150103700F92175 /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
+		1C0BCD3A2150145500F92175 /* PalleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteViewController.swift; sourceTree = "<group>"; };
+		1C0BCD3D2150173300F92175 /* PalleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteCell.swift; sourceTree = "<group>"; };
+		1C12B31D21518A7200C8EFA4 /* SaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveIcon.png; sourceTree = "<group>"; };
+		1C12B31F21518F0600C8EFA4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		1C12B3232152A8AE00C8EFA4 /* GoBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GoBack.png; path = "../../../Polygon App Assets/GoBack.png"; sourceTree = "<group>"; };
 		1C4FC5C1213A23D700652354 /* SplittingNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplittingNodes.swift; sourceTree = "<group>"; };
 		1C4FC5D0213C46E900652354 /* Four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Four.png; sourceTree = "<group>"; };
 		1C4FC5D1213C46E900652354 /* Nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nine.png; sourceTree = "<group>"; };
@@ -97,7 +117,7 @@
 		1C74E28221066B9400EBECC5 /* Septagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Septagon.png; sourceTree = "<group>"; };
 		1C74E28921066D7D00EBECC5 /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		1C74E29A2106712500EBECC5 /* light-blue-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-blue-background.png"; sourceTree = "<group>"; };
-		1C74E29C210676F700EBECC5 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		1C74E29C210676F700EBECC5 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		1C74E29E2108C82900EBECC5 /* scissors-clipart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scissors-clipart.png"; sourceTree = "<group>"; };
 		1C74E2A02108CAB000EBECC5 /* closed-scissors-clipart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closed-scissors-clipart.png"; sourceTree = "<group>"; };
 		1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,9 +170,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C0BCCFF214F36A700F92175 /* DesignViewControler */ = {
+			isa = PBXGroup;
+			children = (
+				1C0BCCFD214F321600F92175 /* DesignViewController.swift */,
+				1C0BCD3521500E2900F92175 /* DesignerState.swift */,
+			);
+			path = DesignViewControler;
+			sourceTree = "<group>";
+		};
+		1C0BCD372150100D00F92175 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */,
+				1C0BCCFB214C52BA00F92175 /* Parachute.swift */,
+				1C74E27821063C6500EBECC5 /* Constants.swift */,
+				1C0BCD382150103700F92175 /* SharedState.swift */,
+				1C12B31F21518F0600C8EFA4 /* DataModel.swift */,
+				1C74E28921066D7D00EBECC5 /* Styles.swift */,
+				1C74E2722103A62F00EBECC5 /* Helpers.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		1C0BCD3C2150145D00F92175 /* PalletteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C0BCD3A2150145500F92175 /* PalleteViewController.swift */,
+				1C0BCD3D2150173300F92175 /* PalleteCell.swift */,
+			);
+			path = PalletteViewController;
+			sourceTree = "<group>";
+		};
+		1C272CDC215067DD00938E65 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C88A20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		1C74E27C2106418A00EBECC5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1C12B3232152A8AE00C8EFA4 /* GoBack.png */,
+				1C12B31D21518A7200C8EFA4 /* SaveIcon.png */,
+				1C0BCD00214F48F900F92175 /* DesignViewButton.png */,
 				1C4FC5D2213C46E900652354 /* Eight.png */,
 				1C4FC5D3213C46E900652354 /* Five.png */,
 				1CF6748C2142BB2300E0D0AC /* CancelButton.png */,
@@ -181,17 +244,10 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		1C74E28B21066D8300EBECC5 /* Styles */ = {
-			isa = PBXGroup;
-			children = (
-				1C74E28921066D7D00EBECC5 /* Styles.swift */,
-			);
-			path = Styles;
-			sourceTree = "<group>";
-		};
 		1CA6C87720FF7C490076E557 = {
 			isa = PBXGroup;
 			children = (
+				1C272CDC215067DD00938E65 /* CoreData */,
 				1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */,
 				1CA6C89A20FF7C4A0076E557 /* PolygonPuzzleTests */,
 				1CA6C8A520FF7C4A0076E557 /* PolygonPuzzleUITests */,
@@ -212,18 +268,17 @@
 		1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
 				1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */,
+				1C0BCD372150100D00F92175 /* Shared */,
+				1C0BCD3C2150145D00F92175 /* PalletteViewController */,
+				1C0BCCFF214F36A700F92175 /* DesignViewControler */,
 				1CFB47FC211A346000635139 /* GameViewController */,
 				1CBA905C212207D7000FCB9D /* LandingViewController */,
-				1C74E28B21066D8300EBECC5 /* Styles */,
-				1C74E27821063C6500EBECC5 /* Constants.swift */,
-				1C74E2722103A62F00EBECC5 /* Helpers.swift */,
-				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
 				1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */,
 				1C74E27C2106418A00EBECC5 /* Assets */,
 				1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */,
 				1CA6C89220FF7C4A0076E557 /* Info.plist */,
-				1CA6C88A20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld */,
 			);
 			path = PolygonPuzzle;
 			sourceTree = "<group>";
@@ -258,14 +313,13 @@
 			isa = PBXGroup;
 			children = (
 				1C74E2702103869400EBECC5 /* Shapes.swift */,
-				1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */,
 				1CA6C88520FF7C4A0076E557 /* GameViewController.swift */,
 				1CFB47FD211A34CF00635139 /* CuttingView.swift */,
 				1CFB47FF211A371800635139 /* CuttingMethods.swift */,
 				1CBA905D2122135C000FCB9D /* Nodes.swift */,
 				1CB98D16213705590020427F /* Vectors.swift */,
 				1CBA905F212213FF000FCB9D /* Line.swift */,
-				1C74E29C210676F700EBECC5 /* Global.swift */,
+				1C74E29C210676F700EBECC5 /* GameState.swift */,
 				1C4FC5C1213A23D700652354 /* SplittingNodes.swift */,
 			);
 			path = GameViewController;
@@ -382,6 +436,7 @@
 				1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */,
 				1C74E27B2106417D00EBECC5 /* Octagon.png in Resources */,
 				1C4FC5E2213C46E900652354 /* One.png in Resources */,
+				1C0BCD01214F48FA00F92175 /* DesignViewButton.png in Resources */,
 				1C74E29B2106712500EBECC5 /* light-blue-background.png in Resources */,
 				1C74E28321066B9500EBECC5 /* Hexagon.png in Resources */,
 				1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */,
@@ -390,12 +445,14 @@
 				1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */,
 				1C74E28421066B9500EBECC5 /* Square.png in Resources */,
 				1C4FC5DD213C46E900652354 /* Five.png in Resources */,
+				1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */,
 				1C4FC5E3213C46E900652354 /* Two.png in Resources */,
 				1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */,
 				1C74E28721066B9500EBECC5 /* Triangle.png in Resources */,
 				1C4FC5E0213C46E900652354 /* Zero.png in Resources */,
 				1C4FC5DC213C46E900652354 /* Eight.png in Resources */,
 				1C74E2A12108CAB000EBECC5 /* closed-scissors-clipart.png in Resources */,
+				1C12B3242152A8AE00C8EFA4 /* GoBack.png in Resources */,
 				1C4FC5DF213C46E900652354 /* Six.png in Resources */,
 				1C4FC5DE213C46E900652354 /* Seven.png in Resources */,
 				1C74E28821066B9500EBECC5 /* Septagon.png in Resources */,
@@ -430,13 +487,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */,
-				1C74E29D210676F700EBECC5 /* Global.swift in Sources */,
+				1C74E29D210676F700EBECC5 /* GameState.swift in Sources */,
 				1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */,
+				1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */,
 				1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */,
 				1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */,
 				1CBA9060212213FF000FCB9D /* Line.swift in Sources */,
+				1C0BCCFE214F321600F92175 /* DesignViewController.swift in Sources */,
+				1C0BCD392150103700F92175 /* SharedState.swift in Sources */,
 				1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */,
 				1C74E27921063C6500EBECC5 /* Constants.swift in Sources */,
+				1C0BCD3621500E2900F92175 /* DesignerState.swift in Sources */,
 				1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */,
 				1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */,
 				1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */,
@@ -444,7 +505,10 @@
 				1C74E2712103869400EBECC5 /* Shapes.swift in Sources */,
 				1CA6C8B520FF8F890076E557 /* DraggablePolygon.swift in Sources */,
 				1CB98D17213705590020427F /* Vectors.swift in Sources */,
+				1C0BCD3B2150145500F92175 /* PalleteViewController.swift in Sources */,
 				1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */,
+				1C0BCD3E2150173300F92175 /* PalleteCell.swift in Sources */,
+				1C12B32021518F0600C8EFA4 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

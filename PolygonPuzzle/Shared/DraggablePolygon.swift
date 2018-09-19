@@ -49,12 +49,17 @@ class PolygonLayer: CAShapeLayer {
 
 class DraggablePolygon: UIView {
     
-    // Public because we will initialize this from outsisde the class.
+    // Not a good place for didSet because nodes get transformed (coordinate systems etc. alot)
     public var nodes: [Node]?
     
     var polygonLayer = PolygonLayer()
     
+    var vertexImage: [UIImageView] = []
     
+    // Each polygon belongs to an array of polygons.
+    var membership: [DraggablePolygon] = []
+    
+    // Looks like this get set later.
     var colorForNumber: CGColor = UIColor.clear.cgColor
     
     // Sometimes we need to get the array of points from the nodes.
@@ -92,6 +97,7 @@ class DraggablePolygon: UIView {
     
     //
     func config(vertices: [CGPoint]){
+        // Woaaaa - sister is nil here!
         self.nodes = vertices.map({v in Node(_location: v, _sister: nil)})
         self.drawTheLayer()
     }

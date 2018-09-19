@@ -36,24 +36,19 @@ func assignNodeStatesBasedOnVertex(nodes: [Node],vertex: Node,cutPoints: [Node])
     for n in nodes {
         
         let v = vector(start: vertex.location, end: n.location!)
-        print("v.theta",v.theta)
         
         if v.theta < topAngle! && v.theta > bottomAngle! {
-            print("assigned to below")
+  
             n.locationState = LocationState.below
         }
         else if abs(v.theta - bottomAngle!) < 0.0001 || abs(v.theta - topAngle!) < 0.0001 {
-            print("assigned to border")
+   
             n.locationState = LocationState.onborder
         }
         else {
-            print("assigned to above")
+
             n.locationState = LocationState.above
         }
-    }
-    
-    for n in nodes {
-        print("location state",n.locationState!)
     }
     
     return nodes

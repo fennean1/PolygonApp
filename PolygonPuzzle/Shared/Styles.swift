@@ -23,6 +23,46 @@ mutating func styleTopRight(container: CGRect) {
     self = CGRect(x: x, y: y, width: w, height: h)
     
 }
+    mutating func styleTopLeft(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/6
+        let w = h
+        
+        let x: CGFloat = 0.5*w
+        let y: CGFloat = 0.5*h
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    mutating func styleBottomLeft(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/7
+        let w = h
+        
+        let x: CGFloat = 0.5*w
+        let y: CGFloat = container.height - 1.5*w
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    
+    mutating func styleInitialPolygonFrame(container: CGRect) {
+        
+        // Polygon is 80% of the frame width. (What about landscape mode?)
+        let polygonWidth = 0.8*container.width
+        let polygonHeight = polygonWidth
+        
+        let x = 0.10*container.width
+        let y =  0.5*(container.height-polygonHeight)
+        let w = polygonWidth
+        let h = polygonHeight
+
+        self = CGRect(x: x, y: y, width: w, height: h)        
+    }
     
     mutating func styleUnderTopRight(container: CGRect) {
         
