@@ -13,18 +13,25 @@ import UIKit
 class PolygonLayer: CAShapeLayer {
     
     public var myColor: CGColor!
+    public var myBorderColor: CGColor!
     
     func drawPolygon(at _nodes: [Node]){
     
         // Calculate the color based on the number of nodes
         myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
         
+        
         var tempNodes = _nodes
 
         self.opacity = 1
         self.lineWidth = 1
-        //shape.lineJoin = kCALineJoinMiter
         self.strokeColor = UIColor.black.cgColor
+        
+        if _nodes.count >= 10{
+            self.lineWidth = 5
+            self.strokeColor = OneColor.cgColor
+        }
+        
         self.fillColor = myColor    
         
         let path = UIBezierPath()
@@ -56,6 +63,8 @@ class DraggablePolygon: UIView {
     
     var vertexImage: [UIImageView] = []
     
+    var lines: [Line] = []
+    
     // Each polygon belongs to an array of polygons.
     var membership: [DraggablePolygon] = []
     
@@ -67,17 +76,14 @@ class DraggablePolygon: UIView {
         return convertNodesToPoints(_nodes: nodes!)
     }
     
-    var lines: [Line] = []
-
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         super.point(inside: point, with: event)
         if let p = polygonLayer.path {
             if p.contains(point) {
+
+                // HELLO!
                 ActivePolygonIndex = AllPolygons.index(of: self)!
                 applyShadows()
-                // Somehow this gets called twice
-                print("Does this get executed on startup?")
-                viewWithTag(0)?.bringSubview(toFront: ActivePolygon)
                 self.layer.shadowPath = p
                 self.layer.shadowRadius = 15
                 self.layer.shadowOpacity = 0.8

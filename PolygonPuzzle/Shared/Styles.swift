@@ -36,6 +36,32 @@ mutating func styleTopRight(container: CGRect) {
         
     }
     
+    mutating func styleBottomMiddle(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/7
+        let w = h
+        
+        let x: CGFloat = 0.5*w - 0.5*dims.min()!
+        let y: CGFloat = container.height - 1.5*w
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    mutating func styleHideBottomMiddle(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/7
+        let w = h
+        
+        let x: CGFloat = container.width/2 - w/2
+        let y: CGFloat = container.height + 1.5*w
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
     mutating func styleBottomLeft(container: CGRect) {
         
         let dims = [container.width,container.height]

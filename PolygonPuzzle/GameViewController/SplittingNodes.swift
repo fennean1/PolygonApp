@@ -12,7 +12,7 @@ import UIKit
 
 
 // Takes an array of nodes that represent a figure as well as the nodes that it needs to be split at.
-func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]){
+func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
     
     // For a straight line, we let the vertex equal the mid point.
     let dummyVertex = midPoint(a: (StartOfCut?.location)!, b: (EndOfCut?.location)!)

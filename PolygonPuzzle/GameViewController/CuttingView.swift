@@ -15,17 +15,20 @@ class CuttingView: UIView {
     
     var myPan: UIPanGestureRecognizer!
     
-    var myContext = UIGraphicsGetCurrentContext()
-    
     public var cutStart = CGPoint(x: 0,y: 0)
     
+    // These might take over for CuttingViewNeedsClearing and ValidCutHasBeenMade
+    var needsClearing = false
+    var validCut = false
+    
+    // Might want to look into this some more...
     public var cutEnd = CGPoint(x: 0,y: 0)
     {
         didSet {
             // Don't call set needs display if pan has ended.
-            if myPan.state != .ended {
+    
                 self.setNeedsDisplay()
-            }
+
         }
     }
     
@@ -44,20 +47,29 @@ class CuttingView: UIView {
         context?.setLineWidth(4)
         
         if CuttingViewNeedsClearing {
-            print("Cutting View is about to be cleared")
+            
            CuttingViewNeedsClearing = false
+           needsClearing = false
            context?.clear(self.bounds)
         }
         else if ValidCutHasBeenMade {
-            // do nothing. We're not drawing anymore because a valid cut is currently on the board.
+            context?.move(to: (StartOfCut?.location)!)
+            if let _ = VertexOfTheCut {
+                context?.addLine(to: (VertexOfTheCut?.location)!)
+            }
+            context?.addLine(to: (EndOfCut?.location)!)
+            context?.strokePath()
         }
         else if let _ = StartOfCut {
+                //print("drawing from start to vertex as well as to pan location")
                 context?.move(to: cutStart)
                 context?.addLine(to: (VertexOfTheCut?.location)!)
+     
                 context?.addLine(to: cutEnd)
                 context?.strokePath()
         }
         else {
+                print("only drawing between cut start and cut end")
                 context?.move(to: cutStart)
                 context?.addLine(to: cutEnd)
                 context?.strokePath()
@@ -70,7 +82,7 @@ class CuttingView: UIView {
         if pan.state == .began {
             print("Pan Began")
             if let _ = StartOfCut {
-                // Don't reset the cut start, I want the old cut start.
+                cutStart = (StartOfCut?.location)!
             }
             else {
                 cutStart = pan.location(in: self)
@@ -96,14 +108,9 @@ class CuttingView: UIView {
                LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
             }
             
-            // 1) I dont' like that I'm passing global variables to this.
-            // 2) I don't like that it returns a boolean  - or do I? - I a little bit do.
-
             guard getIntersectionPoints(lines: LinesToCut, cuttingLine: LineToCutWith) else {
                 print("Failed getIntersectionPoints")
                 return}
-            
-            // print("Passed getIntersectionPoints")
             
             UIView.animate(withDuration: 1, animations: {
                 if let first = StartOfCut {

@@ -10,19 +10,7 @@ import UIKit
 import Foundation
 
 
-// TODO:
-// 1) Submit Cut Button (Only shows after line is draw and dissapears otherwise) - Might not need this.
-// 2) Cut button generates all LinesToCut from current DraggablePolygon (see array)
-// 3) Iterates through LineToCutWith in order to find a match.
-// 4) Cancels the cut if there are more than two intersections
-
-// TODO Later
-// 1) Make intersection points near vertices default to the vertice
-// 2) Track "Sister" nodes after the cut. (Index of Syster? Node class that extends CG Point? (Yea probably)
-
-// Little number bounce up when polygon is touched.
-// Numbers over 20 have a yellow border with 
-
+var currentPuzzle: PuzzleStruct!
 
 class GameViewController: UIViewController {
     
@@ -32,33 +20,38 @@ class GameViewController: UIViewController {
     var polygonWidth: CGFloat? = nil
     var polygonHeight: CGFloat? = nil
     var polygonRadius: CGFloat? = nil
-    var MyPolygons: [DraggablePolygon] = []
+
+    // I really don't need this dumbass custom init.
+    var animatedNumber = NumberFrame(n: 6, dim: 100)
+    var numberDim: CGFloat = 0
 
     let cuttingView = CuttingView()
     var parachute: Parachute!
-    var points: [CGPoint] = []
-    var detecting = true
     var polygons: [DraggablePolygon] = []
     var saveButton = UIButton()
     
-    @objc func saveActivePolygon(sender: UIButton){
+    @objc func savePuzzle(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
         
-        SavedPolygons.append(ActivePolygon)
+        SavedPolygons = AllPolygons
         
         parachute.setText(message: "Polygon Saved!")
         parachute.showParachute()
     
     }
     
-    func showCancelButton(){
+    func showUndoButton(){
         view.bringSubview(toFront: undoButton)
-        undoButton.alpha = 1
-        undoButton.frame.styleUnderTopRight(container: view.frame)
+
+        
+        UIView.animate(withDuration: 0.5, animations: {undoButton.frame.styleUnderTopRight(container: self.view.frame)
+            undoButton.alpha = 1
+        })
     }
     
-    func hideCancelButton(){
+    func hideUndoButton(){
         UIView.animate(withDuration: 0.5, animations: {
+            undoButton.frame.styleTopRight(container: self.view.frame)
             undoButton.alpha = 0})
     }
     
@@ -92,14 +85,6 @@ class GameViewController: UIViewController {
     }
     
     
-    func addPolygonsToCurrentView() {
-        for p in AllPolygons {
-            print("polygon superview before",p.superview)
-            view.addSubview(p)
-            print("polygon superview after",p.superview)
-        }
-    }
-    
     @objc func cutOrCancel(sender: UIButton){
         
         print("How many times was cut or cancel called?")
@@ -128,21 +113,17 @@ class GameViewController: UIViewController {
         // Go add the line on dragEnded to change the image to a check mark when valid cut has been made (maybe use did set on ValidCutHasBeenMade?
         
         if !ActivelyCutting {
-           // parachute.showParachute()
-            print("not actively cutting when clicked")
             ActivelyCutting = true
-            showCancelButton()
+            showUndoButton()
             CuttingViewNeedsClearing = false
             hideInactivePolygons()
         }
         // Ends the cut entirely.
         else if ActivelyCutting {
-            print("Actively cutting when clicked")
-            parachute.hideParachute()
-            
+   
             returnPolygonsToView()
             
-            hideCancelButton()
+            hideUndoButton()
             
             UIView.animate(withDuration: 1, animations:
             {
@@ -215,11 +196,15 @@ class GameViewController: UIViewController {
             topPolygon.drawTheLayer()
             bottomPolygon.drawTheLayer()
         
-            print("About to remove active polygon from superview")
             ActivePolygon.removeFromSuperview()
             
-            AllPolygons.remove(at: ActivePolygonIndex)
-            print("AllPolygons after removal",AllPolygons)
+            let currentPolygonIndex = AllPolygons.index(of: ActivePolygon)
+            
+            print("index of active polygon",index)
+            print("active polygon index",ActivePolygonIndex)
+            
+            AllPolygons.remove(at: currentPolygonIndex!)
+            //print("AllPolygons after removal",AllPolygons)
             
             //print("top Polygon superview before",topPolygon.superview)
             self.view.addSubview(topPolygon)
@@ -229,11 +214,9 @@ class GameViewController: UIViewController {
             AllPolygons.append(topPolygon)
             AllPolygons.append(bottomPolygon)
             
-            
             resetCutting()
+            SisterIndex += 1
             ActivelyCutting = false
-            
-            addPolygonsToCurrentView()
         
         }
     }
@@ -242,21 +225,25 @@ class GameViewController: UIViewController {
         resetCutting()
     }
     
-    
+    // Sweeeeeet
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches Began Is called")
         if !ActivelyCutting {
             view.bringSubview(toFront: ActivePolygon)
+            animatedNumber.render(n: ActivePolygon.nodes!.count)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.animatedNumber.center = CGPoint(x: self.view.center.x, y: self.view.frame.height - 2*self.numberDim)})
+ 
         }
     }
     
-
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.5, animations: {self.animatedNumber.frame.styleHideBottomMiddle(container: self.view.frame)})
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-  
         // ----------- init ----------------------
         
         AllPolygons = []
@@ -264,6 +251,7 @@ class GameViewController: UIViewController {
     
         let initialPolygon = DraggablePolygon()
         polygonRadius = 0.4*view.frame.width
+        numberDim = view.frame.width/8
         
         // Gets the coordinates for a polygon based on "numberOfSides" and "radius"
         let verticesForInitialShape = getVerticesForType(numberOfSides: numberOfSides, radius: Double(polygonRadius!))
@@ -289,7 +277,7 @@ class GameViewController: UIViewController {
             undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
     
         
-        saveButton.addTarget(self, action: #selector(saveActivePolygon(sender:)), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(savePuzzle(sender:)), for: .touchUpInside)
         
         backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         
@@ -337,7 +325,8 @@ class GameViewController: UIViewController {
         
     
         cutOrCancelButton.frame.styleTopRight(container: view.frame)
-        undoButton.frame.styleUnderTopRight(container: view.frame)
+        undoButton.frame.styleTopRight(container: view.frame)
+        undoButton.alpha = 0
         
  
         // ----- Finishing Touches ---------------
@@ -348,6 +337,13 @@ class GameViewController: UIViewController {
         
         AllPolygons.append(initialPolygon)
         //MyPolygons = AllPolygons
+        
+        
+        // Sprinkle in our animated number.
+        view.addSubview(animatedNumber)
+        view.bringSubview(toFront: animatedNumber)
+        animatedNumber.render(n: 0)
+        animatedNumber.center = CGPoint(x: view.center.x, y: view.frame.height+numberDim)
         
     }
 

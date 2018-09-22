@@ -82,7 +82,7 @@
         <scene sceneID="G6S-N4-Tdg">
             <objects>
                 <viewController storyboardIdentifier="DesignViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OjH-ND-TXc" customClass="DesignViewController" customModule="PolygonPuzzle" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" tag="1" contentMode="scaleToFill" id="PtU-o7-lFY">
+                    <view key="view" tag="10" contentMode="scaleToFill" id="PtU-o7-lFY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

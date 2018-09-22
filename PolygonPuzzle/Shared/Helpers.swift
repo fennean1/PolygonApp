@@ -9,12 +9,19 @@
 import Foundation
 import UIKit
 
-
 func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
     
-    switch n {
+    let m = n%10
+    
+    switch m {
+    case 0:
+        return UIColor(red: 1.00, green:0.80, blue:0.00, alpha: opacity).cgColor
+    case 1:
+        return UIColor(red:0.96, green:0.90, blue:0.00, alpha: 1.0).cgColor
+    case 2:
+        return UIColor(red:0.78, green:0.82, blue:0.10, alpha: opacity).cgColor
     case 3:
-        return UIColor(red:0.07, green:0.58, blue:0.25, alpha:1.0).cgColor
+        return UIColor(red:0.07, green:0.58, blue:0.25, alpha: opacity).cgColor
     case 4:
         return UIColor(red:0.11, green:0.69, blue:0.93, alpha: opacity).cgColor
     case 5:
@@ -30,10 +37,7 @@ func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
     default:
         return UIColor.black.cgColor
     }
-    
-
 }
-
 
 
 // Finds duplicates in an array based on an arbitrary criteria

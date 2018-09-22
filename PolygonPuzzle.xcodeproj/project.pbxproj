@@ -15,8 +15,8 @@
 		1C0BCD3B2150145500F92175 /* PalleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3A2150145500F92175 /* PalleteViewController.swift */; };
 		1C0BCD3E2150173300F92175 /* PalleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3D2150173300F92175 /* PalleteCell.swift */; };
 		1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B31D21518A7200C8EFA4 /* SaveIcon.png */; };
-		1C12B32021518F0600C8EFA4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B31F21518F0600C8EFA4 /* DataModel.swift */; };
 		1C12B3242152A8AE00C8EFA4 /* GoBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B3232152A8AE00C8EFA4 /* GoBack.png */; };
+		1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B332215569A400C8EFA4 /* NumberFrame.swift */; };
 		1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4FC5C1213A23D700652354 /* SplittingNodes.swift */; };
 		1C4FC5DA213C46E900652354 /* Four.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D0213C46E900652354 /* Four.png */; };
 		1C4FC5DB213C46E900652354 /* Nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D1213C46E900652354 /* Nine.png */; };
@@ -90,8 +90,8 @@
 		1C0BCD3A2150145500F92175 /* PalleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteViewController.swift; sourceTree = "<group>"; };
 		1C0BCD3D2150173300F92175 /* PalleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteCell.swift; sourceTree = "<group>"; };
 		1C12B31D21518A7200C8EFA4 /* SaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveIcon.png; sourceTree = "<group>"; };
-		1C12B31F21518F0600C8EFA4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		1C12B3232152A8AE00C8EFA4 /* GoBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GoBack.png; path = "../../../Polygon App Assets/GoBack.png"; sourceTree = "<group>"; };
+		1C12B332215569A400C8EFA4 /* NumberFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFrame.swift; sourceTree = "<group>"; };
 		1C4FC5C1213A23D700652354 /* SplittingNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplittingNodes.swift; sourceTree = "<group>"; };
 		1C4FC5D0213C46E900652354 /* Four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Four.png; sourceTree = "<group>"; };
 		1C4FC5D1213C46E900652354 /* Nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nine.png; sourceTree = "<group>"; };
@@ -186,9 +186,9 @@
 				1C0BCCFB214C52BA00F92175 /* Parachute.swift */,
 				1C74E27821063C6500EBECC5 /* Constants.swift */,
 				1C0BCD382150103700F92175 /* SharedState.swift */,
-				1C12B31F21518F0600C8EFA4 /* DataModel.swift */,
 				1C74E28921066D7D00EBECC5 /* Styles.swift */,
 				1C74E2722103A62F00EBECC5 /* Helpers.swift */,
+				1C12B332215569A400C8EFA4 /* NumberFrame.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -271,10 +271,10 @@
 				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
 				1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */,
 				1C0BCD372150100D00F92175 /* Shared */,
+				1CBA905C212207D7000FCB9D /* LandingViewController */,
+				1CFB47FC211A346000635139 /* GameViewController */,
 				1C0BCD3C2150145D00F92175 /* PalletteViewController */,
 				1C0BCCFF214F36A700F92175 /* DesignViewControler */,
-				1CFB47FC211A346000635139 /* GameViewController */,
-				1CBA905C212207D7000FCB9D /* LandingViewController */,
 				1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */,
 				1C74E27C2106418A00EBECC5 /* Assets */,
 				1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */,
@@ -500,6 +500,7 @@
 				1C0BCD3621500E2900F92175 /* DesignerState.swift in Sources */,
 				1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */,
 				1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */,
+				1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */,
 				1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */,
 				1CA6C88C20FF7C4A0076E557 /* PolygonPuzzle.xcdatamodeld in Sources */,
 				1C74E2712103869400EBECC5 /* Shapes.swift in Sources */,
@@ -508,7 +509,6 @@
 				1C0BCD3B2150145500F92175 /* PalleteViewController.swift in Sources */,
 				1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */,
 				1C0BCD3E2150173300F92175 /* PalleteCell.swift in Sources */,
-				1C12B32021518F0600C8EFA4 /* DataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,10 +25,7 @@ class DesignViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches Began Is called")
-        if !ActivelyCutting {
             view.bringSubview(toFront: ActivePolygon)
-        }
     }
     
     @objc func goBack(sender: UIButton) {
@@ -53,11 +50,17 @@ class DesignViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.tag = 1
+        
+        
+        // Could be like "current Puzzle" or some shit"
+        AllPolygons = SavedPolygons
         
         // ----------- init ----------------------
 
         let backGround = UIImageView()
         backButton = UIButton()
+        
         
         // ------------ targets ---------------------
         
@@ -68,8 +71,8 @@ class DesignViewController: UIViewController {
         view.addSubview(backGround)
         view.addSubview(backButton)
         
-        if SavedPolygons.count != 0 {
-            for p in SavedPolygons {
+        if AllPolygons.count != 0 {
+            for p in AllPolygons {
                 view.addSubview(p)
             }
         }
@@ -78,15 +81,16 @@ class DesignViewController: UIViewController {
         // -------------- Setting State ---------------
         
         backButton.setImage(ImgGoBack, for: .normal)
-        
+
         // -----  Ordering Views ------------
         
-        //view.bringSubview(toFront: ActivePolygon)
-        
+
         
         // ------------ Adding Styles ----------------------
         
         backButton.frame.styleTopLeft(container: view.frame)
+        backGround.frame.styleFillContainer(container: view.frame)
+        
 
         // ----- Finishing Touches ---------------
         

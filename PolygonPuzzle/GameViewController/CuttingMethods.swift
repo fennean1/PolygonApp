@@ -39,14 +39,14 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
     } else {
         if (ActivePolygon.polygonLayer.path?.contains(firstPointInActivePolygonsCoordinateSystem))! {
             potentialVertex = Node(_location: cuttingLine.firstPoint! , _sister: SisterIndex)
-            //print("The first point is in the polygon!")
+            print("The first point is in the polygon!")
         }
         else if (ActivePolygon.polygonLayer.path?.contains(secondPointInActivePolygonsCoordinateSystem))! {
             potentialVertex = Node(_location: cuttingLine.secondPoint!, _sister: SisterIndex)
-            //print("The second point is in the polygon!")
+            print("The second point is in the polygon!")
         }
     }
-    print("intersectionPoints Count",intersectionPoints.count)
+
     if intersectionPoints.count > 2 {
         print("No, we're not dealing with more than 2 intersection points in a single cut. This case doesn't count the vertex.")
         return false
@@ -75,6 +75,7 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
                 ValidCutHasBeenMade = true
                 return true
             } else if let _ = potentialVertex {
+                print("potential vertex has been set")
                 VertexOfTheCut = potentialVertex
                 return true
             } else {
@@ -92,8 +93,11 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
             else {
                 print("One intersection point, start not set and vertex not set")
                 StartOfCut = intersectionPoints.first!
+                print("StartOfCut",StartOfCut?.location)
                 if let _ = potentialVertex {
+                    print("assigning vertex now")
                     VertexOfTheCut = potentialVertex
+                    print("VertexOfTheCut",VertexOfTheCut?.location)
                 }
                 return true
             }

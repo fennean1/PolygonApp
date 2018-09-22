@@ -37,7 +37,9 @@ NEXT) Shrink the undo button and make it animate!
  
  10) Back Button needs to be active when cutting and also successfully reset when exited.
  
- 11) Back button needs to save current cutting state for that view - need a different cutting state for each time the vc has been entered. 
+ 11) Back button needs to save current cutting state for that view - need a different cutting state for each time the vc has been entered.
+ 
+ 12) Need to handle situation where the vertex & endpoints form a straight line.
  
  */
 
@@ -51,8 +53,6 @@ NEXT) Shrink the undo button and make it animate!
  
  */
 
-
- // NEXT: WRITE CODE TO RETAIN PUZZLES UPON EXIT AND ENTRANCE
 
 import Foundation
 import UIKit
@@ -138,10 +138,11 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("LandingViewController,viewDidLoad")
+        // print("LandingViewController,viewDidLoad")
         
         // Init
         
+
         backGround.image = BackGround
         screenWidth = view.frame.width
         let r = screenWidth/3
@@ -171,6 +172,7 @@ class LandingViewController: UIViewController {
         segueToDesignViewController.addTarget(self, action: #selector(segueToDesignViewController(sender:)), for: .touchUpInside)
         
         view.bringSubview(toFront: segueToDesignViewController)
+ 
         
     }
     

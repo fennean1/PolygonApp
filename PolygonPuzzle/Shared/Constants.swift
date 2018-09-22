@@ -13,6 +13,8 @@ import UIKit
 
 let niceColor = UIColor(red: 50, green: 20, blue: 30, alpha: 1.0)
 // #139341
+let OneColor = UIColor(red:0.96, green:0.90, blue:0.00, alpha: 1.0)
+//
 let colorForThree = UIColor(red:0.07, green:0.58, blue:0.25, alpha:1.0)
 //#1DAFEC
 let colorForFour = UIColor(red:0.11, green:0.69, blue:0.93, alpha:1.0)
@@ -26,6 +28,18 @@ let colorForSeven = UIColor(red:0.92, green:0.09, blue:0.55, alpha:1.0)
 let colorForEight = UIColor(red:0.82, green:0.08, blue:0.19, alpha:1.0)
 // #F1662F
 let colorForNine = UIColor(red:0.95, green:0.40, blue:0.18, alpha:1.0)
+
+let Zero = UIImage(named: "Zero")
+let One = UIImage(named: "One")
+let Two = UIImage(named: "Two")
+let Three = UIImage(named: "Three")
+let Four = UIImage(named: "Four")
+let Five = UIImage(named: "Five")
+let Six = UIImage(named: "Six")
+let Seven = UIImage(named: "Seven")
+let Eight = UIImage(named: "Eight")
+let Nine = UIImage(named: "Nine")
+
 
 
 let Triangle = UIImage(named: "Triangle")
