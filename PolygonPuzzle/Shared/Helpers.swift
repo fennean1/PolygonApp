@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
     
     let m = n%10
@@ -38,6 +40,8 @@ func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
         return UIColor.black.cgColor
     }
 }
+
+
 
 
 // Finds duplicates in an array based on an arbitrary criteria

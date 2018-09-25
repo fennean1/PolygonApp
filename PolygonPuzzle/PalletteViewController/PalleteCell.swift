@@ -12,6 +12,7 @@ import UIKit
 class PalleteCell: UICollectionViewCell {
     
 
+    // Dummy
     func drawPolygon(n: Int) {
         let polygon = DraggablePolygon()
         let v = getVerticesForType(numberOfSides: n, radius: 50)

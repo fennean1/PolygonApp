@@ -23,10 +23,15 @@ class Node {
     // Location of the node
     var location: CGPoint!
     
+    // Origin of coordinate system in which the node is drawn.
+    var origin = CGPoint(x: 0, y: 0)
+    
+    var locationInSuperview: CGPoint {
+        return addPoints(a: self.location, b: self.origin)
+    }
+    
     // Node that must be matched with this one to put the puzzle together.
     var sister: Int?
-    
-    var isaVertex = false
     
     // Determines if the node is a top node or bottom node. Either above or below.
     // node might not have a LocationState if it's not part of a cutting process.

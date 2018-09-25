@@ -69,7 +69,6 @@ class CuttingView: UIView {
                 context?.strokePath()
         }
         else {
-                print("only drawing between cut start and cut end")
                 context?.move(to: cutStart)
                 context?.addLine(to: cutEnd)
                 context?.strokePath()

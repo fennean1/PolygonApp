@@ -20,7 +20,6 @@ class PolygonLayer: CAShapeLayer {
         // Calculate the color based on the number of nodes
         myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
         
-        
         var tempNodes = _nodes
 
         self.opacity = 1
@@ -101,7 +100,7 @@ class DraggablePolygon: UIView {
         }
     }
     
-    //
+    // Helps us initialize our polygon
     func config(vertices: [CGPoint]){
         // Woaaaa - sister is nil here!
         self.nodes = vertices.map({v in Node(_location: v, _sister: nil)})

@@ -9,6 +9,80 @@
 import Foundation
 import UIKit
 
+// Is any vertex by default going to be a new sister?
+
+
+// This takes car of assigning sisters when a node interesects on the border.
+func assignNodeStatesBasedOnVertex(nodes: [Node],vertex: Node,cutPoints: [Node]) -> [Node] {
+    
+    var topSister: Int?
+    var bottomSister: Int?
+    
+    let firstCutPoint = cutPoints[0]
+    let secondCutPoint = cutPoints[1]
+    
+    // Create the vectors
+    let cutVectorOne = vector(start: vertex.location, end: firstCutPoint.location)
+    let cutVectorTwo = vector(start: vertex.location, end: secondCutPoint.location)
+    
+    // Find the angles formed by each
+    let angleOne = cutVectorOne.theta
+    let angleTwo = cutVectorTwo.theta
+    
+    // find the max and min
+    let topAngle = [angleOne,angleTwo].max()
+    let bottomAngle = [angleOne,angleTwo].min()
+    
+    // Risky equality?
+    if topAngle == angleOne {
+        print("top angle = angle one")
+        topSister = firstCutPoint.sister
+    }
+    
+    if topAngle == angleTwo {
+        print("top angle = angle two")
+        topSister = secondCutPoint.sister
+    }
+    
+    if bottomAngle == angleOne {
+        print("bottom angle = angle one")
+        bottomSister = firstCutPoint.sister
+    }
+    
+    if bottomAngle == angleTwo {
+        print("bottom angle = angle two")
+        bottomSister = secondCutPoint.sister
+    }
+    
+    
+    for n in nodes {
+        
+        let v = vector(start: vertex.location, end: n.location!)
+        
+        if v.theta < topAngle! && v.theta > bottomAngle! {
+            
+            n.locationState = LocationState.below
+        }
+        else if abs(v.theta - topAngle!) < 0.0001 {
+            
+            print("Assigning a sister that's on the border")
+            n.locationState = LocationState.onborder
+
+            
+        } else if abs(v.theta - bottomAngle!) < 0.0001 {
+            
+            print("assigning a sister that's on the border")
+            n.locationState = LocationState.onborder
+
+        }
+        else {
+            n.locationState = LocationState.above
+        }
+    }
+    
+    return nodes
+}
+
 
 
 // Takes an array of nodes that represent a figure as well as the nodes that it needs to be split at.
@@ -17,12 +91,19 @@ func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
     // For a straight line, we let the vertex equal the mid point.
     let dummyVertex = midPoint(a: (StartOfCut?.location)!, b: (EndOfCut?.location)!)
     
+    // WHAAAAAT? SET HERE? (start and end of cut)
+    StartOfCut?.sister = SisterIndex
+    EndOfCut?.sister = SisterIndex+1
+    SisterIndex += 2
+    
     var vertexNode: Node!
     
     var nodesWithState: [Node] = []
  
-    vertexNode = Node(_location: dummyVertex, _sister: SisterIndex)
+    // Create node from the dummy vertex point.
+    vertexNode = Node(_location: dummyVertex, _sister: nil)
     
+    // AND THEN PASSED HERE? (start and end of cut)
     nodesWithState = assignNodeStatesBasedOnVertex(nodes: nodes, vertex: vertexNode, cutPoints: [StartOfCut!,EndOfCut!])
     
     // indices at which we need to break our nodesWithCutPointsInserted Array
@@ -74,6 +155,8 @@ func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
     }
     
     // HELLO Need a safegaurd here so it doesn't toally crash
+    
+    
     let firstIndexToBreakAt = breakAtIndices[0]
     let secondIndexToBreakAt = breakAtIndices[1]
     
@@ -85,12 +168,17 @@ func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
 }
 
 
-
 // Takes an array of nodes that represent a figure as well as the nodes that it needs to be split at.
 func splitNodesWithDualCut(nodes: [Node])-> ([Node],[Node]){
 
     var nodesWithState: [Node] = []
+    
+    StartOfCut?.sister = SisterIndex
+    VertexOfTheCut?.sister = SisterIndex+1
+    EndOfCut?.sister = SisterIndex+2
+    SisterIndex += 3
 
+    // This will decrement the sister index if one of the cuts absorbs the index of an existing nodes.
     nodesWithState = assignNodeStatesBasedOnVertex(nodes: nodes, vertex: VertexOfTheCut!, cutPoints: [StartOfCut!,EndOfCut!])
     
     // indices at which we need to break our nodesWithCutPointsInserted Array

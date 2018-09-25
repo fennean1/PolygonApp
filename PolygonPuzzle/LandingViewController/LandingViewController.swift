@@ -19,19 +19,12 @@ NEXT) Shrink the undo button and make it animate!
  1) Bug where an endpoint is inside of the polygon but it still tried to clip to node. Might need a function that tells me
  if a point is on the border of the polygon
  
- 2) Need to be able to cancel any cut.
- 
- 3) Hitting the cut button at any time will exit without failure.
- 
- 4) Characters on landing screen as well as on cutting view.
- 
- 5) Third dot goes away after cut.
- 
- 6) Disallow cutting after second cut has been made.
  
  7) Puzzle needs to detect when it's put together. (Sister nodes)
  
  8) Need support for when a cut crosses a gap. How?
+ 
+ 8.b) Need support for when a cut occurs along a single edge (i.e. trying to cut parallel to an edge)
  
  9) Note: When a straight line is formed by the vertex and the endpoints
  

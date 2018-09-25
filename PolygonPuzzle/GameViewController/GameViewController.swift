@@ -32,10 +32,20 @@ class GameViewController: UIViewController {
     
     @objc func savePuzzle(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
-        
+
         SavedPolygons = AllPolygons
         
-        parachute.setText(message: "Polygon Saved!")
+        print("validating all sisters",validateAllSisters())
+        
+        printAllSisters()
+
+        if validateAllSisters() {
+            parachute.setText(message: "Polygon Solved!")
+        } else
+        {
+            parachute.setText(message: "Not Solved!")
+        }
+
         parachute.showParachute()
     
     }
@@ -134,15 +144,11 @@ class GameViewController: UIViewController {
             
             //cuttingView.setNeedsDisplay()
 
-            // Can I replace this with "ValidCutHasBeenMade?
+            // Can I replace this with "ValidCutHasBeenMade? - I think so and it would make more sense.
             guard StartOfCut != nil && EndOfCut != nil else {
-                print("YO, GUARD FAILED!")
-                print("ActivePolygonIndex",ActivePolygonIndex)
-                print("Start and End of Cut have not been set!")
+                print("GUARD FAILED!")
                 resetCutting()
                 ActivelyCutting = false
-                print("cuttingViewNeedsClearing",CuttingViewNeedsClearing)
-                print("cutting has been reset")
                 return
             }
             
@@ -189,8 +195,8 @@ class GameViewController: UIViewController {
             // Map back to the  view's coordinate system.
             bottomPolygon.nodes = bottomNodes.map({(n: Node) -> Node in
                 let newLocation = subtractPoints(a: n.location, b: bottomPolygonFrame.origin)
-                let returnNode = Node(_location: newLocation, _sister: n.sister)
-                return returnNode})
+                n.location = newLocation
+                return n})
             
             // THE NODES ARE NOT IN THE CORRECT COORDINATE SYSTEM WHEN THIS OCCURS (now they are)
             topPolygon.drawTheLayer()
@@ -215,7 +221,6 @@ class GameViewController: UIViewController {
             AllPolygons.append(bottomPolygon)
             
             resetCutting()
-            SisterIndex += 1
             ActivelyCutting = false
         
         }
@@ -260,6 +265,7 @@ class GameViewController: UIViewController {
         let verticesForInitialShape_inPolygon = verticesForInitialShape.map({p in addPoints(a: p, b: CGPoint(x: polygonRadius!, y: polygonRadius!))})
         
         initialPolygon.frame.styleInitialPolygonFrame(container: view.frame)
+        // Right now, config only gets called when the polygon is first initialized. That's why it gets a sister index because all the vertices will have the same index in the beginning.
         initialPolygon.config(vertices: verticesForInitialShape_inPolygon)
         
 
@@ -344,6 +350,9 @@ class GameViewController: UIViewController {
         view.bringSubview(toFront: animatedNumber)
         animatedNumber.render(n: 0)
         animatedNumber.center = CGPoint(x: view.center.x, y: view.frame.height+numberDim)
+        
+        // Gotta reset this when we start over.
+        SisterIndex = 0
         
     }
 

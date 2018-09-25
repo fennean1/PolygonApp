@@ -17,6 +17,7 @@
 		1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B31D21518A7200C8EFA4 /* SaveIcon.png */; };
 		1C12B3242152A8AE00C8EFA4 /* GoBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B3232152A8AE00C8EFA4 /* GoBack.png */; };
 		1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B332215569A400C8EFA4 /* NumberFrame.swift */; };
+		1C12B3422159694E00C8EFA4 /* Sisters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B3412159694E00C8EFA4 /* Sisters.swift */; };
 		1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4FC5C1213A23D700652354 /* SplittingNodes.swift */; };
 		1C4FC5DA213C46E900652354 /* Four.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D0213C46E900652354 /* Four.png */; };
 		1C4FC5DB213C46E900652354 /* Nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D1213C46E900652354 /* Nine.png */; };
@@ -55,7 +56,7 @@
 		1CA6C8A720FF7C4A0076E557 /* PolygonPuzzleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C8A620FF7C4A0076E557 /* PolygonPuzzleUITests.swift */; };
 		1CA6C8B520FF8F890076E557 /* DraggablePolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */; };
 		1CB98D17213705590020427F /* Vectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB98D16213705590020427F /* Vectors.swift */; };
-		1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905D2122135C000FCB9D /* Nodes.swift */; };
+		1CBA905E2122135C000FCB9D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905D2122135C000FCB9D /* Node.swift */; };
 		1CBA9060212213FF000FCB9D /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBA905F212213FF000FCB9D /* Line.swift */; };
 		1CF6748D2142BB2300E0D0AC /* CancelButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6748C2142BB2300E0D0AC /* CancelButton.png */; };
 		1CF6748F2142BBEE00E0D0AC /* DoneButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CF6748E2142BBEE00E0D0AC /* DoneButton.png */; };
@@ -92,6 +93,7 @@
 		1C12B31D21518A7200C8EFA4 /* SaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveIcon.png; sourceTree = "<group>"; };
 		1C12B3232152A8AE00C8EFA4 /* GoBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GoBack.png; path = "../../../Polygon App Assets/GoBack.png"; sourceTree = "<group>"; };
 		1C12B332215569A400C8EFA4 /* NumberFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFrame.swift; sourceTree = "<group>"; };
+		1C12B3412159694E00C8EFA4 /* Sisters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sisters.swift; sourceTree = "<group>"; };
 		1C4FC5C1213A23D700652354 /* SplittingNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplittingNodes.swift; sourceTree = "<group>"; };
 		1C4FC5D0213C46E900652354 /* Four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Four.png; sourceTree = "<group>"; };
 		1C4FC5D1213C46E900652354 /* Nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nine.png; sourceTree = "<group>"; };
@@ -136,7 +138,7 @@
 		1CA6C8A820FF7C4A0076E557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggablePolygon.swift; sourceTree = "<group>"; };
 		1CB98D16213705590020427F /* Vectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vectors.swift; sourceTree = "<group>"; };
-		1CBA905D2122135C000FCB9D /* Nodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
+		1CBA905D2122135C000FCB9D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		1CBA905F212213FF000FCB9D /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		1CF6748C2142BB2300E0D0AC /* CancelButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CancelButton.png; path = "../../../Polygon App Assets/CancelButton.png"; sourceTree = "<group>"; };
 		1CF6748E2142BBEE00E0D0AC /* DoneButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DoneButton.png; path = "../../../Polygon App Assets/DoneButton.png"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		1C0BCD372150100D00F92175 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				1CBA905D2122135C000FCB9D /* Node.swift */,
 				1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */,
 				1C0BCCFB214C52BA00F92175 /* Parachute.swift */,
 				1C74E27821063C6500EBECC5 /* Constants.swift */,
@@ -314,9 +317,9 @@
 			children = (
 				1C74E2702103869400EBECC5 /* Shapes.swift */,
 				1CA6C88520FF7C4A0076E557 /* GameViewController.swift */,
+				1C12B3412159694E00C8EFA4 /* Sisters.swift */,
 				1CFB47FD211A34CF00635139 /* CuttingView.swift */,
 				1CFB47FF211A371800635139 /* CuttingMethods.swift */,
-				1CBA905D2122135C000FCB9D /* Nodes.swift */,
 				1CB98D16213705590020427F /* Vectors.swift */,
 				1CBA905F212213FF000FCB9D /* Line.swift */,
 				1C74E29C210676F700EBECC5 /* GameState.swift */,
@@ -490,7 +493,7 @@
 				1C74E29D210676F700EBECC5 /* GameState.swift in Sources */,
 				1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */,
 				1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */,
-				1CBA905E2122135C000FCB9D /* Nodes.swift in Sources */,
+				1CBA905E2122135C000FCB9D /* Node.swift in Sources */,
 				1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */,
 				1CBA9060212213FF000FCB9D /* Line.swift in Sources */,
 				1C0BCCFE214F321600F92175 /* DesignViewController.swift in Sources */,
@@ -499,6 +502,7 @@
 				1C74E27921063C6500EBECC5 /* Constants.swift in Sources */,
 				1C0BCD3621500E2900F92175 /* DesignerState.swift in Sources */,
 				1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */,
+				1C12B3422159694E00C8EFA4 /* Sisters.swift in Sources */,
 				1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */,
 				1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */,
 				1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */,

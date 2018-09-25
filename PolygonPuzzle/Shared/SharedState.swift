@@ -20,18 +20,6 @@ struct MyPuzzles {
     
 }
 
-
-//
-//  DataModel.swift
-//  PolygonPuzzle
-//
-//  Created by Andrew Leland Fenner on 9/18/18.
-//  Copyright © 2018 Andrew Fenner. All rights reserved.
-//
-
-import Foundation
-import UIKit
-
 struct SessionStruct {
     var puzzles: [PuzzleStruct] = []
     var savePieces: [Polygon] = []

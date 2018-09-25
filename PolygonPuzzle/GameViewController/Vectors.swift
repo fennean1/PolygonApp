@@ -22,38 +22,6 @@ enum VectorPosition {
     case unknown
 }
 
-func assignNodeStatesBasedOnVertex(nodes: [Node],vertex: Node,cutPoints: [Node]) -> [Node] {
-    
-    let cutVectorOne = vector(start: vertex.location, end: cutPoints[0].location)
-    let cutVectorTwo = vector(start: vertex.location, end: cutPoints[1].location)
-    
-    let angleOne = cutVectorOne.theta
-    let angleTwo = cutVectorTwo.theta
-    
-    let topAngle = [angleOne,angleTwo].max()
-    let bottomAngle = [angleOne,angleTwo].min()
-
-    for n in nodes {
-        
-        let v = vector(start: vertex.location, end: n.location!)
-        
-        if v.theta < topAngle! && v.theta > bottomAngle! {
-  
-            n.locationState = LocationState.below
-        }
-        else if abs(v.theta - bottomAngle!) < 0.0001 || abs(v.theta - topAngle!) < 0.0001 {
-   
-            n.locationState = LocationState.onborder
-        }
-        else {
-
-            n.locationState = LocationState.above
-        }
-    }
-    
-    return nodes
-}
-
 func getVectorPosition(dx: CGFloat, dy: CGFloat) -> VectorPosition {
     
     if dy == 0 {

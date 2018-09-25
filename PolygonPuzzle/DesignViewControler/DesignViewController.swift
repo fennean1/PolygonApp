@@ -52,7 +52,6 @@ class DesignViewController: UIViewController {
         
         view.tag = 1
         
-        
         // Could be like "current Puzzle" or some shit"
         AllPolygons = SavedPolygons
         
@@ -81,6 +80,7 @@ class DesignViewController: UIViewController {
         // -------------- Setting State ---------------
         
         backButton.setImage(ImgGoBack, for: .normal)
+        backGround.image = BackGround
 
         // -----  Ordering Views ------------
         
