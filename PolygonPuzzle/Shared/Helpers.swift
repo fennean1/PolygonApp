@@ -9,7 +9,17 @@
 import Foundation
 import UIKit
 
-
+func unitVectors(from points: [CGPoint]) -> [CGPoint]{
+    var uVectors: [CGPoint] = []
+    
+    for p in points  {
+        let pLength = distance(a: PointZero, b: p)
+        let dx = p.x/pLength
+        let dy = p.y/pLength
+        uVectors.append((CGPoint(x: dx, y: dy)))
+    }
+    return uVectors
+}
 
 func getColorFromNumberOfSides(n: Int,opacity: CGFloat) -> CGColor{
     
@@ -184,7 +194,7 @@ func distance(a: CGPoint,b: CGPoint) -> CGFloat {
     let y2 = b.y
     
     let deltaXSquared = pow(Double(x2-x1),2)
-        let deltaYSquared = pow(Double(y2-y1),2)
+    let deltaYSquared = pow(Double(y2-y1),2)
 
     let rSquared  = deltaXSquared+deltaYSquared
     

@@ -12,22 +12,38 @@ import UIKit
 import Foundation
 
 
-class PalleteViewController: UICollectionViewController {
+class PalleteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var backButton: UIButton!
+    var backGround: UIButton!
+    var notification: Parachute!
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    override func viewDidAppear(_ animated: Bool) {
+        
+        notification = Parachute(frame: view.frame)
+        view.addSubview(notification)
+        
+        if SavedPolygons.count == 0 {
+            notification.setText(message: "You have no saved polygons!")
+            notification.showParachute()
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return SavedPolygons.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let i = indexPath.row
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "palleteCell", for: indexPath) as! PalleteCell
         
-        cell.drawPolygon(n: 6)
+        cell.drawPolygon(n: i)
         
         return cell
         
@@ -35,7 +51,8 @@ class PalleteViewController: UICollectionViewController {
     
     @objc func goBack(sender: UIButton) {
         
-        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "LandingViewController")
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "DesignViewController")
+        
         self.show(vc as! UIViewController, sender: vc)
         
     }
@@ -46,7 +63,7 @@ class PalleteViewController: UICollectionViewController {
         
         // ----------- init ----------------------
         
-        // let backGround = UIImageView()
+        let backGround = UIImageView()
         
         // ------------ targets ---------------------
         
@@ -54,24 +71,29 @@ class PalleteViewController: UICollectionViewController {
         
         // ---------- Adding The Views -----------
         
-        //view.addSubview(backGround)
+        view.addSubview(backGround)
         //view.addSubview(ActivePolygon)
         
         
         // -------------- Setting State ---------------
         
+        backGround.image = BackGround
         
         
         // -----  Ordering Views ------------
         
         //view.bringSubview(toFront: ActivePolygon)
+        view.sendSubview(toBack: backGround)
         
         
         // ------------ Adding Styles ----------------------
         
         //ActivePolygon.center = self.view.center
+        backGround.frame.styleFillContainer(container: view.frame)
         
         // ----- Finishing Touches ---------------
+        
+        
         
         
     }

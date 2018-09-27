@@ -12,6 +12,8 @@ import Foundation
 
 var currentPuzzle: PuzzleStruct!
 
+var InitialPolygonDim: CGFloat!
+
 class GameViewController: UIViewController {
     
     
@@ -21,7 +23,7 @@ class GameViewController: UIViewController {
     var polygonHeight: CGFloat? = nil
     var polygonRadius: CGFloat? = nil
 
-    // I really don't need this dumbass custom init.
+    // I really don't need this custom init.
     var animatedNumber = NumberFrame(n: 6, dim: 100)
     var numberDim: CGFloat = 0
 
@@ -29,25 +31,31 @@ class GameViewController: UIViewController {
     var parachute: Parachute!
     var polygons: [DraggablePolygon] = []
     var saveButton = UIButton()
+    var printButton = UIButton()
+    
+    @objc func printPuzzle(sender: UIButton) {
+        saveAllPolygonsToPhotos()
+        parachute.setText(message: "Puzzle Saved To Photos")
+        parachute.showParachute()
+    }
     
     @objc func savePuzzle(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
 
-        SavedPolygons = AllPolygons
+        SavedPolygons.append(ActivePolygon)
         
         print("validating all sisters",validateAllSisters())
         
         printAllSisters()
-
+        
         if validateAllSisters() {
-            parachute.setText(message: "Polygon Solved!")
+            parachute.setText(message: "Puzzle Solved, Polygon Saved.")
         } else
         {
-            parachute.setText(message: "Not Solved!")
+            parachute.setText(message: "Puzzle Not Solved, Polygon Saved.")
         }
 
         parachute.showParachute()
-    
     }
     
     func showUndoButton(){
@@ -274,19 +282,20 @@ class GameViewController: UIViewController {
         // ------------ targets ---------------------
         
 
-            cutOrCancelButton = UIButton()
-            cutOrCancelButton.addTarget(self, action: #selector(cutOrCancel(sender:)), for: .touchUpInside)
+        cutOrCancelButton = UIButton()
+        cutOrCancelButton.addTarget(self, action: #selector(cutOrCancel(sender:)), for: .touchUpInside)
        
         
 
-            undoButton = UIButton()
-            undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
+        undoButton = UIButton()
+        undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
     
         
         saveButton.addTarget(self, action: #selector(savePuzzle(sender:)), for: .touchUpInside)
         
         backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         
+        printButton.addTarget(self, action: #selector(printPuzzle(sender:)), for: .touchUpInside)
         
         // ---------- Adding The Views -----------
         
@@ -299,6 +308,7 @@ class GameViewController: UIViewController {
         view.addSubview(markerThree)
         view.addSubview(initialPolygon)
         view.addSubview(cuttingView)
+        view.addSubview(printButton)
         
         
     
@@ -314,6 +324,7 @@ class GameViewController: UIViewController {
         view.bringSubview(toFront: cutOrCancelButton)
         view.bringSubview(toFront: undoButton)
         view.bringSubview(toFront: saveButton)
+        view.bringSubview(toFront: printButton)
         
         
         
@@ -334,6 +345,9 @@ class GameViewController: UIViewController {
         undoButton.frame.styleTopRight(container: view.frame)
         undoButton.alpha = 0
         
+        printButton.frame.styleBottomRight(container: view.frame)
+        printButton.setImage(PrintIcon, for: .normal)
+        
  
         // ----- Finishing Touches ---------------
         
@@ -342,7 +356,6 @@ class GameViewController: UIViewController {
         undoButton.alpha = 0 // Initially not visible.
         
         AllPolygons.append(initialPolygon)
-        //MyPolygons = AllPolygons
         
         
         // Sprinkle in our animated number.

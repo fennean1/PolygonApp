@@ -45,38 +45,64 @@
             <point key="canvasLocation" x="303" y="-302"/>
         </scene>
         <!--Pallete View Controller-->
-        <scene sceneID="8r3-7N-AsS">
+        <scene sceneID="Eo4-cj-ChP">
             <objects>
-                <collectionViewController storyboardIdentifier="PalleteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LXV-k4-o0T" customClass="PalleteViewController" customModule="PolygonPuzzle" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rQ1-CH-2fw" userLabel="collectionView">
+                <viewController storyboardIdentifier="PalleteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1eP-c5-0Ww" customClass="PalleteViewController" customModule="PolygonPuzzle" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YhP-2o-6dH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AwT-S0-AGN">
+                                <rect key="frame" x="24" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="AwT-S0-AGN" secondAttribute="height" multiplier="1:1" id="adh-k4-u38"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="40"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="OjH-ND-TXc" kind="show" id="aGt-0r-ln1"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Moz-pq-Sc3">
+                                <rect key="frame" x="35" y="95" width="305" height="530"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XTd-Vv-oVa">
+                                    <size key="itemSize" width="80" height="80"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="palleteCell" id="XNY-D5-Uxc" customClass="PalleteCell" customModule="PolygonPuzzle" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="1eP-c5-0Ww" id="Wj0-SE-psO"/>
+                                    <outlet property="delegate" destination="1eP-c5-0Ww" id="uXg-J1-dQw"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8cG-23-g73">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="palleteCell" id="063-6h-QWY" userLabel="palleteCell" customClass="PalleteCell" customModule="PolygonPuzzle" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </view>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="LXV-k4-o0T" id="U9f-FM-dYS"/>
-                            <outlet property="delegate" destination="LXV-k4-o0T" id="7bE-W0-Gnf"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Eq8-zl-XAK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="AwT-S0-AGN" firstAttribute="width" secondItem="YhP-2o-6dH" secondAttribute="height" multiplier="30:667" id="CZB-7e-hks"/>
+                            <constraint firstItem="AwT-S0-AGN" firstAttribute="top" secondItem="QMV-iU-kGD" secondAttribute="top" id="rOF-4L-oBY"/>
+                            <constraint firstItem="AwT-S0-AGN" firstAttribute="leading" secondItem="QMV-iU-kGD" secondAttribute="leading" constant="24" id="xvT-Ml-nBC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QMV-iU-kGD"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pvo-xO-P1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-345" y="433"/>
+            <point key="canvasLocation" x="1770" y="-304"/>
         </scene>
         <!--Design View Controller-->
         <scene sceneID="G6S-N4-Tdg">

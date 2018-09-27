@@ -10,13 +10,15 @@ import Foundation
 import UIKit
 
 
+
 class PolygonLayer: CAShapeLayer {
     
     public var myColor: CGColor!
     public var myBorderColor: CGColor!
-    
+
+
     func drawPolygon(at _nodes: [Node]){
-    
+        
         // Calculate the color based on the number of nodes
         myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
         
@@ -26,7 +28,7 @@ class PolygonLayer: CAShapeLayer {
         self.lineWidth = 1
         self.strokeColor = UIColor.black.cgColor
         
-        if _nodes.count >= 10{
+        if _nodes.count >= 10 {
             self.lineWidth = 5
             self.strokeColor = OneColor.cgColor
         }
@@ -57,6 +59,8 @@ class DraggablePolygon: UIView {
     
     // Not a good place for didSet because nodes get transformed (coordinate systems etc. alot)
     public var nodes: [Node]?
+    
+    var pan: UIPanGestureRecognizer!
     
     var polygonLayer = PolygonLayer()
     
@@ -109,7 +113,7 @@ class DraggablePolygon: UIView {
     
     @objc func panhandle(_ sender: UIPanGestureRecognizer)
     {
-        let translation = sender.translation(in: sender.view)
+        let translation = sender.translation(in: self.superview)
         
         if let view = sender.view {
             view.center = CGPoint(x: (view.center.x + translation.x),
@@ -137,11 +141,12 @@ class DraggablePolygon: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = frame
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(panhandle))
+        pan = UIPanGestureRecognizer(target: self, action: #selector(panhandle))
         pan.cancelsTouchesInView = false
         self.frame = frame
         self.addGestureRecognizer(pan)
         self.isUserInteractionEnabled = true
+        //self.backgroundColor = UIColor.blue
         self.layer.shadowColor = colorForNumber
     }
     

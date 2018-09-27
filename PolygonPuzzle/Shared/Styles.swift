@@ -42,7 +42,7 @@ mutating func styleTopRight(container: CGRect) {
         let h = dims.min()!/7
         let w = h
         
-        let x: CGFloat = 0.5*w - 0.5*dims.min()!
+        let x: CGFloat = 0.5*dims.min()! - 0.5*w 
         let y: CGFloat = container.height - 1.5*w
         
         self = CGRect(x: x, y: y, width: w, height: h)
@@ -69,6 +69,19 @@ mutating func styleTopRight(container: CGRect) {
         let w = h
         
         let x: CGFloat = 0.5*w
+        let y: CGFloat = container.height - 1.5*w
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    mutating func styleBottomRight(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/7
+        let w = h
+        
+        let x: CGFloat = container.width - 1.5*w
         let y: CGFloat = container.height - 1.5*w
         
         self = CGRect(x: x, y: y, width: w, height: h)

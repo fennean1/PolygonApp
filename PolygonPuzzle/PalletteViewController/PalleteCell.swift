@@ -9,21 +9,22 @@
 import Foundation
 import UIKit
 
+
+
 class PalleteCell: UICollectionViewCell {
-    
+    var shape = UIImageView()
 
     // Dummy
     func drawPolygon(n: Int) {
-        let polygon = DraggablePolygon()
-        let v = getVerticesForType(numberOfSides: n, radius: 50)
-        polygon.config(vertices: v)
-        polygon.drawTheLayer()
-        polygon.frame = self.bounds
-        self.addSubview(polygon)
+        let v = SavedPolygons[n].vertices()
+        let thumb = createThumbNailView(vertices: v, originalContextDim: InitialPolygonDim, newContextDim: self.frame.width)
+        thumb.frame = self.bounds
+        self.addSubview(thumb)
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        self.backgroundColor = UIColor.blue
+        print("Awake From Nib, Setting Color To Blue")
     }
 }

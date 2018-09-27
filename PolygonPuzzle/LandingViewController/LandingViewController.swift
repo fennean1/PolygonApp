@@ -32,7 +32,9 @@ NEXT) Shrink the undo button and make it animate!
  
  11) Back button needs to save current cutting state for that view - need a different cutting state for each time the vc has been entered.
  
- 12) Need to handle situation where the vertex & endpoints form a straight line.
+ 12) Need to handle situation where the vertex & endpoints form a straight line. - Check the angle formed by the vertex and end points and if i'ts 180, revert to a straight line cut.
+ 
+ 13) Triangle is not centered.
  
  */
 
@@ -40,9 +42,7 @@ NEXT) Shrink the undo button and make it animate!
 
 /*
  
- 1) VertexOfCut variable is a nuissance - not quite. Letting start and end points be seperate from vertex but will add a vertex array when we do multiple zigs.
- 
- 2) Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous
+Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous
  
  */
 
@@ -135,12 +135,13 @@ class LandingViewController: UIViewController {
         
         // Init
         
+        InitialPolygonDim = 0.8*view.frame.width
 
         backGround.image = BackGround
         screenWidth = view.frame.width
         let r = screenWidth/3
 
-        segueToDesignViewController.setImage(DesignButtonImage, for: .normal)
+        segueToDesignViewController.setImage(PalleteIcon, for: .normal)
         
         // Add Views
         

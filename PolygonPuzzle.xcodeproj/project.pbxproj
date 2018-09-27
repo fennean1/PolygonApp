@@ -18,6 +18,11 @@
 		1C12B3242152A8AE00C8EFA4 /* GoBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B3232152A8AE00C8EFA4 /* GoBack.png */; };
 		1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B332215569A400C8EFA4 /* NumberFrame.swift */; };
 		1C12B3422159694E00C8EFA4 /* Sisters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B3412159694E00C8EFA4 /* Sisters.swift */; };
+		1C12B351215A971D00C8EFA4 /* SaveImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B350215A971D00C8EFA4 /* SaveImage.swift */; };
+		1C12B353215C5EC900C8EFA4 /* ArtistsPallete.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B352215C5EC800C8EFA4 /* ArtistsPallete.png */; };
+		1C12B355215C5ED000C8EFA4 /* RotateIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B354215C5ECF00C8EFA4 /* RotateIcon.png */; };
+		1C12B357215C5ED800C8EFA4 /* TrashIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B356215C5ED800C8EFA4 /* TrashIcon.png */; };
+		1C12B359215D25A500C8EFA4 /* PrintIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B358215D25A500C8EFA4 /* PrintIcon.png */; };
 		1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C4FC5C1213A23D700652354 /* SplittingNodes.swift */; };
 		1C4FC5DA213C46E900652354 /* Four.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D0213C46E900652354 /* Four.png */; };
 		1C4FC5DB213C46E900652354 /* Nine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4FC5D1213C46E900652354 /* Nine.png */; };
@@ -94,6 +99,11 @@
 		1C12B3232152A8AE00C8EFA4 /* GoBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GoBack.png; path = "../../../Polygon App Assets/GoBack.png"; sourceTree = "<group>"; };
 		1C12B332215569A400C8EFA4 /* NumberFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFrame.swift; sourceTree = "<group>"; };
 		1C12B3412159694E00C8EFA4 /* Sisters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sisters.swift; sourceTree = "<group>"; };
+		1C12B350215A971D00C8EFA4 /* SaveImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveImage.swift; sourceTree = "<group>"; };
+		1C12B352215C5EC800C8EFA4 /* ArtistsPallete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArtistsPallete.png; sourceTree = "<group>"; };
+		1C12B354215C5ECF00C8EFA4 /* RotateIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RotateIcon.png; sourceTree = "<group>"; };
+		1C12B356215C5ED800C8EFA4 /* TrashIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TrashIcon.png; sourceTree = "<group>"; };
+		1C12B358215D25A500C8EFA4 /* PrintIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrintIcon.png; path = "../../../Polygon App Assets/PrintIcon.png"; sourceTree = "<group>"; };
 		1C4FC5C1213A23D700652354 /* SplittingNodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplittingNodes.swift; sourceTree = "<group>"; };
 		1C4FC5D0213C46E900652354 /* Four.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Four.png; sourceTree = "<group>"; };
 		1C4FC5D1213C46E900652354 /* Nine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nine.png; sourceTree = "<group>"; };
@@ -186,6 +196,7 @@
 			children = (
 				1CBA905D2122135C000FCB9D /* Node.swift */,
 				1CA6C8B420FF8F890076E557 /* DraggablePolygon.swift */,
+				1C12B350215A971D00C8EFA4 /* SaveImage.swift */,
 				1C0BCCFB214C52BA00F92175 /* Parachute.swift */,
 				1C74E27821063C6500EBECC5 /* Constants.swift */,
 				1C0BCD382150103700F92175 /* SharedState.swift */,
@@ -216,6 +227,10 @@
 		1C74E27C2106418A00EBECC5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1C12B358215D25A500C8EFA4 /* PrintIcon.png */,
+				1C12B354215C5ECF00C8EFA4 /* RotateIcon.png */,
+				1C12B356215C5ED800C8EFA4 /* TrashIcon.png */,
+				1C12B352215C5EC800C8EFA4 /* ArtistsPallete.png */,
 				1C12B3232152A8AE00C8EFA4 /* GoBack.png */,
 				1C12B31D21518A7200C8EFA4 /* SaveIcon.png */,
 				1C0BCD00214F48F900F92175 /* DesignViewButton.png */,
@@ -442,6 +457,8 @@
 				1C0BCD01214F48FA00F92175 /* DesignViewButton.png in Resources */,
 				1C74E29B2106712500EBECC5 /* light-blue-background.png in Resources */,
 				1C74E28321066B9500EBECC5 /* Hexagon.png in Resources */,
+				1C12B353215C5EC900C8EFA4 /* ArtistsPallete.png in Resources */,
+				1C12B357215C5ED800C8EFA4 /* TrashIcon.png in Resources */,
 				1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */,
 				1C4FC5DB213C46E900652354 /* Nine.png in Resources */,
 				1C74E28621066B9500EBECC5 /* Pentagon.png in Resources */,
@@ -459,11 +476,13 @@
 				1C4FC5DF213C46E900652354 /* Six.png in Resources */,
 				1C4FC5DE213C46E900652354 /* Seven.png in Resources */,
 				1C74E28821066B9500EBECC5 /* Septagon.png in Resources */,
+				1C12B355215C5ED000C8EFA4 /* RotateIcon.png in Resources */,
 				1C4FC5DA213C46E900652354 /* Four.png in Resources */,
 				1C66F60E21470E18006AA656 /* UndoButton.png in Resources */,
 				1C74E28521066B9500EBECC5 /* Nonagon.png in Resources */,
 				1CF6748F2142BBEE00E0D0AC /* DoneButton.png in Resources */,
 				1CF6748D2142BB2300E0D0AC /* CancelButton.png in Resources */,
+				1C12B359215D25A500C8EFA4 /* PrintIcon.png in Resources */,
 				1CFB47FB211A0FEC00635139 /* marker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */,
+				1C12B351215A971D00C8EFA4 /* SaveImage.swift in Sources */,
 				1C74E29D210676F700EBECC5 /* GameState.swift in Sources */,
 				1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */,
 				1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */,

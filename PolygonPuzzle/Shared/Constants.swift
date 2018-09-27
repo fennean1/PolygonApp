@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let PointZero = CGPoint(x: 0, y: 0)
 
 
 let niceColor = UIColor(red: 50, green: 20, blue: 30, alpha: 1.0)
@@ -50,6 +51,8 @@ let Septagon = UIImage(named: "Septagon")
 let Octagon = UIImage(named: "Octagon")
 let Nonagon = UIImage(named: "Nonagon")
 let ShapesArray = [Triangle,Square,Pentagon,Hexagon,Septagon,Octagon,Nonagon]
+
+
 let BackGround = UIImage(named: "light-blue-background")
 let Marker = UIImage(named: "marker")
 let DoneImage = UIImage(named: "DoneButton")
@@ -59,6 +62,12 @@ let Scissors = UIImage(named: "scissors-clipart")
 let DesignButtonImage = UIImage(named: "DesignViewButton")
 let SaveIconImage = UIImage(named: "SaveIcon")
 let ImgGoBack = UIImage(named: "GoBack")
+let RotateIcon = UIImage(named: "RotateIcon")
+let TrashIcon = UIImage(named: "TrashIcon")
+let PalleteIcon = UIImage(named: "ArtistsPallete")
+let PrintIcon = UIImage(named: "PrintIcon")
+
+
 // For putting markers out of sight.
 let OutOfSightTopLeft = CGPoint(x: -30, y: -30)
 

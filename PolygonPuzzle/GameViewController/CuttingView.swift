@@ -43,7 +43,7 @@ class CuttingView: UIView {
     override func draw(_ rect: CGRect) {
         
         let context = UIGraphicsGetCurrentContext()
-        context?.setStrokeColor(UIColor.yellow.cgColor)
+        context?.setStrokeColor(UIColor.white.cgColor)
         context?.setLineWidth(4)
         
         if CuttingViewNeedsClearing {
