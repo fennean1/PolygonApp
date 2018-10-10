@@ -14,7 +14,7 @@ import Foundation
 
 class PalleteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var backButton: UIButton!
+    var backButton = UIButton()
     var backGround: UIButton!
     var notification: Parachute!
     
@@ -67,17 +67,20 @@ class PalleteViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         // ------------ targets ---------------------
         
+        backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         
         
         // ---------- Adding The Views -----------
         
         view.addSubview(backGround)
+        view.addSubview(backButton)
         //view.addSubview(ActivePolygon)
         
         
         // -------------- Setting State ---------------
         
         backGround.image = BackGround
+        backButton.setImage(BackImage, for: .normal)
         
         
         // -----  Ordering Views ------------
@@ -90,12 +93,11 @@ class PalleteViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         //ActivePolygon.center = self.view.center
         backGround.frame.styleFillContainer(container: view.frame)
+        backButton.frame.styleTopLeft(container: view.frame)
         
         // ----- Finishing Touches ---------------
         
-        
-        
-        
+    
     }
     
     override func didReceiveMemoryWarning() {

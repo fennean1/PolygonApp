@@ -23,6 +23,9 @@ class Node {
     // Location of the node
     var location: CGPoint!
     
+    // This will change all the time for every cut pretty much. I don't like it. Sort of just using it to test an idea.
+    var insertedAfter: Int = 0
+    
     // Origin of coordinate system in which the node is drawn.
     var origin = CGPoint(x: 0, y: 0)
     

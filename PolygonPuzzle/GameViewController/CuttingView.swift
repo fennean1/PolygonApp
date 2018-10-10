@@ -14,6 +14,7 @@ import UIKit
 class CuttingView: UIView {
     
     var myPan: UIPanGestureRecognizer!
+    var endPoints: (CGPoint,CGPoint)!
     
     public var cutStart = CGPoint(x: 0,y: 0)
     
@@ -37,6 +38,10 @@ class CuttingView: UIView {
         // Only registers point if the user is not finished cutting.
         return ActivelyCutting
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        cutStart = (touches.first?.location(in: self))!
+    }
 
     // Draw is a single source of truth for our view. Everything drawn is a function of
     // the current app state.
@@ -53,9 +58,12 @@ class CuttingView: UIView {
            context?.clear(self.bounds)
         }
         else if ValidCutHasBeenMade {
+            print("Valid cut has been made, drawing final path")
             context?.move(to: (StartOfCut?.location)!)
-            if let _ = VertexOfTheCut {
-                context?.addLine(to: (VertexOfTheCut?.location)!)
+            if VerticesOfCut.count != 0 {
+                for v in VerticesOfCut {
+                    context?.addLine(to: v.location)
+                }
             }
             context?.addLine(to: (EndOfCut?.location)!)
             context?.strokePath()
@@ -63,8 +71,12 @@ class CuttingView: UIView {
         else if let _ = StartOfCut {
                 //print("drawing from start to vertex as well as to pan location")
                 context?.move(to: cutStart)
-                context?.addLine(to: (VertexOfTheCut?.location)!)
-     
+            
+                for v in VerticesOfCut {
+                    context?.addLine(to: v.location)
+                }
+            
+                //context?.addLine(to: (VertexOfTheCut?.location)!)
                 context?.addLine(to: cutEnd)
                 context?.strokePath()
         }
@@ -83,16 +95,12 @@ class CuttingView: UIView {
             if let _ = StartOfCut {
                 cutStart = (StartOfCut?.location)!
             }
-            else {
-                cutStart = pan.location(in: self)
-            }
         }
     
         cutEnd = pan.location(in: self)
    
         if pan.state == .ended {
             
-            print("pan ended")
             // Need support for many strokes.
             if ValidCutHasBeenMade {
                 print("Not doing anything because valid cut has been made")
@@ -100,14 +108,17 @@ class CuttingView: UIView {
             }
             else if let _ = StartOfCut {
                 print("creating line to cut with using vertex of cut and cut end")
-                LineToCutWith = Line(_firstPoint: (VertexOfTheCut?.location)!, _secondPoint: cutEnd)
+                // Should be "most recent" vertex!
+                LineToCutWith = Line(_firstPoint: (VerticesOfCut.last!.location)!, _secondPoint: cutEnd)
+                endPoints = (VerticesOfCut.last!.location,cutEnd) as! (CGPoint, CGPoint)
             }
             else {
                 print("Creating First Line to Cut")
-               LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
+                LineToCutWith = Line(_firstPoint: cutStart, _secondPoint: cutEnd)
+                endPoints = (cutStart,cutEnd)
             }
             
-            guard getIntersectionPoints(lines: LinesToCut, cuttingLine: LineToCutWith) else {
+            guard getIntersectionPoints(lines: LinesToCut, endPoints: endPoints) else {
                 print("Failed getIntersectionPoints")
                 return}
             
@@ -115,6 +126,8 @@ class CuttingView: UIView {
                 if let first = StartOfCut {
                     markerOne.center = first.location
                 }
+                
+                // Set append to vertex.
                 
                 if let second = VertexOfTheCut {
                     markerTwo.center = second.location

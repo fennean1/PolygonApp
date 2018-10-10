@@ -9,38 +9,50 @@
 import UIKit
 import Foundation
 
+/*
+    1) Some kind of initialization or non reinitialization issue
+    2) A problem the vertex being used to classify points as either above or below.
+    3) FIRST and SECOND nodes AREN"T ALWAYS "IN" or "OUT" in the same respect. Need a better way to differentiacte because they different now...called it.
+ */
 
-var currentPuzzle: PuzzleStruct!
 
 var InitialPolygonDim: CGFloat!
+
+var testingVertex: CGPoint!
 
 class GameViewController: UIViewController {
     
     
     // Polygon is 80% of the frame width. (What about landscape mode? - Not Supporting Yet)
     var viewFrame: CGRect? = nil
+    
+    // What are these?
     var polygonWidth: CGFloat? = nil
     var polygonHeight: CGFloat? = nil
     var polygonRadius: CGFloat? = nil
-
-    // I really don't need this custom init.
-    var animatedNumber = NumberFrame(n: 6, dim: 100)
+    
+    var backButton = UIButton()
+    
+    // Number that pops up when polygon is touched.
+    var animatedNumber: NumberFrame!
     var numberDim: CGFloat = 0
 
     let cuttingView = CuttingView()
-    var parachute: Parachute!
     var polygons: [DraggablePolygon] = []
     var saveButton = UIButton()
     var printButton = UIButton()
     
     @objc func printPuzzle(sender: UIButton) {
-        saveAllPolygonsToPhotos()
+       // saveAllPolygonsToPhotos()
+        savePuzzleToCoreData(polygons: AllPolygons, name: "MyFirstPuzzle")
         parachute.setText(message: "Puzzle Saved To Photos")
         parachute.showParachute()
     }
     
     @objc func savePuzzle(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
+        
+        //savePuzzleToCoreData(polygons: AllPolygons, name: "Cool Puzzle")
 
         SavedPolygons.append(ActivePolygon)
         
@@ -49,13 +61,22 @@ class GameViewController: UIViewController {
         printAllSisters()
         
         if validateAllSisters() {
-            parachute.setText(message: "Puzzle Solved, Polygon Saved.")
+            parachute.setText(message: "Polygon Saved.")
         } else
         {
-            parachute.setText(message: "Puzzle Not Solved, Polygon Saved.")
+            parachute.setText(message: "Polygon Saved.")
         }
 
         parachute.showParachute()
+        
+        /*
+        
+        let puzzles = fetchMyPuzzle(name: "Cool Puzzle")
+        let firstPuzzle = puzzles.first
+        FetchedPolygons =  buildDraggablePolygonsFromPuzzle(puzzle: firstPuzzle!)
+ 
+         */
+        
     }
     
     func showUndoButton(){
@@ -75,6 +96,7 @@ class GameViewController: UIViewController {
     
     // This doesn't end ActivelyCutting.
     func resetCutting(){
+        VerticesOfCut = []
         ValidCutHasBeenMade = false
         StartOfCut = nil
         EndOfCut = nil
@@ -86,8 +108,6 @@ class GameViewController: UIViewController {
         markerThree.frame.styleHideMarker(container: view.frame)
     }
     
-
-    @IBOutlet weak var backButton: UIButton!
 
     
     @objc func goBack(sender: UIButton) {
@@ -126,9 +146,6 @@ class GameViewController: UIViewController {
         let nodesForLines = mapPointsWithOffset(offSet: polygonOrigin, points: AllPolygons[ActivePolygonIndex].vertices())
         LinesToCut = makeLinesFromPoints(points: nodesForLines)
 
-        // NEED TO CHECK IF VALID CUT HAS BEEN MADE TO DETERMINE WHETHER A CLICK CANCELS EVERYTHING
-        
-        // Go add the line on dragEnded to change the image to a check mark when valid cut has been made (maybe use did set on ValidCutHasBeenMade?
         
         if !ActivelyCutting {
             ActivelyCutting = true
@@ -150,8 +167,6 @@ class GameViewController: UIViewController {
                 markerThree.frame.styleHideMarker(container: self.view.frame)
             })
             
-            //cuttingView.setNeedsDisplay()
-
             // Can I replace this with "ValidCutHasBeenMade? - I think so and it would make more sense.
             guard StartOfCut != nil && EndOfCut != nil else {
                 print("GUARD FAILED!")
@@ -160,9 +175,12 @@ class GameViewController: UIViewController {
                 return
             }
             
+            // REALLY IMPORTANT FEW LINES!
             let origin = ActivePolygon.frame.origin
             let nodes = ActivePolygon.nodes
+            let originalOrigin = ActivePolygon.originalOrigin
             
+    
             // This converts the nodes to the main coordinate system - need to write a function for this.
             let transformedNodes = nodes?.map( {(n: Node) -> Node in
                 let newLocation = addPoints(a: n.location, b: origin)
@@ -189,7 +207,21 @@ class GameViewController: UIViewController {
             
             // This is a wonderful and useful function.
             let topPolygonFrame = frame(of: topPolygon.vertices())
+            let topPolygonFrameOrigin = topPolygonFrame.origin
             let bottomPolygonFrame = frame(of: bottomPolygon.vertices())
+            let bottomPolygonFrameOrigin = bottomPolygonFrame.origin
+            
+ 
+            // Computing the original origins for the new polygons.
+            // Psuedo code: newOriginalOrigin = newOrigin-currentOrigin+originalOrigin
+            
+            let offsetFromCurrentOriginTopPolygon = subtractPoints(a: topPolygonFrameOrigin, b: origin)
+            let originalOriginForTopPolygon = addPoints(a: offsetFromCurrentOriginTopPolygon, b: originalOrigin)
+            let offsetFromCurrentOriginBottomPolygon = subtractPoints(a: bottomPolygonFrameOrigin, b: origin)
+            let originalOriginForBottomPolygon = addPoints(a: offsetFromCurrentOriginBottomPolygon, b: originalOrigin)
+            
+            topPolygon.originalOrigin = originalOriginForTopPolygon
+            bottomPolygon.originalOrigin = originalOriginForBottomPolygon
             
             topPolygon.frame = topPolygonFrame
             bottomPolygon.frame = bottomPolygonFrame
@@ -212,6 +244,7 @@ class GameViewController: UIViewController {
         
             ActivePolygon.removeFromSuperview()
             
+            // Why am I recomputing this?
             let currentPolygonIndex = AllPolygons.index(of: ActivePolygon)
             
             print("index of active polygon",index)
@@ -238,32 +271,52 @@ class GameViewController: UIViewController {
         resetCutting()
     }
     
-    // Sweeeeeet
+    //
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !ActivelyCutting {
             view.bringSubview(toFront: ActivePolygon)
             animatedNumber.render(n: ActivePolygon.nodes!.count)
             UIView.animate(withDuration: 0.5, animations: {
-                self.animatedNumber.center = CGPoint(x: self.view.center.x, y: self.view.frame.height - 2*self.numberDim)})
- 
+                self.animatedNumber.center = CGPoint(x: self.view.center.x, y:  2*self.numberDim)})
         }
     }
     
+    // FIX THE Y COORDINATE!
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.5, animations: {self.animatedNumber.frame.styleHideBottomMiddle(container: self.view.frame)})
+        UIView.animate(withDuration: 0.5, animations: {self.animatedNumber.center = CGPoint(x: self.view.center.x, y: -self.view.frame.width/7 )})
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Sprinkle in our animated number.
+        animatedNumber = NumberFrame(n: 6, dim: view.frame.width/6)
+        view.addSubview(animatedNumber)
+        view.bringSubview(toFront: animatedNumber)
+        animatedNumber.render(n: 0)
+        animatedNumber.center = CGPoint(x: view.center.x, y: -2*numberDim)
+     
+    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let pol = FetchedPolygons {
+            AllPolygons = pol
+        }
+        
+        testingVertex = view.center
+        VerticesOfCut = []
         
         // ----------- init ----------------------
         
         AllPolygons = []
         ActivePolygonIndex = 0
     
+
         let initialPolygon = DraggablePolygon()
         polygonRadius = 0.4*view.frame.width
+        
+        // What is number dim...
         numberDim = view.frame.width/8
         
         // Gets the coordinates for a polygon based on "numberOfSides" and "radius"
@@ -284,8 +337,6 @@ class GameViewController: UIViewController {
 
         cutOrCancelButton = UIButton()
         cutOrCancelButton.addTarget(self, action: #selector(cutOrCancel(sender:)), for: .touchUpInside)
-       
-        
 
         undoButton = UIButton()
         undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
@@ -309,6 +360,7 @@ class GameViewController: UIViewController {
         view.addSubview(initialPolygon)
         view.addSubview(cuttingView)
         view.addSubview(printButton)
+        view.addSubview(backButton)
         
         
     
@@ -325,7 +377,6 @@ class GameViewController: UIViewController {
         view.bringSubview(toFront: undoButton)
         view.bringSubview(toFront: saveButton)
         view.bringSubview(toFront: printButton)
-        
         
         
         // ----------------- Adding Styles ----------------------
@@ -348,24 +399,35 @@ class GameViewController: UIViewController {
         printButton.frame.styleBottomRight(container: view.frame)
         printButton.setImage(PrintIcon, for: .normal)
         
+        backButton.frame.styleTopLeft(container: view.frame)
+        
  
         // ----- Finishing Touches ---------------
         
         cutOrCancelButton.setImage(Scissors, for: .normal)
         undoButton.setImage(UndoImage, for: .normal)
+        backButton.setImage(BackImage, for: .normal)
         undoButton.alpha = 0 // Initially not visible.
         
         AllPolygons.append(initialPolygon)
+        //SavedPolygons = AllPolygons
         
-        
-        // Sprinkle in our animated number.
-        view.addSubview(animatedNumber)
-        view.bringSubview(toFront: animatedNumber)
-        animatedNumber.render(n: 0)
-        animatedNumber.center = CGPoint(x: view.center.x, y: view.frame.height+numberDim)
-        
-        // Gotta reset this when we start over.
+        // Gotta reset this when we start over. (this will be depracated)
         SisterIndex = 0
+        
+        /*
+        
+        if let pol = FetchedPolygons {
+            print("substituting fetched polygons")
+            AllPolygons = pol
+            initialPolygon.removeFromSuperview()
+            for p in AllPolygons {
+                view.addSubview(p)
+            }
+        }
+ 
+    */
+ 
         
     }
 

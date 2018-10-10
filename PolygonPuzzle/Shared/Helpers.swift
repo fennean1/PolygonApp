@@ -79,8 +79,7 @@ extension Array {
 
 // Removes duplicate nodes if they are m
 func removeDuplicateNodes(nodes: [Node]) -> [Node] {
-    
-    
+
     
     // Function that gives the criteria for duplicates
     func duplicateCriteria(pointA: CGPoint, pointB: CGPoint) -> Bool
@@ -103,7 +102,7 @@ func removeDuplicateNodes(nodes: [Node]) -> [Node] {
 }
 
 
-// Computes the origin for a polygon defined by an array of points
+// Computes the origin for a polygon defined by an array of points (In the superview coordinate system)
 func frame(of points: [CGPoint])-> CGRect {
     let xValues = points.map({p in p.x})
     let yValues = points.map({p in p.y})
@@ -115,6 +114,20 @@ func frame(of points: [CGPoint])-> CGRect {
     let w = xMax! - xMin!
 
     return CGRect(x: xMin!, y: yMin!, width: w, height: h)
+}
+
+func size(of points: [CGPoint]) -> CGSize {
+    let xValues = points.map({p in p.x})
+    let yValues = points.map({p in p.y})
+    let xMin = xValues.min()
+    let yMin = yValues.min()
+    let xMax = xValues.max()
+    let yMax = yValues.max()
+    let h = yMax! - yMin!
+    let w = xMax! - xMin!
+    
+    return CGSize(width: w, height: h)
+    
 }
 
 

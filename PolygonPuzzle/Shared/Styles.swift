@@ -6,31 +6,61 @@
 //  Copyright © 2018 Andrew Fenner. All rights reserved.
 //
 
+// Determines what fraction we take in order to create the dimensions of action buttons
+let compressionFactor: CGFloat = 10
+
 import Foundation
 import UIKit
 
 extension CGRect {
 
-mutating func styleTopRight(container: CGRect) {
+    mutating func styleTopRight(container: CGRect) {
         
-    let dims = [container.width,container.height]
-    let h = dims.min()!/6
-    let w = h
+        let dims = [container.width,container.height]
+        let h = dims.min()!/compressionFactor
+        let w = h
     
-    let x: CGFloat = container.width - 1.5*w
-    let y: CGFloat = 0.5*h
+        let x: CGFloat = container.width - 1.5*w
+        let y: CGFloat = 0.5*h
     
-    self = CGRect(x: x, y: y, width: w, height: h)
+        self = CGRect(x: x, y: y, width: w, height: h)
     
-}
+    }
+    
     mutating func styleTopLeft(container: CGRect) {
         
         let dims = [container.width,container.height]
-        let h = dims.min()!/6
+        let h = dims.min()!/compressionFactor
         let w = h
         
         let x: CGFloat = 0.5*w
         let y: CGFloat = 0.5*h
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    mutating func styleHideTopMiddle(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/7
+        let w = h
+        
+        let x: CGFloat = 0.5*dims.min()! - 0.5*w
+        let y: CGFloat = -2*w
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    mutating func styleTopMiddle(container: CGRect) {
+        
+        let dims = [container.width,container.height]
+        let h = dims.min()!/compressionFactor
+        let w = h
+        
+        let x: CGFloat = 0.5*dims.min()! - 0.5*w
+        let y: CGFloat = 0.5*w
         
         self = CGRect(x: x, y: y, width: w, height: h)
         
@@ -46,9 +76,8 @@ mutating func styleTopRight(container: CGRect) {
         let y: CGFloat = container.height - 1.5*w
         
         self = CGRect(x: x, y: y, width: w, height: h)
-        
     }
-    
+
     mutating func styleHideBottomMiddle(container: CGRect) {
         
         let dims = [container.width,container.height]
@@ -65,7 +94,7 @@ mutating func styleTopRight(container: CGRect) {
     mutating func styleBottomLeft(container: CGRect) {
         
         let dims = [container.width,container.height]
-        let h = dims.min()!/7
+        let h = dims.min()!/compressionFactor
         let w = h
         
         let x: CGFloat = 0.5*w
@@ -78,7 +107,7 @@ mutating func styleTopRight(container: CGRect) {
     mutating func styleBottomRight(container: CGRect) {
         
         let dims = [container.width,container.height]
-        let h = dims.min()!/7
+        let h = dims.min()!/compressionFactor
         let w = h
         
         let x: CGFloat = container.width - 1.5*w
@@ -87,7 +116,6 @@ mutating func styleTopRight(container: CGRect) {
         self = CGRect(x: x, y: y, width: w, height: h)
         
     }
-    
     
     mutating func styleInitialPolygonFrame(container: CGRect) {
         
@@ -106,7 +134,7 @@ mutating func styleTopRight(container: CGRect) {
     mutating func styleUnderTopRight(container: CGRect) {
         
         let dims = [container.width,container.height]
-        let h = dims.min()!/6
+        let h = dims.min()!/compressionFactor
         let w = h
 
         let x: CGFloat = container.width - 1.5*w
@@ -116,17 +144,17 @@ mutating func styleTopRight(container: CGRect) {
         
     }
 
-mutating func styleFillContainer(container: CGRect) {
+    mutating func styleFillContainer(container: CGRect) {
     
-    let x: CGFloat = 0
-    let y: CGFloat = 0
+        let x: CGFloat = 0
+        let y: CGFloat = 0
     
-    let w = container.width
-    let h = container.height
+        let w = container.width
+        let h = container.height
     
-    self = CGRect(x: x, y: y, width: w, height: h)
+        self = CGRect(x: x, y: y, width: w, height: h)
     
-}
+    }
     
     mutating func styleHideObject(size: CGSize) {
         

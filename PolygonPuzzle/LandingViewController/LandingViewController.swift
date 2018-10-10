@@ -16,6 +16,14 @@ NEXT) Make it so that the button views get added again
 NEXT) Shrink the undo button and make it animate!
  
  
+ 0) Start and End can't be the same point*
+ 1) Activate Vertices Array
+ 2) Append Verteces
+ 3) Draw through appended vertices
+ 4) Notify when a valid cut hasn't been made, also indicate with parachute whether it has or has not been made.
+ 
+ 
+ 
  1) Bug where an endpoint is inside of the polygon but it still tried to clip to node. Might need a function that tells me
  if a point is on the border of the polygon
  
@@ -35,6 +43,15 @@ NEXT) Shrink the undo button and make it animate!
  12) Need to handle situation where the vertex & endpoints form a straight line. - Check the angle formed by the vertex and end points and if i'ts 180, revert to a straight line cut.
  
  13) Triangle is not centered.
+ 
+ 14) Handle case where StartOfCut = EndOfCut
+ 
+ 15) Puzzle thumbnail of puzzle put together for puzzle collection view - maybe just a list view actually with big cells
+ 
+ 16) Need create puazle thumbnail thing.
+ 
+ 17) Border color has to match color for tens place
+ 
  
  */
 
@@ -167,7 +184,6 @@ class LandingViewController: UIViewController {
         
         view.bringSubview(toFront: segueToDesignViewController)
  
-        
     }
     
     override func didReceiveMemoryWarning() {

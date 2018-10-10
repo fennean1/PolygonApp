@@ -48,13 +48,18 @@ var ActivelyCutting = false {
     }
 }
 
-// To do multiple zigs we need to stored the vertices as an array.
-//var ZigVertices: [Node] = []
-
 var StartOfCut: Node?
+var VerticesOfCut: [Node] = []
 var VertexOfTheCut: Node?
 var EndOfCut: Node?
 
+// Need this in order to calculate if path forms a closed loop. (ie the points intersect)
+var Path: [Node] {
+    var path = [StartOfCut!]
+    path = path + VerticesOfCut
+    path.append(EndOfCut!)
+    return path
+}
 
 var OriginalLocations: [CGPoint] = []
 

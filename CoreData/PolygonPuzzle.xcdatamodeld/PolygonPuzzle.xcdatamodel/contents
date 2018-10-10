@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Polygon" representedClassName="Polygon" syncable="YES" codeGenerationType="class">
-        <relationship name="nodes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PrimitiveNode" syncable="YES"/>
+    <entity name="Polygon" representedClassName="Polygon" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="nodes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PrimitiveNode" inverseName="polygon" inverseEntity="PrimitiveNode" syncable="YES"/>
+        <relationship name="puzzle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Puzzle" inverseName="polygons" inverseEntity="Puzzle" syncable="YES"/>
     </entity>
-    <entity name="PrimitiveNode" representedClassName="PrimitiveNode" syncable="YES" codeGenerationType="class">
+    <entity name="PrimitiveNode" representedClassName="PrimitiveNode" syncable="YES">
+        <attribute name="drawingOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isOriginalNode" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="sisterIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="xCoordinate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="yCoordinate" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="polygon" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Polygon" inverseName="nodes" inverseEntity="Polygon" syncable="YES"/>
     </entity>
-    <entity name="Puzzle" representedClassName="Puzzle" syncable="YES" codeGenerationType="class">
-        <relationship name="polygons" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Polygon" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
-    </entity>
-    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+    <entity name="Puzzle" representedClassName="Puzzle" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pallete" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Polygon" syncable="YES"/>
-        <relationship name="puzzles" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Puzzle" syncable="YES"/>
+        <relationship name="polygons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Polygon" inverseName="puzzle" inverseEntity="Polygon" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Polygon" positionX="-54" positionY="0" width="128" height="60"/>
-        <element name="PrimitiveNode" positionX="-36" positionY="36" width="128" height="105"/>
-        <element name="Puzzle" positionX="-18" positionY="63" width="128" height="75"/>
+        <element name="Polygon" positionX="-13869" positionY="-4125" width="128" height="30"/>
+        <element name="PrimitiveNode" positionX="-14123" positionY="-4320" width="128" height="30"/>
+        <element name="Puzzle" positionX="-13970" positionY="-4347" width="128" height="30"/>
     </elements>
 </model>

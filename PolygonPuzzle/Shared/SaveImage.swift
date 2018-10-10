@@ -43,12 +43,12 @@ class PurePolygon: CAShapeLayer {
         
         self.fillColor = myColor
         
-        let start = tempPoints.first
-        tempPoints.removeFirst()
+        let start = tempPoints[0]
+        tempPoints.remove(at: 0)
         
         let path = UIBezierPath()
         
-        path.move(to: start!)
+        path.move(to: start)
         
         for p in tempPoints {
             let addTo = CGPoint(x: p.x, y: p.y)

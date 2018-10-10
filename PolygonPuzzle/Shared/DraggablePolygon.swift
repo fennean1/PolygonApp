@@ -16,6 +16,7 @@ class PolygonLayer: CAShapeLayer {
     public var myColor: CGColor!
     public var myBorderColor: CGColor!
 
+    
 
     func drawPolygon(at _nodes: [Node]){
         
@@ -59,6 +60,9 @@ class DraggablePolygon: UIView {
     
     // Not a good place for didSet because nodes get transformed (coordinate systems etc. alot)
     public var nodes: [Node]?
+    
+    // If a polygon is just a saved polgyon - does it need an original origin? Well, it might inherit  from the piece that get saved.
+    var originalOrigin = PointZero
     
     var pan: UIPanGestureRecognizer!
     

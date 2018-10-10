@@ -16,6 +16,7 @@ class PalleteCell: UICollectionViewCell {
 
     // Dummy
     func drawPolygon(n: Int) {
+        // Is extracting the vertices this way somehow changing their order?
         let v = SavedPolygons[n].vertices()
         let thumb = createThumbNailView(vertices: v, originalContextDim: InitialPolygonDim, newContextDim: self.frame.width)
         thumb.frame = self.bounds

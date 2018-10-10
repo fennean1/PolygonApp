@@ -11,8 +11,10 @@ import UIKit
 
 
 // Returns true if the intersection points are valid - I'm passing global variables to this. Really not necessary.
-func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
+func getIntersectionPoints(lines: [Line],endPoints: (CGPoint,CGPoint)) -> Bool {
    
+    let cuttingLine = Line(_firstPoint: endPoints.0, _secondPoint: endPoints.1)
+    
     var intersectionPoints: [Node] = []
     
     var potentialVertex: Node?
@@ -33,9 +35,14 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
     
     //Assign vertext of cut. This may get reassigned to the same thing if this runs twice because the last point of the first like is equal to the first point of the last line. Maybe check here to make sure Vertex has already been set.
     
+    //// IDEA! Pass start and end points instead of the cutting line.
+    
     // Don't run this if the vertex has already been set - we're only dealing with one for now.
     if let _ = VertexOfTheCut {
-        // Do nothing right now.
+        // First Vertex has been set:
+        if (ActivePolygon.polygonLayer.path?.contains(secondPointInActivePolygonsCoordinateSystem))! {
+            potentialVertex = Node(_location: cuttingLine.secondPoint!, _sister: SisterIndex)
+        }
     } else {
         if (ActivePolygon.polygonLayer.path?.contains(firstPointInActivePolygonsCoordinateSystem))! {
             potentialVertex = Node(_location: cuttingLine.firstPoint! , _sister: SisterIndex)
@@ -46,6 +53,7 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
             print("The second point is in the polygon!")
         }
     }
+    
 
     if intersectionPoints.count > 2 {
         print("No, we're not dealing with more than 2 intersection points in a single cut. This case doesn't count the vertex.")
@@ -76,6 +84,7 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
                 return true
             } else if let _ = potentialVertex {
                 print("potential vertex has been set")
+                VerticesOfCut.append(potentialVertex!)
                 VertexOfTheCut = potentialVertex
                 return true
             } else {
@@ -96,12 +105,20 @@ func getIntersectionPoints(lines: [Line],cuttingLine: Line) -> Bool {
                 print("StartOfCut",StartOfCut?.location)
                 if let _ = potentialVertex {
                     print("assigning vertex now")
+                    VerticesOfCut.append(potentialVertex!)
                     VertexOfTheCut = potentialVertex
                     print("VertexOfTheCut",VertexOfTheCut?.location)
                 }
                 return true
             }
         }
+    } else if intersectionPoints.count == 0 {
+        if let _ = StartOfCut {
+            if let _ = potentialVertex {
+                VerticesOfCut.append(potentialVertex!)
+            }
+        }
+        return false
     } else {
         print("failed intersection points at the final case")
         return false

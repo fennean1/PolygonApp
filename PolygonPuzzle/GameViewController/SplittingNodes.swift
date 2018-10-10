@@ -9,76 +9,106 @@
 import Foundation
 import UIKit
 
-// Is any vertex by default going to be a new sister?
-
+// When the start of the cut is closer to the "nextNode" then our algorithm works so this is by default equal to true.
+var flagStartCloserToNextNode = true
 
 // This takes car of assigning sisters when a node interesects on the border.
-func assignNodeStatesBasedOnVertex(nodes: [Node],vertex: Node,cutPoints: [Node]) -> [Node] {
+func assignNodeStates(nodes: [Node],cutPoints: [Node]) -> [Node] {
     
-    var topSister: Int?
-    var bottomSister: Int?
+    let nodeCount = nodes.count
+    var firstSet = true
     
-    let firstCutPoint = cutPoints[0]
-    let secondCutPoint = cutPoints[1]
+    // Let's let these always be the start and end - important right now.
+    let cutPointOne = cutPoints[0]
+    let cutPointTwo = cutPoints[1]
     
-    // Create the vectors
-    let cutVectorOne = vector(start: vertex.location, end: firstCutPoint.location)
-    let cutVectorTwo = vector(start: vertex.location, end: secondCutPoint.location)
-    
-    // Find the angles formed by each
-    let angleOne = cutVectorOne.theta
-    let angleTwo = cutVectorTwo.theta
-    
-    // find the max and min
-    let topAngle = [angleOne,angleTwo].max()
-    let bottomAngle = [angleOne,angleTwo].min()
-    
-    // Risky equality?
-    if topAngle == angleOne {
-        print("top angle = angle one")
-        topSister = firstCutPoint.sister
+    for (i,n) in nodes.enumerated() {
+        
+        let thisNode = n
+        let nextNodeIndex = (i+1)%nodeCount
+        let nextNode = nodes[nextNodeIndex]
+        
+        let currentLine = Line(_firstPoint: thisNode.location, _secondPoint: nextNode.location)
+        let containsStartPoint = currentLine.containsPoint(point: cutPointOne.location)
+        let containsEndPoint = currentLine.containsPoint(point: cutPointTwo.location)
+        let containsBothPoints = containsStartPoint && containsEndPoint
+        let startDistanceFromNextNode = distance(a: (StartOfCut?.location)!, b: nextNode.location!)
+        let endDistanceFromNextNode = distance(a: (EndOfCut?.location)!, b: nextNode.location!)
+        let startIsOnTheNextNode = startDistanceFromNextNode < 0.10
+        let endIsOnTheNextNode = endDistanceFromNextNode < 0.10
+        
+        
+        if containsBothPoints {
+            print("Contains both points")
+           
+            // Set is going to switch when the bridge contains both points.
+            firstSet = !firstSet
+            if firstSet == true {
+                print("assigning state to above")
+                nextNode.locationState = LocationState.above
+            } else if firstSet == false {
+                print("assigning state to below")
+                nextNode.locationState = LocationState.below
+            }
+            
+            StartOfCut?.insertedAfter = i
+            EndOfCut?.insertedAfter = i
+            
+            // Some of the points might get "reassigned to border state"
+            if startIsOnTheNextNode {
+                nextNode.locationState = LocationState.onborder
+                nextNode.insertedAfter = i
+            }
+            
+            if endIsOnTheNextNode {
+                nextNode.locationState = LocationState.onborder
+                nextNode.insertedAfter = i  
+            }
+            
+            if startDistanceFromNextNode > endDistanceFromNextNode {
+                flagStartCloserToNextNode = false
+            } else {
+                flagStartCloserToNextNode = true
+            }
+
+        } else if startIsOnTheNextNode {
+            nextNode.locationState = LocationState.onborder
+            nextNode.insertedAfter = i
+        } else if endIsOnTheNextNode {
+            nextNode.locationState = LocationState.onborder
+            nextNode.insertedAfter = i
+        } else {
+        
+        if containsStartPoint {
+            print("intersects as first cut point")
+            StartOfCut?.insertedAfter = i
+            firstSet = !firstSet
+        }
+        
+        if containsEndPoint {
+            EndOfCut?.insertedAfter = i
+            print("intersects at second cut point")
+            firstSet = !firstSet
+        }
+        
+        if firstSet == true {
+            print("assigning state to above")
+            nextNode.locationState = LocationState.above
+        } else if firstSet == false {
+            print("assigning state to below")
+            nextNode.locationState = LocationState.below
+        }
+
+        }
+
     }
-    
-    if topAngle == angleTwo {
-        print("top angle = angle two")
-        topSister = secondCutPoint.sister
-    }
-    
-    if bottomAngle == angleOne {
-        print("bottom angle = angle one")
-        bottomSister = firstCutPoint.sister
-    }
-    
-    if bottomAngle == angleTwo {
-        print("bottom angle = angle two")
-        bottomSister = secondCutPoint.sister
-    }
-    
     
     for n in nodes {
-        
-        let v = vector(start: vertex.location, end: n.location!)
-        
-        if v.theta < topAngle! && v.theta > bottomAngle! {
-            
-            n.locationState = LocationState.below
-        }
-        else if abs(v.theta - topAngle!) < 0.0001 {
-            
-            print("Assigning a sister that's on the border")
-            n.locationState = LocationState.onborder
-
-            
-        } else if abs(v.theta - bottomAngle!) < 0.0001 {
-            
-            print("assigning a sister that's on the border")
-            n.locationState = LocationState.onborder
-
-        }
-        else {
-            n.locationState = LocationState.above
-        }
+        print("Location State Of New Assignments",n.locationState!)
     }
+    
+    print("insert Start After",StartOfCut?.insertedAfter)
+    print("inset End After",EndOfCut?.insertedAfter)
     
     return nodes
 }
@@ -104,8 +134,10 @@ func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
     vertexNode = Node(_location: dummyVertex, _sister: nil)
     
     // AND THEN PASSED HERE? (start and end of cut)
-    nodesWithState = assignNodeStatesBasedOnVertex(nodes: nodes, vertex: vertexNode, cutPoints: [StartOfCut!,EndOfCut!])
+    //nodesWithState = assignNodeStatesBasedOnVertex(nodes: nodes, vertex: vertexNode, cutPoints: [StartOfCut!,EndOfCut!])
     
+    nodesWithState = assignNodeStates(nodes: nodes, cutPoints: [StartOfCut!,EndOfCut!])
+
     // indices at which we need to break our nodesWithCutPointsInserted Array
     var breakAtIndices: [Int] = []
     
@@ -171,15 +203,36 @@ func splitNodesWithSingleCut(nodes: [Node])-> ([Node],[Node]) {
 // Takes an array of nodes that represent a figure as well as the nodes that it needs to be split at.
 func splitNodesWithDualCut(nodes: [Node])-> ([Node],[Node]){
 
+    
+    VertexOfTheCut = VerticesOfCut.first
+    
     var nodesWithState: [Node] = []
+    
+    var verticesForFirstPoints: [Node] = []
+    var verticesForSecondPoints: [Node] = []
     
     StartOfCut?.sister = SisterIndex
     VertexOfTheCut?.sister = SisterIndex+1
     EndOfCut?.sister = SisterIndex+2
     SisterIndex += 3
-
-    // This will decrement the sister index if one of the cuts absorbs the index of an existing nodes.
-    nodesWithState = assignNodeStatesBasedOnVertex(nodes: nodes, vertex: VertexOfTheCut!, cutPoints: [StartOfCut!,EndOfCut!])
+    
+    verticesForFirstPoints = VerticesOfCut.reversed()
+    verticesForSecondPoints = VerticesOfCut
+    
+    nodesWithState = assignNodeStates(nodes: nodes, cutPoints: [StartOfCut!,EndOfCut!])
+    
+    if (StartOfCut?.insertedAfter)! > (EndOfCut?.insertedAfter)! {
+        verticesForFirstPoints = VerticesOfCut.reversed()
+        verticesForSecondPoints = VerticesOfCut
+    } else if (StartOfCut?.insertedAfter)! < (EndOfCut?.insertedAfter)! {
+        verticesForFirstPoints = VerticesOfCut
+        verticesForSecondPoints = VerticesOfCut.reversed()
+    } else if (StartOfCut?.insertedAfter)! == (EndOfCut?.insertedAfter)! {
+        if !flagStartCloserToNextNode {
+          verticesForFirstPoints = VerticesOfCut
+          verticesForSecondPoints = VerticesOfCut.reversed()
+        }
+    }
     
     // indices at which we need to break our nodesWithCutPointsInserted Array
     var breakAtIndices: [Int] = []
@@ -207,6 +260,7 @@ func splitNodesWithDualCut(nodes: [Node])-> ([Node],[Node]){
         let intersectsAtBothNodes = intersectsAtFirstCutNode && intersectsAtSecondCutNode
 
         nodesWithCutPointsInserted.append(currentNode)
+        
         let nodeCount = nodesWithCutPointsInserted.count
   
         if intersectsAtBothNodes {
@@ -228,7 +282,6 @@ func splitNodesWithDualCut(nodes: [Node])-> ([Node],[Node]){
             }
         }
         else if currentNode.locationState == LocationState.onborder {
-
             breakAtIndices.append(nodeCount-1)
         }
         else if nextNode.locationState == LocationState.onborder{
@@ -238,26 +291,30 @@ func splitNodesWithDualCut(nodes: [Node])-> ([Node],[Node]){
  
             if intersectsAtFirstCutNode {
                 breakAtIndices.append(nodeCount)
+                print("firstIndexToBreakAt:",nodeCount)
                 nodesWithCutPointsInserted.append(StartOfCut!)
             }
             
             if intersectsAtSecondCutNode {
                 breakAtIndices.append(nodeCount)
+                print("Second index to break at",nodeCount)
                 nodesWithCutPointsInserted.append(EndOfCut!)
             }
         }
     }
+    
+    print("indices to break",breakAtIndices)
     
     // HELLO Need a safegaurd here so it doesn't toally crash
     let firstIndexToBreakAt = breakAtIndices[0]
     let secondIndexToBreakAt = breakAtIndices[1]
     
     var firstNodesToDraw = Array(nodesWithCutPointsInserted[...firstIndexToBreakAt])
-    firstNodesToDraw.append(VertexOfTheCut!)
+    firstNodesToDraw = firstNodesToDraw + verticesForFirstPoints
     firstNodesToDraw = Array(firstNodesToDraw + nodesWithCutPointsInserted[secondIndexToBreakAt...])
-    
+
     var secondNodesToDraw = Array(nodesWithCutPointsInserted[firstIndexToBreakAt...secondIndexToBreakAt])
-    secondNodesToDraw.append(VertexOfTheCut!)
+    secondNodesToDraw = secondNodesToDraw + verticesForSecondPoints
     
     // I don't want to need this but right now I do.
     let firstNodesToDrawDeduped = removeDuplicateNodes(nodes: firstNodesToDraw)

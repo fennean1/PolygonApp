@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+// Exports: Global "Parachute Notification"
+var parachute: Parachute!
+
+
 extension CGRect {
     
     mutating func styleHideParachute(container: CGRect) {

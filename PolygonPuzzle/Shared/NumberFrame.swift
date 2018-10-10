@@ -48,7 +48,7 @@ class NumberFrame: UIView {
         self.frame.size = size
     }
     
-    // Custom initializer.
+    // Custom initializer - we really don't need this.
     init(n: Int,dim: CGFloat) {
         
         self.dm = dim
@@ -71,9 +71,6 @@ class NumberFrame: UIView {
         
         self.addSubview(Left)
         self.addSubview(Right)
-        
-        
-        
         
     }
     

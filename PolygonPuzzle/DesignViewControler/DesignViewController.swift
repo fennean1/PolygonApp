@@ -45,7 +45,13 @@ class DesignViewController: UIViewController  {
     }
     
     @objc func trash(sender: UIButton) {
-        
+        print("trash clicked")
+        if AllPolygons.count != 0 {
+            print("trying to remove from trash")
+            ActivePolygon.removeFromSuperview()
+            AllPolygons.remove(at: ActivePolygonIndex)
+            SavedPolygons = AllPolygons
+        }
     }
     
     @objc func segueToPallete(sender: UIButton) {
@@ -55,7 +61,9 @@ class DesignViewController: UIViewController  {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if AllPolygons.count != 0 {
             view.bringSubview(toFront: ActivePolygon)
+        }
     }
     
     @objc func goBack(sender: UIButton) {
@@ -120,7 +128,7 @@ class DesignViewController: UIViewController  {
         
         // -------------- Setting State ---------------
         
-        backButton.setImage(ImgGoBack, for: .normal)
+        backButton.setImage(BackImage, for: .normal)
         backGround.image = BackGround
         trashButton.setImage(TrashIcon, for: .normal)
         rotateButton.setImage(RotateIcon, for: .normal)
