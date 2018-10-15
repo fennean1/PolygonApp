@@ -9,6 +9,30 @@
 import Foundation
 import UIKit
 
+
+
+
+extension CGRect {
+    mutating func scaleBy(scale: CGFloat) {
+
+        // Get current values
+        let currW = self.width
+        let currH = self.height
+        let currX = self.minX
+        let currY = self.minY
+
+        // Scale new values
+        let newX = currX*scale
+        let newY = currY*scale
+        let newW = currW*scale
+        let newH = currH*scale
+        
+        self = CGRect(x: newX, y: newY, width: newW, height: newH)
+        
+    }
+}
+
+
 func unitVectors(from points: [CGPoint]) -> [CGPoint]{
     var uVectors: [CGPoint] = []
     

@@ -16,11 +16,9 @@ import Foundation
  */
 
 
-var InitialPolygonDim: CGFloat!
-
 var testingVertex: CGPoint!
 
-class GameViewController: UIViewController {
+class PuzzleEditor: UIViewController {
     
     
     // Polygon is 80% of the frame width. (What about landscape mode? - Not Supporting Yet)
@@ -43,16 +41,90 @@ class GameViewController: UIViewController {
     var printButton = UIButton()
     
     @objc func printPuzzle(sender: UIButton) {
-       // saveAllPolygonsToPhotos()
+        saveAllPolygonsToPhotos()
         savePuzzleToCoreData(polygons: AllPolygons, name: "MyFirstPuzzle")
         parachute.setText(message: "Puzzle Saved To Photos")
         parachute.showParachute()
     }
     
-    @objc func savePuzzle(sender: UIButton){
+    func validateName(name: String) -> Bool {
+        for p in FetchedPuzzles {
+            if p.name == name {
+                return false
+            } else {
+                return true
+            }
+        }
+        
+        return true
+        
+    }
+    
+    @objc func savePuzzle(sender: UIButton) {
+            
+            let alert = UIAlertController(title: "New Puzzle",
+                                          message: "Name Your Puzzle",
+                                          preferredStyle: .alert)
+            
+            let saveAction = UIAlertAction(title: "Save",
+                                           style: .default,
+                                           handler: { (action:UIAlertAction) -> Void in
+                                            
+                                            let puzzleName = alert.textFields!.first?.text
+
+                                            
+                                            // Check to see if the name doesn't exist
+                                            if self.validateName(name: puzzleName!) {
+                    
+                                                savePuzzleToCoreData(polygons: AllPolygons, name: puzzleName!)
+                                        
+                                            }
+                                                // If it does, prompt to enter another name.
+                                            else
+                                            {
+                                                let oopsalert = UIAlertController(title: "Oops!",
+                                                                                  message: "That name is already taken",
+                                                                                  preferredStyle: .alert)
+                                                
+                                                let okAction = UIAlertAction(title: "Ok", style: .default, handler: {(action: UIAlertAction) -> Void in self.present(alert,
+                                                                                                                                                                     animated: true,
+                                                                                                                                                                     completion: nil)})
+                                                
+                                                oopsalert.addAction(okAction)
+                                                
+                                                self.present(oopsalert,
+                                                             animated: true,
+                                                             completion: nil)
+                                                
+                                                
+                                            }
+                                            
+                                            
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: .default) { (action: UIAlertAction) -> Void in
+            }
+            
+            alert.addTextField {
+                (textField: UITextField) -> Void in}
+            
+            alert.addAction(saveAction)
+            alert.addAction(cancelAction)
+            
+            alert.view.setNeedsLayout()
+            
+            present(alert, animated: true,
+                    completion: nil)
+        
+        
+        
+    }
+    
+    @objc func savePolygon(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
         
-        //savePuzzleToCoreData(polygons: AllPolygons, name: "Cool Puzzle")
+        savePuzzleToCoreData(polygons: AllPolygons, name: "Cool Puzzle")
 
         SavedPolygons.append(ActivePolygon)
         
@@ -68,14 +140,6 @@ class GameViewController: UIViewController {
         }
 
         parachute.showParachute()
-        
-        /*
-        
-        let puzzles = fetchMyPuzzle(name: "Cool Puzzle")
-        let firstPuzzle = puzzles.first
-        FetchedPolygons =  buildDraggablePolygonsFromPuzzle(puzzle: firstPuzzle!)
- 
-         */
         
     }
     
@@ -287,13 +351,14 @@ class GameViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // Sprinkle in our animated number.
+        /* Sprinkle in our animated number.
         animatedNumber = NumberFrame(n: 6, dim: view.frame.width/6)
         view.addSubview(animatedNumber)
         view.bringSubview(toFront: animatedNumber)
         animatedNumber.render(n: 0)
         animatedNumber.center = CGPoint(x: view.center.x, y: -2*numberDim)
-     
+ 
+ */
     
     }
     
@@ -410,24 +475,10 @@ class GameViewController: UIViewController {
         undoButton.alpha = 0 // Initially not visible.
         
         AllPolygons.append(initialPolygon)
-        //SavedPolygons = AllPolygons
         
         // Gotta reset this when we start over. (this will be depracated)
         SisterIndex = 0
         
-        /*
-        
-        if let pol = FetchedPolygons {
-            print("substituting fetched polygons")
-            AllPolygons = pol
-            initialPolygon.removeFromSuperview()
-            for p in AllPolygons {
-                view.addSubview(p)
-            }
-        }
- 
-    */
- 
         
     }
 
@@ -436,6 +487,15 @@ class GameViewController: UIViewController {
         parachute = Parachute(frame: self.view.frame)
         parachute.setText(message: "Hello Again!")
         view.addSubview(parachute)
+        view.bringSubview(toFront: parachute)
+        
+        // Sprinkle in our animated number.
+        animatedNumber = NumberFrame(n: 6, dim: view.frame.width/6)
+        view.addSubview(animatedNumber)
+        view.bringSubview(toFront: animatedNumber)
+        animatedNumber.render(n: 0)
+        animatedNumber.center = CGPoint(x: view.center.x, y: -2*numberDim)
+        
     }
     
     override func didReceiveMemoryWarning() {

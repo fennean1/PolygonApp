@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
+var InitialPolygonDim: CGFloat!
+
 var FetchedPolygons: [DraggablePolygon]!
+
+var FetchedPuzzles: [Puzzle] = []
 
 var SavedPolygons: [DraggablePolygon] = []
 var ActiveSavedPolygonIndex = 0

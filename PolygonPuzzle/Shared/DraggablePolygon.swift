@@ -30,7 +30,7 @@ class PolygonLayer: CAShapeLayer {
         self.strokeColor = UIColor.black.cgColor
         
         if _nodes.count >= 10 {
-            self.lineWidth = 5
+            self.lineWidth = self.frame.width/50
             self.strokeColor = OneColor.cgColor
         }
         
@@ -63,6 +63,8 @@ class DraggablePolygon: UIView {
     
     // If a polygon is just a saved polgyon - does it need an original origin? Well, it might inherit  from the piece that get saved.
     var originalOrigin = PointZero
+    var contextDim: CGFloat = InitialPolygonDim
+    var cancelDragging = false
     
     var pan: UIPanGestureRecognizer!
     
@@ -87,6 +89,11 @@ class DraggablePolygon: UIView {
         super.point(inside: point, with: event)
         if let p = polygonLayer.path {
             if p.contains(point) {
+                
+                // Return false if dragging is canceled.
+                if cancelDragging {
+                    return false
+                }
 
                 // HELLO!
                 ActivePolygonIndex = AllPolygons.index(of: self)!

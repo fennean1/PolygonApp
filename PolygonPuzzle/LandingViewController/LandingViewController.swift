@@ -52,6 +52,7 @@ NEXT) Shrink the undo button and make it animate!
  
  17) Border color has to match color for tens place
  
+ 18) Should be able to flip polygons in design view.
  
  */
 
@@ -113,7 +114,7 @@ class LandingViewController: UIViewController {
     @objc func segueToDesignViewController(sender: UIButton){
         print("segue to DesignViewController")
 
-        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "DesignViewController")
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "PuzzleViewController")
         
         self.show(vc as! UIViewController, sender: vc)
         
@@ -148,8 +149,7 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // print("LandingViewController,viewDidLoad")
-        
+ 
         // Init
         
         InitialPolygonDim = 0.8*view.frame.width
@@ -173,7 +173,6 @@ class LandingViewController: UIViewController {
         
         // State
         
-        
         self.initShapeButtons(r: r)
         
         for button in shapeButtons {
@@ -183,6 +182,13 @@ class LandingViewController: UIViewController {
         segueToDesignViewController.addTarget(self, action: #selector(segueToDesignViewController(sender:)), for: .touchUpInside)
         
         view.bringSubview(toFront: segueToDesignViewController)
+        
+        if let p = fetchAllPuzzles() {
+            FetchedPuzzles = p
+            puzzleCollectionViewDataSource = initPuzzleCollectionViewDataSource(puzzles: p)
+        }
+        
+
  
     }
     

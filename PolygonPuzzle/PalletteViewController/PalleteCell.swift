@@ -28,4 +28,5 @@ class PalleteCell: UICollectionViewCell {
         super.awakeFromNib()
         print("Awake From Nib, Setting Color To Blue")
     }
+    
 }

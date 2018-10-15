@@ -4,11 +4,66 @@
 //
 //  Created by Andrew Leland Fenner on 10/1/18.
 //  Copyright © 2018 Andrew Fenner. All rights reserved.
-//
 
 import Foundation
 import UIKit
 import CoreData
+
+class cachedPuzzle {
+    var name = "name"
+    var polygons: [DraggablePolygon] = []
+    var puzzleView = UIView()
+    
+    init(name: String,polygons: [DraggablePolygon],dim: CGFloat) {
+        
+        puzzleView.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+        
+        for p in polygons {
+            
+            let scale = dim/p.contextDim
+            let vertices = p.vertices()
+            
+            let scaledVertices = vertices.map({(p: CGPoint)-> CGPoint in return CGPoint(x: p.x*scale, y: p.y*scale)})
+            p.frame.origin = p.originalOrigin
+            // Hello! Not building from the data source again so rescaling just makes it smaller and smaller...
+            
+            p.frame.scaleBy(scale: scale)
+            p.config(vertices: scaledVertices)
+            p.drawTheLayer()
+            p.cancelDragging = true
+            puzzleView.addSubview(p)
+            
+            
+        }
+    }
+    
+}
+
+func initPuzzleCollectionViewDataSource(puzzles: [Puzzle]) -> [cachedPuzzle] {
+    var cached: [cachedPuzzle] = []
+    for p in puzzles {
+        let pols = buildDraggablePolygonsFromPuzzle(puzzle: p)
+        let newCache = cachedPuzzle(name: p.name!, polygons: pols, dim: 250)
+        cached.append(newCache)
+    }
+    return cached
+}
+
+func fetchAllPuzzles() -> [Puzzle]? {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    let puzzleFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Puzzle")
+    
+    if let puzzles = try? context.fetch(puzzleFetchRequest) {
+        return puzzles as! [Puzzle]
+    } else
+    {
+        print("No puzzles!")
+        return nil
+    }
+
+}
 
 func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String) {
     
@@ -16,16 +71,15 @@ func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String) {
     let context = appDelegate.persistentContainer.viewContext
 
     let puzzleFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Puzzle")
+
     
-    
-    
-    // Delete everything before starting over
+    /* Delete everything before starting over
     if let result = try? context.fetch(puzzleFetchRequest) {
         for object in result {
             context.delete(object as! NSManagedObject)
         }
     }
-    
+    */
     
     print("creating puzzle entity")
     let puzzleEntity = NSEntityDescription.entity(forEntityName: "Puzzle", in: context)
@@ -41,6 +95,7 @@ func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String) {
         let newPolygon = NSManagedObject(entity: polygonEntity!, insertInto: context) as! Polygon
         newPolygon.setValue(p.originalOrigin.x, forKey: "originalX")
         newPolygon.setValue(p.originalOrigin.y, forKey: "originalY")
+        newPolygon.setValue(p.contextDim, forKey: "contextDim")
         
         newPuzzle.addToPolygons(newPolygon)
         
@@ -94,19 +149,21 @@ func buildDraggablePolygonsFromPuzzle(puzzle: Puzzle) -> [DraggablePolygon] {
     for p in puzzle.polygons!{
         
         let pz = p as! Polygon
-        
-        let nodes = pz.nodes
+   
 
-        let newPolygon = buildDraggablePolygonFromPrimitiveNodes(pNodes: nodes)
+        let nodes = pz.nodes
+        let cDim = pz.contextDim
+
+        let newPolygon = buildDraggablePolygonFromPrimitiveNodes(pNodes: nodes,contextDim: CGFloat(cDim))
         newPolygon.originalOrigin = CGPoint(x: CGFloat(pz.originalX), y: CGFloat(pz.originalY))
-    
+        
         newPolygons.append(newPolygon)
         
     }
     return newPolygons
 }
 
-func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?) -> DraggablePolygon {
+func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?,contextDim: CGFloat) -> DraggablePolygon {
     
     var newPNodes: [PrimitiveNode] = []
     var newNodes: [Node] = []

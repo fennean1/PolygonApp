@@ -28,6 +28,10 @@ func getAllSisters(withIndex index: Int) -> [Node] {
     return returnMe
 }
 
+func validatePuzzle(polygons: [DraggablePolygon]) {
+    
+}
+
 func validateSisters(sisters: [Node]) -> Bool {
     
     var varSisters = sisters

@@ -14,7 +14,9 @@
 		1C0BCD392150103700F92175 /* SharedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD382150103700F92175 /* SharedState.swift */; };
 		1C0BCD3B2150145500F92175 /* PalleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3A2150145500F92175 /* PalleteViewController.swift */; };
 		1C0BCD3E2150173300F92175 /* PalleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCD3D2150173300F92175 /* PalleteCell.swift */; };
-		1C0C3FCE216D8E3D00E4DCBB /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C3FCD216D8E3D00E4DCBB /* TestingViewController.swift */; };
+		1C0C3FCE216D8E3D00E4DCBB /* PuzzleSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C3FCD216D8E3D00E4DCBB /* PuzzleSolver.swift */; };
+		1C0C3FD1216DA5A100E4DCBB /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C3FD0216DA5A100E4DCBB /* PuzzleViewController.swift */; };
+		1C0C3FD4216DA96600E4DCBB /* PuzzleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0C3FD3216DA96600E4DCBB /* PuzzleCell.swift */; };
 		1C0D55A821656E62005918F9 /* PolygonPuzzle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1C0D55A621656E62005918F9 /* PolygonPuzzle.xcdatamodeld */; };
 		1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C12B31D21518A7200C8EFA4 /* SaveIcon.png */; };
 		1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C12B332215569A400C8EFA4 /* NumberFrame.swift */; };
@@ -54,7 +56,7 @@
 		1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E29E2108C82900EBECC5 /* scissors-clipart.png */; };
 		1C74E2A12108CAB000EBECC5 /* closed-scissors-clipart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E2A02108CAB000EBECC5 /* closed-scissors-clipart.png */; };
 		1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */; };
-		1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88520FF7C4A0076E557 /* GameViewController.swift */; };
+		1CA6C88620FF7C4A0076E557 /* PuzzleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88520FF7C4A0076E557 /* PuzzleEditor.swift */; };
 		1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88720FF7C4A0076E557 /* Main.storyboard */; };
 		1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */; };
 		1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88F20FF7C4A0076E557 /* LaunchScreen.storyboard */; };
@@ -97,7 +99,9 @@
 		1C0BCD382150103700F92175 /* SharedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedState.swift; sourceTree = "<group>"; };
 		1C0BCD3A2150145500F92175 /* PalleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteViewController.swift; sourceTree = "<group>"; };
 		1C0BCD3D2150173300F92175 /* PalleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalleteCell.swift; sourceTree = "<group>"; };
-		1C0C3FCD216D8E3D00E4DCBB /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
+		1C0C3FCD216D8E3D00E4DCBB /* PuzzleSolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleSolver.swift; sourceTree = "<group>"; };
+		1C0C3FD0216DA5A100E4DCBB /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
+		1C0C3FD3216DA96600E4DCBB /* PuzzleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCell.swift; sourceTree = "<group>"; };
 		1C0D55A721656E62005918F9 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		1C12B31D21518A7200C8EFA4 /* SaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveIcon.png; sourceTree = "<group>"; };
 		1C12B332215569A400C8EFA4 /* NumberFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFrame.swift; sourceTree = "<group>"; };
@@ -138,7 +142,7 @@
 		1C74E2A02108CAB000EBECC5 /* closed-scissors-clipart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closed-scissors-clipart.png"; sourceTree = "<group>"; };
 		1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1CA6C88520FF7C4A0076E557 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		1CA6C88520FF7C4A0076E557 /* PuzzleEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEditor.swift; sourceTree = "<group>"; };
 		1CA6C88820FF7C4A0076E557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CA6C89020FF7C4A0076E557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -221,12 +225,21 @@
 			path = PalletteViewController;
 			sourceTree = "<group>";
 		};
-		1C0C3FCF216D8E4A00E4DCBB /* UITesting */ = {
+		1C0C3FCF216D8E4A00E4DCBB /* PuzzleSolver */ = {
 			isa = PBXGroup;
 			children = (
-				1C0C3FCD216D8E3D00E4DCBB /* TestingViewController.swift */,
+				1C0C3FCD216D8E3D00E4DCBB /* PuzzleSolver.swift */,
 			);
-			path = UITesting;
+			path = PuzzleSolver;
+			sourceTree = "<group>";
+		};
+		1C0C3FD2216DA5AE00E4DCBB /* PuzzleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1C0C3FD0216DA5A100E4DCBB /* PuzzleViewController.swift */,
+				1C0C3FD3216DA96600E4DCBB /* PuzzleCell.swift */,
+			);
+			path = PuzzleViewController;
 			sourceTree = "<group>";
 		};
 		1C74E27C2106418A00EBECC5 /* Assets */ = {
@@ -271,6 +284,8 @@
 			isa = PBXGroup;
 			children = (
 				1C0D55A621656E62005918F9 /* PolygonPuzzle.xcdatamodeld */,
+				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
+				1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */,
 				1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */,
 				1CA6C89A20FF7C4A0076E557 /* PolygonPuzzleTests */,
 				1CA6C8A520FF7C4A0076E557 /* PolygonPuzzleUITests */,
@@ -291,12 +306,11 @@
 		1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */ = {
 			isa = PBXGroup;
 			children = (
-				1CA6C88720FF7C4A0076E557 /* Main.storyboard */,
-				1C0C3FCF216D8E4A00E4DCBB /* UITesting */,
-				1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */,
+				1C0C3FD2216DA5AE00E4DCBB /* PuzzleViewController */,
+				1C0C3FCF216D8E4A00E4DCBB /* PuzzleSolver */,
 				1C0BCD372150100D00F92175 /* Shared */,
 				1CBA905C212207D7000FCB9D /* LandingViewController */,
-				1CFB47FC211A346000635139 /* GameViewController */,
+				1CFB47FC211A346000635139 /* PuzzleEditor */,
 				1C0BCD3C2150145D00F92175 /* PalletteViewController */,
 				1C0BCCFF214F36A700F92175 /* DesignViewControler */,
 				1CA6C88D20FF7C4A0076E557 /* Assets.xcassets */,
@@ -333,11 +347,11 @@
 			path = LandingViewController;
 			sourceTree = "<group>";
 		};
-		1CFB47FC211A346000635139 /* GameViewController */ = {
+		1CFB47FC211A346000635139 /* PuzzleEditor */ = {
 			isa = PBXGroup;
 			children = (
 				1C74E2702103869400EBECC5 /* Shapes.swift */,
-				1CA6C88520FF7C4A0076E557 /* GameViewController.swift */,
+				1CA6C88520FF7C4A0076E557 /* PuzzleEditor.swift */,
 				1C12B3412159694E00C8EFA4 /* Sisters.swift */,
 				1CFB47FD211A34CF00635139 /* CuttingView.swift */,
 				1CFB47FF211A371800635139 /* CuttingMethods.swift */,
@@ -346,7 +360,7 @@
 				1C74E29C210676F700EBECC5 /* GameState.swift */,
 				1C4FC5C1213A23D700652354 /* SplittingNodes.swift */,
 			);
-			path = GameViewController;
+			path = PuzzleEditor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -516,8 +530,10 @@
 			files = (
 				1C74E28A21066D7D00EBECC5 /* Styles.swift in Sources */,
 				1C12B351215A971D00C8EFA4 /* SaveImage.swift in Sources */,
+				1C0C3FD1216DA5A100E4DCBB /* PuzzleViewController.swift in Sources */,
+				1C0C3FD4216DA96600E4DCBB /* PuzzleCell.swift in Sources */,
 				1C74E29D210676F700EBECC5 /* GameState.swift in Sources */,
-				1CA6C88620FF7C4A0076E557 /* GameViewController.swift in Sources */,
+				1CA6C88620FF7C4A0076E557 /* PuzzleEditor.swift in Sources */,
 				1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */,
 				1CBA905E2122135C000FCB9D /* Node.swift in Sources */,
 				1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */,
@@ -526,7 +542,7 @@
 				1C0BCCFE214F321600F92175 /* DesignViewController.swift in Sources */,
 				1C0BCD392150103700F92175 /* SharedState.swift in Sources */,
 				1C4FC5C2213A23D700652354 /* SplittingNodes.swift in Sources */,
-				1C0C3FCE216D8E3D00E4DCBB /* TestingViewController.swift in Sources */,
+				1C0C3FCE216D8E3D00E4DCBB /* PuzzleSolver.swift in Sources */,
 				1C74E27921063C6500EBECC5 /* Constants.swift in Sources */,
 				1C0BCD3621500E2900F92175 /* DesignerState.swift in Sources */,
 				1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */,
