@@ -127,11 +127,6 @@ class CuttingView: UIView {
                     markerOne.center = first.location
                 }
                 
-                // Set append to vertex.
-                
-                if let second = VertexOfTheCut {
-                    markerTwo.center = second.location
-                }
          
                 if let third = EndOfCut {
                     markerThree.center = third.location

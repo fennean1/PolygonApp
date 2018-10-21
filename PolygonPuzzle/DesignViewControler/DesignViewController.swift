@@ -29,7 +29,6 @@ class DesignViewController: UIViewController  {
 
     @objc func rotate(sender: UIButton) {
         
-        
         print("trying to rotate")
         
         let currentRotation = atan2(ActivePolygon.transform.b, ActivePolygon.transform.a)
@@ -50,7 +49,7 @@ class DesignViewController: UIViewController  {
             print("trying to remove from trash")
             ActivePolygon.removeFromSuperview()
             AllPolygons.remove(at: ActivePolygonIndex)
-            SavedPolygons = AllPolygons
+            PolygonsOnPallette = AllPolygons
         }
     }
     
@@ -96,7 +95,7 @@ class DesignViewController: UIViewController  {
         
         // AllPolygons is so global that it works kind of like a "Scratch Pad" We can just assign it whatever polygons we want to work on and they behave just like they would in the cutting view. Even if there is no cutting. 
         
-        AllPolygons = SavedPolygons
+        AllPolygons = PolygonsOnPallette
         
         // ----------- init ----------------------
 

@@ -52,9 +52,9 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
         let puzzleName = FetchedPuzzles[i].name
         
         let puzzles = FetchedPuzzles.filter({$0.name == puzzleName})
-        let puzzle = puzzles[2]
+        let puzzle = puzzles.first!
         
-        AllPolygons = buildDraggablePolygonsFromPuzzle(puzzle: puzzle)
+        AllPolygons = buildDraggablePolygonsFromPuzzle(puzzle: puzzle,dim: InitialPolygonDim)
         
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "PuzzleSolver")
         
@@ -70,7 +70,6 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puzzleCell", for: indexPath) as! PuzzleCell
     
-        //cell.clear()
 
         cell.drawPuzzle(cache: puzzleCollectionViewDataSource[i])
         

@@ -23,7 +23,7 @@ class Node {
     // Location of the node
     var location: CGPoint!
     
-    // This will change all the time for every cut pretty much. I don't like it. Sort of just using it to test an idea.
+    // This index that this new node will be inserted after. Totally temporary and hackey thing.
     var insertedAfter: Int = 0
     
     // Origin of coordinate system in which the node is drawn.

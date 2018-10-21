@@ -13,7 +13,21 @@ import Foundation
 import UIKit
 
 extension CGRect {
-
+    
+    
+    mutating func styleOptionButton(order: Int, container: CGRect) {
+        
+        let h = container.height/7
+        let w = 0.8*container.width
+        let y = CGFloat(order)*h
+        let x = container.width/2 - w/2
+        
+        self = CGRect(x: x, y: y, width: w, height: h)
+        
+    }
+    
+    
+    
     mutating func styleTopRight(container: CGRect) {
         
         let dims = [container.width,container.height]
@@ -69,7 +83,7 @@ extension CGRect {
     mutating func styleBottomMiddle(container: CGRect) {
         
         let dims = [container.width,container.height]
-        let h = dims.min()!/7
+        let h = dims.min()!/compressionFactor
         let w = h
         
         let x: CGFloat = 0.5*dims.min()! - 0.5*w 

@@ -76,7 +76,7 @@ func createThumbNailView(vertices: [CGPoint],originalContextDim: CGFloat,newCont
     let offsetVertices = scaledVertices.map({(p: CGPoint) -> CGPoint in return addPoints(a: PointZero, b: p)})
 
     // Need to apply offset to points before drawing the polygon so it draws in the center...    
-    let frameOfNewLayer = frame(of: offsetVertices)
+    let frameOfNewLayer = getFrame(of: offsetVertices)
     let widthOfNewLayer = frameOfNewLayer.width
     let heightOfNewLayer = frameOfNewLayer.height
     let polygonLayerOriginX = thumbNail.center.x - widthOfNewLayer/2

@@ -5,45 +5,117 @@
 //  Created by Andrew Leland Fenner on 10/1/18.
 //  Copyright © 2018 Andrew Fenner. All rights reserved.
 
+
+// Keep an eye on this:
+///https://cocoacasts.com/core-data-relationships-and-delete-rules
+
 import Foundation
 import UIKit
 import CoreData
 
 class cachedPuzzle {
-    var name = "name"
+    var puzzleName = "name"
     var polygons: [DraggablePolygon] = []
     var puzzleView = UIView()
     
     init(name: String,polygons: [DraggablePolygon],dim: CGFloat) {
         
         puzzleView.frame = CGRect(x: 0, y: 0, width: dim, height: dim)
+        puzzleName = name
         
         for p in polygons {
-            
-            let scale = dim/p.contextDim
-            let vertices = p.vertices()
-            
-            let scaledVertices = vertices.map({(p: CGPoint)-> CGPoint in return CGPoint(x: p.x*scale, y: p.y*scale)})
-            p.frame.origin = p.originalOrigin
-            // Hello! Not building from the data source again so rescaling just makes it smaller and smaller...
-            
-            p.frame.scaleBy(scale: scale)
-            p.config(vertices: scaledVertices)
+            p.frame.origin = CGPoint(x: p.originalOrigin.x,y: p.originalOrigin.y)
             p.drawTheLayer()
             p.cancelDragging = true
             puzzleView.addSubview(p)
-            
-            
         }
     }
     
 }
 
-func initPuzzleCollectionViewDataSource(puzzles: [Puzzle]) -> [cachedPuzzle] {
+
+/// HEY YOU! WRITE YOUR "FIRST LOAD" FUNCTION HERE THAT RETURNS TRUE IF YOU"RE IN YOUR FIRST LOAD HAHA. It mus
+
+func deleteFirstLoad() {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    let firstLoadFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FirstLoad")
+    
+    if let firstLoadState = try? context.fetch(firstLoadFetchRequest) {
+        print("firstLoadState",firstLoadState)
+        
+        for object in firstLoadState {
+            print("deleting an object here")
+            context.delete(object as! NSManagedObject)
+        }
+    }
+}
+
+
+func deleteAllPuzzles() {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    let puzzleFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Puzzle")
+    
+    if let puzzle = try? context.fetch(puzzleFetchRequest) {
+        print("firstLoadState",puzzle)
+        
+        for object in puzzle {
+            print("deleting an object here")
+            context.delete(object as! NSManagedObject)
+        }
+    }
+}
+
+func firstLoad() -> Bool {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    
+    // If this fails, should I also check to see if I have an saved pieces or polygons?
+    
+    let firstLoadFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FirstLoad")
+    
+    if let firstLoadState = try? context.fetch(firstLoadFetchRequest) {
+        print("firstLoadState",firstLoadState)
+        
+        for object in firstLoadState {
+            print("deleting an object here")
+            context.delete(object as! NSManagedObject)
+        }
+        
+        print("firstLoadState afer Delete",firstLoadState)
+        
+        // Check to see if it's empty.
+        if let loadFirst = firstLoadState.first {
+            let x = loadFirst as! FirstLoad
+            print("NOT THE FIRST LOAD",x.loaded)
+            return false
+        }
+        // If it is empty, insert an entity.
+        else {
+            print("TOTALLY THE FIRST LOAD")
+            let loadEntity = NSEntityDescription.entity(forEntityName: "FirstLoad", in: context)
+            let newLoad = NSManagedObject(entity: loadEntity!, insertInto: context) as! FirstLoad
+            newLoad.setValue(true, forKey: "loaded")
+            return true
+        }
+    } else
+    {
+       print("fetching first load failed")
+    }
+    return false
+}
+
+
+func initPuzzleCollectionViewDataSource(puzzles: [Puzzle],dim: CGFloat) -> [cachedPuzzle] {
     var cached: [cachedPuzzle] = []
     for p in puzzles {
-        let pols = buildDraggablePolygonsFromPuzzle(puzzle: p)
-        let newCache = cachedPuzzle(name: p.name!, polygons: pols, dim: 250)
+        let pols = buildDraggablePolygonsFromPuzzle(puzzle: p,dim: dim)
+        let newCache = cachedPuzzle(name: p.name!, polygons: pols, dim: dim)
         cached.append(newCache)
     }
     return cached
@@ -62,24 +134,23 @@ func fetchAllPuzzles() -> [Puzzle]? {
         print("No puzzles!")
         return nil
     }
-
 }
 
-func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String) {
+func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String,dim: CGFloat) {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let context = appDelegate.persistentContainer.viewContext
 
-    let puzzleFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Puzzle")
-
     
-    /* Delete everything before starting over
+    /*
+    let puzzleFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Puzzle")
     if let result = try? context.fetch(puzzleFetchRequest) {
         for object in result {
             context.delete(object as! NSManagedObject)
         }
     }
-    */
+ 
+ */
     
     print("creating puzzle entity")
     let puzzleEntity = NSEntityDescription.entity(forEntityName: "Puzzle", in: context)
@@ -88,22 +159,19 @@ func savePuzzleToCoreData(polygons: [DraggablePolygon], name: String) {
     print("setting value for new puzzle")
     newPuzzle.setValue(name, forKey: "name")
     
-    
     for p in polygons {
         
         let polygonEntity = NSEntityDescription.entity(forEntityName: "Polygon", in: context)
         let newPolygon = NSManagedObject(entity: polygonEntity!, insertInto: context) as! Polygon
-        newPolygon.setValue(p.originalOrigin.x, forKey: "originalX")
-        newPolygon.setValue(p.originalOrigin.y, forKey: "originalY")
-        newPolygon.setValue(p.contextDim, forKey: "contextDim")
+        newPolygon.setValue(p.originalOrigin.x/dim, forKey: "originalX")
+        newPolygon.setValue(p.originalOrigin.y/dim, forKey: "originalY")
         
         newPuzzle.addToPolygons(newPolygon)
         
         for (i,n) in p.nodes!.enumerated() {
             
-            let ex = Float(n.location.x)
-            let why = Float(n.location.y)
-            
+            let ex = Float(n.location.x/dim)
+            let why = Float(n.location.y/dim)
             
             let nodeEntity = NSEntityDescription.entity(forEntityName: "PrimitiveNode", in: context)
             let newNode = NSManagedObject(entity: nodeEntity!, insertInto: context) as! PrimitiveNode
@@ -131,9 +199,6 @@ func fetchMyPuzzle(name: String) -> [Puzzle] {
     
     do {
         let fetchedPuzzles = try context.fetch(puzzleFetchRequest) as! [Puzzle]
-        for p in fetchedPuzzles {
-            print("node",p.polygons)
-        }
         return fetchedPuzzles
     } catch {
         fatalError("Failed to fetch puzzle: \(error)")
@@ -141,7 +206,7 @@ func fetchMyPuzzle(name: String) -> [Puzzle] {
     
 }
 
-func buildDraggablePolygonsFromPuzzle(puzzle: Puzzle) -> [DraggablePolygon] {
+func buildDraggablePolygonsFromPuzzle(puzzle: Puzzle,dim: CGFloat) -> [DraggablePolygon] {
     
     var newPolygons: [DraggablePolygon] = []
     
@@ -150,12 +215,15 @@ func buildDraggablePolygonsFromPuzzle(puzzle: Puzzle) -> [DraggablePolygon] {
         
         let pz = p as! Polygon
    
-
         let nodes = pz.nodes
-        let cDim = pz.contextDim
 
-        let newPolygon = buildDraggablePolygonFromPrimitiveNodes(pNodes: nodes,contextDim: CGFloat(cDim))
-        newPolygon.originalOrigin = CGPoint(x: CGFloat(pz.originalX), y: CGFloat(pz.originalY))
+        let newPolygon = buildDraggablePolygonFromPrimitiveNodes(pNodes: nodes,dim: dim)
+        
+        // SCALING ORIGINS
+        let scaledOriginalOriginX = CGFloat(pz.originalX*Float(dim))
+        let scaledOriginalOriginY = CGFloat(pz.originalY*Float(dim))
+        
+        newPolygon.originalOrigin = CGPoint(x: scaledOriginalOriginX, y: scaledOriginalOriginY)
         
         newPolygons.append(newPolygon)
         
@@ -163,7 +231,7 @@ func buildDraggablePolygonsFromPuzzle(puzzle: Puzzle) -> [DraggablePolygon] {
     return newPolygons
 }
 
-func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?,contextDim: CGFloat) -> DraggablePolygon {
+func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?,dim: CGFloat) -> DraggablePolygon {
     
     var newPNodes: [PrimitiveNode] = []
     var newNodes: [Node] = []
@@ -177,7 +245,7 @@ func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?,contextDim: CGFloat)
     newPNodes.sort(by: {$0.order < $1.order})
     
     for pN in newPNodes {
-        let newNode = buildNodeFromCoreData(pNode: pN)
+        let newNode = buildNodeFromCoreData(pNode: pN,dim: dim)
         newNodes.append(newNode)
     }
     
@@ -194,11 +262,11 @@ func buildDraggablePolygonFromPrimitiveNodes(pNodes: NSSet?,contextDim: CGFloat)
     return newDraggablePolygon
 }
 
-func buildNodeFromCoreData(pNode: PrimitiveNode) -> Node {
+func buildNodeFromCoreData(pNode: PrimitiveNode,dim: CGFloat) -> Node {
     
     let sister = Int(pNode.sisterIndex)
-    let x = CGFloat(pNode.xCoordinate)
-    let y = CGFloat(pNode.yCoordinate)
+    let x = CGFloat(pNode.xCoordinate*Float(dim))
+    let y = CGFloat(pNode.yCoordinate*Float(dim))
     let location = CGPoint(x: x, y: y)
 
     return Node(_location: location, _sister: sister)

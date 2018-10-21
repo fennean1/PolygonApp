@@ -66,6 +66,8 @@ let RotateIcon = UIImage(named: "RotateIcon")
 let TrashIcon = UIImage(named: "TrashIcon")
 let PalleteIcon = UIImage(named: "ArtistsPallete")
 let PrintIcon = UIImage(named: "PrintIcon")
+let PuzzleIcon = UIImage(named: "PuzzlePieces")
+let BrokenSaveIcon = UIImage(named:"BrokenSaveIcon")
 
 
 // For putting markers out of sight.

@@ -24,7 +24,7 @@ class PuzzleCell: UICollectionViewCell {
            
             let x: CGFloat = 0
             let y: CGFloat = 250
-            let w: CGFloat = 300
+            let w: CGFloat = 250
             let h: CGFloat = 50
             
             return CGRect(x: x, y: y, width: w, height: h)
@@ -32,11 +32,15 @@ class PuzzleCell: UICollectionViewCell {
         }
         
         nameText.frame = nameTextFrame
-        nameText.text = cache.name
+        nameText.text = cache.puzzleName
+        nameText.textAlignment = .center
+        nameText.font = UIFont(name: "Chalkboard SE", size: 20)
         nameText.backgroundColor = UIColor.clear
         puzzle = cache.puzzleView
         contentView.addSubview(puzzle)
         contentView.addSubview(nameText)
+        //contentView.backgroundColor = UIColor.purple
+        //nameText.backgroundColor = UIColor.white
 
     }
     
@@ -44,7 +48,7 @@ class PuzzleCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(puzzle)
         print("init called")
-        puzzle.backgroundColor = UIColor.blue
+        //puzzle.backgroundColor = UIColor.blue
     
     }
     
@@ -63,7 +67,7 @@ class PuzzleCell: UICollectionViewCell {
         
         super.awakeFromNib()
         print("Awake From Nib, Setting Color To Blue")
-        //backgroundColor = UIColor.purple
+
     }
     
 }

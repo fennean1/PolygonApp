@@ -12,17 +12,17 @@
 /*
  
  
-NEXT) Make it so that the button views get added again
-NEXT) Shrink the undo button and make it animate!
+ NEXT) Make it so that the button views get added again
+ NEXT) Shrink the undo button and make it animate!
  
  
  0) Start and End can't be the same point*
-
+ 
  1) Must be able to delete saved puzzle
  
  1) Bug where an endpoint is inside of the polygon but it still tried to clip to node. Might need a function that tells me
  if a point is on the border of the polygon. UPDATE: This appears to be resolved but keep an eye on it.
-
+ 
  2) Need support for when a cut occurs along a single edge (i.e. trying to cut parallel to an edge)
  
  3) Note: When a straight line is formed by the vertex and the endpoints
@@ -39,7 +39,7 @@ NEXT) Shrink the undo button and make it animate!
  
  9) Border color has to match color for tens place
  
- 10) Should be able to flip polygons in design view. - Polygons need to store whether or not their flipped and also the angle 
+ 10) Should be able to flip polygons in design view. - Polygons need to store whether or not their flipped and also the angle
  
  11) Should be able to save tanagram as wireframe to phone.
  
@@ -48,15 +48,15 @@ NEXT) Shrink the undo button and make it animate!
  13) When two points are extremely close, remove one of them.
  
  14) When the puzzle is put together we need to make sure that the rotation is also zero. A piece could have an origin in the right spot
- but it's rotated the wrong way. 
-
+ but it's rotated the wrong way.
+ 
  */
 
 // ------------- Concerns ----------------
 
 /*
  
-Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous.
+ Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous.
  
  UPDATE: No issues yet.
  
@@ -67,36 +67,18 @@ import Foundation
 import UIKit
 import Darwin
 
-var numberOfSides = 3
 
-class ShapeButton: UIButton {
-    
-    var n = 0
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        let cx = frame.origin.x
-        let cy = frame.origin.y
-        self.center = CGPoint(x: cx, y: cy)
-        self.frame.size = frame.size
-        
-    }
-    
-}
-
-
-class LandingViewController: UIViewController {
+class EntryPointViewController: UIViewController {
     
     var shapeButtons: [ShapeButton] = []
     var segueToDesignViewController = UIButton()
     var segueToPuzzleViewController = UIButton()
     var backGround = UIImageView()
-
+    
+    var optionSolve = OptionButton()
+    var optionCreate = OptionButton()
+    var optionDesign = OptionButton()
+    
     var screenWidth: CGFloat = 0
     
     
@@ -112,7 +94,7 @@ class LandingViewController: UIViewController {
     
     @objc func segueToDesignViewController(sender: UIButton){
         print("segue to DesignViewController")
-
+        
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "DesignViewController")
         
         self.show(vc as! UIViewController, sender: vc)
@@ -157,18 +139,23 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
+
+        view.addSubview(optionSolve)
+        optionSolve.frame.styleOptionButton(order: 1, container: view.frame)
+        
+        
+        
         // Init
         
         
         
         InitialPolygonDim = 0.8*view.frame.width
         ViewControllerFrame = view.frame
-
+        
         backGround.image = BackGround
         screenWidth = view.frame.width
         let r = screenWidth/3
-
+        
         segueToPuzzleViewController.setImage(PuzzleIcon, for: .normal)
         segueToDesignViewController.setImage(PalleteIcon, for: .normal)
         
@@ -199,18 +186,18 @@ class LandingViewController: UIViewController {
         view.bringSubview(toFront: segueToDesignViewController)
         view.bringSubview(toFront: segueToPuzzleViewController)
         
-
+        
         /*
-        if firstLoad() {
-            loadRawPuzzlesToCoreData()
-        }
-  */
-      
+         if firstLoad() {
+         loadRawPuzzlesToCoreData()
+         }
+         */
+        
         if let p = fetchAllPuzzles() {
             FetchedPuzzles = p
             puzzleCollectionViewDataSource = initPuzzleCollectionViewDataSource(puzzles: p,dim: 250)
         }
- 
+        
         
     }
     

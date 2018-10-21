@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FirstLoad" representedClassName="FirstLoad" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="loaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Polygon" representedClassName="Polygon" syncable="YES" codeGenerationType="class">
         <attribute name="contextDim" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="descendant" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +23,7 @@
         <relationship name="polygons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Polygon" inverseName="puzzle" inverseEntity="Polygon" syncable="YES"/>
     </entity>
     <elements>
+        <element name="FirstLoad" positionX="-6138" positionY="1125" width="128" height="60"/>
         <element name="Polygon" positionX="-6129" positionY="1098" width="128" height="135"/>
         <element name="PrimitiveNode" positionX="-5951" positionY="1053" width="128" height="118"/>
         <element name="Puzzle" positionX="-6318" positionY="1098" width="128" height="75"/>

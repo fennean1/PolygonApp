@@ -35,7 +35,6 @@ func getIntersectionPoints(lines: [Line],endPoints: (CGPoint,CGPoint)) -> Bool {
     
     //Assign vertext of cut. This may get reassigned to the same thing if this runs twice because the last point of the first like is equal to the first point of the last line. Maybe check here to make sure Vertex has already been set.
     
-    //// IDEA! Pass start and end points instead of the cutting line.
     
     // Don't run this if the vertex has already been set - we're only dealing with one for now.
     if let _ = VertexOfTheCut {
@@ -54,7 +53,6 @@ func getIntersectionPoints(lines: [Line],endPoints: (CGPoint,CGPoint)) -> Bool {
         }
     }
     
-
     if intersectionPoints.count > 2 {
         print("No, we're not dealing with more than 2 intersection points in a single cut. This case doesn't count the vertex.")
         return false
@@ -102,12 +100,10 @@ func getIntersectionPoints(lines: [Line],endPoints: (CGPoint,CGPoint)) -> Bool {
             else {
                 print("One intersection point, start not set and vertex not set")
                 StartOfCut = intersectionPoints.first!
-                print("StartOfCut",StartOfCut?.location)
                 if let _ = potentialVertex {
                     print("assigning vertex now")
                     VerticesOfCut.append(potentialVertex!)
                     VertexOfTheCut = potentialVertex
-                    print("VertexOfTheCut",VertexOfTheCut?.location)
                 }
                 return true
             }

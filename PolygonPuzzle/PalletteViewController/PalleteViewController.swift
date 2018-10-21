@@ -33,6 +33,16 @@ class PalleteViewController: UIViewController, UICollectionViewDelegate, UIColle
         return 1
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let i = indexPath.row
+        PolygonsOnPallette.append(SavedPolygons[i])
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "DesignViewController")
+        
+        self.show(vc as! UIViewController, sender: vc)
+    
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return SavedPolygons.count
     }
@@ -96,6 +106,10 @@ class PalleteViewController: UIViewController, UICollectionViewDelegate, UIColle
         backButton.frame.styleTopLeft(container: view.frame)
         
         // ----- Finishing Touches ---------------
+        
+        // Need to fetch PallettePuzzle
+        
+        
         
     
     }

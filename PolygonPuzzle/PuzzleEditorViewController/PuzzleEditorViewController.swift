@@ -9,13 +9,6 @@
 import UIKit
 import Foundation
 
-/*
-    1) Some kind of initialization or non reinitialization issue
-    2) A problem the vertex being used to classify points as either above or below.
-    3) FIRST and SECOND nodes AREN"T ALWAYS "IN" or "OUT" in the same respect. Need a better way to differentiacte because they different now...called it.
- */
-
-
 var testingVertex: CGPoint!
 
 class PuzzleEditor: UIViewController {
@@ -37,12 +30,13 @@ class PuzzleEditor: UIViewController {
 
     let cuttingView = CuttingView()
     var polygons: [DraggablePolygon] = []
-    var saveButton = UIButton()
+    var savePuzzleButton = UIButton()
     var printButton = UIButton()
+    var savePolygonButton = UIButton()
     
     @objc func printPuzzle(sender: UIButton) {
         saveAllPolygonsToPhotos()
-        savePuzzleToCoreData(polygons: AllPolygons, name: "MyFirstPuzzle")
+        savePuzzleToCoreData(polygons: AllPolygons, name: "MyFirstPuzzle",dim: InitialPolygonDim)
         parachute.setText(message: "Puzzle Saved To Photos")
         parachute.showParachute()
     }
@@ -75,8 +69,11 @@ class PuzzleEditor: UIViewController {
                                             
                                             // Check to see if the name doesn't exist
                                             if self.validateName(name: puzzleName!) {
-                    
-                                                savePuzzleToCoreData(polygons: AllPolygons, name: puzzleName!)
+                                                
+                                                print("Initial Polygon dim before savind",InitialPolygonDim)
+                                                
+                                                savePuzzleToCoreData(polygons: AllPolygons, name: puzzleName!,dim: InitialPolygonDim)
+                                                
                                         
                                             }
                                                 // If it does, prompt to enter another name.
@@ -117,27 +114,29 @@ class PuzzleEditor: UIViewController {
             present(alert, animated: true,
                     completion: nil)
         
-        
-        
     }
     
     @objc func savePolygon(sender: UIButton){
         // How do we check for duplicates here? - We don't? Oh we need support for extras. Polygon Needs "Polygon ID"
         
-        savePuzzleToCoreData(polygons: AllPolygons, name: "Cool Puzzle")
-
+        PolygonsOnPallette.append(ActivePolygon)
         SavedPolygons.append(ActivePolygon)
         
-        print("validating all sisters",validateAllSisters())
+        printRawJSONPuzzle()
+       // printRandCoordinatesActivePolygonFrame(number: 10)
         
-        printAllSisters()
+        //printRawPuzzle(polygons: AllPolygons)
+                
         
-        if validateAllSisters() {
-            parachute.setText(message: "Polygon Saved.")
-        } else
-        {
-            parachute.setText(message: "Polygon Saved.")
+        /*
+        if validatePuzzle(polygons: AllPolygons) {
+            parachute.setText(message: "Puzzle Solved")
+        } else {
+            parachute.setText(message: "Puzzle Not Solved")
         }
+        */
+        
+        parachute.setText(message: "Polygon Saved")
 
         parachute.showParachute()
         
@@ -241,8 +240,11 @@ class PuzzleEditor: UIViewController {
             
             // REALLY IMPORTANT FEW LINES!
             let origin = ActivePolygon.frame.origin
+            print("current Origin of the Polygon i'm cutting",origin)
             let nodes = ActivePolygon.nodes
             let originalOrigin = ActivePolygon.originalOrigin
+            
+            print("originalOrigin for polygon I'm cutting",originalOrigin)
             
     
             // This converts the nodes to the main coordinate system - need to write a function for this.
@@ -270,9 +272,11 @@ class PuzzleEditor: UIViewController {
             bottomPolygon.nodes = bottomNodes
             
             // This is a wonderful and useful function.
-            let topPolygonFrame = frame(of: topPolygon.vertices())
+            let topPolygonFrame = getFrame(of: topPolygon.vertices())
+            print("topPolygonFrame origin after get frame",topPolygonFrame.origin)
             let topPolygonFrameOrigin = topPolygonFrame.origin
-            let bottomPolygonFrame = frame(of: bottomPolygon.vertices())
+            let bottomPolygonFrame = getFrame(of: bottomPolygon.vertices())
+            print("bottomPolygonFrame origin after get frame",bottomPolygonFrame.origin)
             let bottomPolygonFrameOrigin = bottomPolygonFrame.origin
             
  
@@ -281,11 +285,15 @@ class PuzzleEditor: UIViewController {
             
             let offsetFromCurrentOriginTopPolygon = subtractPoints(a: topPolygonFrameOrigin, b: origin)
             let originalOriginForTopPolygon = addPoints(a: offsetFromCurrentOriginTopPolygon, b: originalOrigin)
+            
             let offsetFromCurrentOriginBottomPolygon = subtractPoints(a: bottomPolygonFrameOrigin, b: origin)
             let originalOriginForBottomPolygon = addPoints(a: offsetFromCurrentOriginBottomPolygon, b: originalOrigin)
             
             topPolygon.originalOrigin = originalOriginForTopPolygon
             bottomPolygon.originalOrigin = originalOriginForBottomPolygon
+            
+            print("topPolygon Original Origin",originalOriginForTopPolygon)
+            print("bottomPolygon Original Origin",originalOriginForBottomPolygon)
             
             topPolygon.frame = topPolygonFrame
             bottomPolygon.frame = bottomPolygonFrame
@@ -327,7 +335,6 @@ class PuzzleEditor: UIViewController {
             
             resetCutting()
             ActivelyCutting = false
-        
         }
     }
     
@@ -347,20 +354,9 @@ class PuzzleEditor: UIViewController {
     
     // FIX THE Y COORDINATE!
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.5, animations: {self.animatedNumber.center = CGPoint(x: self.view.center.x, y: -self.view.frame.width/7 )})
+        UIView.animate(withDuration: 0.5, animations: {self.animatedNumber.center = CGPoint(x: self.view.center.x, y: -self.view.frame.width/compressionFactor)})
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        /* Sprinkle in our animated number.
-        animatedNumber = NumberFrame(n: 6, dim: view.frame.width/6)
-        view.addSubview(animatedNumber)
-        view.bringSubview(toFront: animatedNumber)
-        animatedNumber.render(n: 0)
-        animatedNumber.center = CGPoint(x: view.center.x, y: -2*numberDim)
- 
- */
-    
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -405,17 +401,17 @@ class PuzzleEditor: UIViewController {
 
         undoButton = UIButton()
         undoButton.addTarget(self, action: #selector(undo(sender:)), for: .touchUpInside)
-    
-        
-        saveButton.addTarget(self, action: #selector(savePuzzle(sender:)), for: .touchUpInside)
-        
-        backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         
         printButton.addTarget(self, action: #selector(printPuzzle(sender:)), for: .touchUpInside)
         
+        savePuzzleButton.addTarget(self, action: #selector(savePuzzle(sender:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
+        savePolygonButton.addTarget(self, action: #selector(savePolygon(sender:)), for: .touchUpInside)
+        
+        
         // ---------- Adding The Views -----------
         
-        view.addSubview(saveButton)
+        view.addSubview(savePuzzleButton)
         view.addSubview(undoButton)
         view.addSubview(cutOrCancelButton)
         view.addSubview(backGround)
@@ -426,23 +422,20 @@ class PuzzleEditor: UIViewController {
         view.addSubview(cuttingView)
         view.addSubview(printButton)
         view.addSubview(backButton)
+        view.addSubview(savePolygonButton)
         
-        
-    
         // -------------- Setting State ---------------
 
         view.tag = 0
         backGround.image = BackGround
-        
         
         // -----  Ordering Views ------------
         
         view.bringSubview(toFront: backButton)
         view.bringSubview(toFront: cutOrCancelButton)
         view.bringSubview(toFront: undoButton)
-        view.bringSubview(toFront: saveButton)
+        view.bringSubview(toFront: savePuzzleButton)
         view.bringSubview(toFront: printButton)
-        
         
         // ----------------- Adding Styles ----------------------
         
@@ -452,29 +445,40 @@ class PuzzleEditor: UIViewController {
         markerTwo.frame.styleHideMarker(container: view.frame)
         markerThree.frame.styleHideMarker(container: view.frame)
         
-        saveButton.frame.styleBottomLeft(container: view.frame)
-        saveButton.setImage(SaveIconImage, for: .normal)
+        savePuzzleButton.frame.styleBottomLeft(container: view.frame)
+        savePuzzleButton.setImage(SaveIconImage, for: .normal)
         cuttingView.frame.styleFillContainer(container: view.frame)
         
-    
         cutOrCancelButton.frame.styleTopRight(container: view.frame)
         undoButton.frame.styleTopRight(container: view.frame)
         undoButton.alpha = 0
         
         printButton.frame.styleBottomRight(container: view.frame)
-        printButton.setImage(PrintIcon, for: .normal)
         
         backButton.frame.styleTopLeft(container: view.frame)
         
+        savePolygonButton.frame.styleBottomMiddle(container: view.frame)
  
         // ----- Finishing Touches ---------------
         
         cutOrCancelButton.setImage(Scissors, for: .normal)
+        printButton.setImage(PrintIcon, for: .normal)
         undoButton.setImage(UndoImage, for: .normal)
         backButton.setImage(BackImage, for: .normal)
+        savePolygonButton.setImage(BrokenSaveIcon, for: .normal)
         undoButton.alpha = 0 // Initially not visible.
         
+        
         AllPolygons.append(initialPolygon)
+        
+        /*
+        AllPolygons = buildPolygonsFromRawPuzzle(_scale: InitialPolygonDim)
+        
+        for p in AllPolygons {
+            view.addSubview(p)
+        }
+ 
+        */
         
         // Gotta reset this when we start over. (this will be depracated)
         SisterIndex = 0

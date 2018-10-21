@@ -10,11 +10,14 @@ import Foundation
 import UIKit
 
 var InitialPolygonDim: CGFloat!
+var ViewControllerFrame: CGRect!
 
 var FetchedPolygons: [DraggablePolygon]!
 
 var FetchedPuzzles: [Puzzle] = []
 
+
+var PolygonsOnPallette: [DraggablePolygon] = []
 var SavedPolygons: [DraggablePolygon] = []
 var ActiveSavedPolygonIndex = 0
 var ActiveSavedPolygon: DraggablePolygon {

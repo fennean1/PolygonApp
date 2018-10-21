@@ -12,6 +12,35 @@ import UIKit
 
 
 
+
+func validatePuzzle(polygons: [DraggablePolygon]) -> Bool {
+    
+    var valid = true
+    
+    let allOrigins = polygons.map({$0.frame.origin})
+    
+    let allOriginXValues = allOrigins.map({$0.x})
+    let allOriginYValues = allOrigins.map({$0.y})
+
+    let xMin = allOriginXValues.min()!
+    let yMin = allOriginYValues.min()!
+
+    
+    let offsetOrigin = CGPoint(x: xMin, y: yMin)
+    
+    let proposedOriginalOrigins = allOrigins.map({subtractPoints(a: $0, b: offsetOrigin)})
+    
+    for (i,pO) in proposedOriginalOrigins.enumerated() {
+        if distance(a: pO, b: polygons[i].originalOrigin) > 50 {
+            valid = false
+        }
+    }
+    
+    return valid
+}
+
+
+
 extension CGRect {
     mutating func scaleBy(scale: CGFloat) {
 
@@ -125,9 +154,23 @@ func removeDuplicateNodes(nodes: [Node]) -> [Node] {
     
 }
 
+func getTenAndOnesFromNumber(num: Int) -> (Int?,Int?) {
+    
+    var tens: Int?
+    var ones: Int?
+    
+    if num < 10 {
+        ones = num
+    } else if num >= 10 {
+        ones = num%10
+        tens = (num - ones!)/10
+    }
+    return (tens,ones)
+}
+
 
 // Computes the origin for a polygon defined by an array of points (In the superview coordinate system)
-func frame(of points: [CGPoint])-> CGRect {
+func getFrame(of points: [CGPoint])-> CGRect {
     let xValues = points.map({p in p.x})
     let yValues = points.map({p in p.y})
     let xMin = xValues.min()
@@ -194,6 +237,15 @@ func addPoints(a: CGPoint,b: CGPoint) -> CGPoint {
     let by = b.y
     
     return CGPoint(x: ax+bx,y: ay+by)
+    
+}
+
+func scalePoint(by scale: CGFloat, point: CGPoint) -> CGPoint {
+    
+    let newX = point.x*scale
+    let newY = point.y*scale
+    
+    return CGPoint(x: newX, y: newY)
     
 }
 

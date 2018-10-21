@@ -9,15 +9,11 @@
 import Foundation
 import UIKit
 
-
-
 class PolygonLayer: CAShapeLayer {
     
     public var myColor: CGColor!
     public var myBorderColor: CGColor!
-
     
-
     func drawPolygon(at _nodes: [Node]){
         
         // Calculate the color based on the number of nodes
@@ -58,12 +54,15 @@ class PolygonLayer: CAShapeLayer {
 
 class DraggablePolygon: UIView {
     
+    // Automatically checks to see if puzzle is solved and then puts it together. False until we load them into the Solver View Controller.
+    var AutoCheck = false
+    
     // Not a good place for didSet because nodes get transformed (coordinate systems etc. alot)
     public var nodes: [Node]?
     
     // If a polygon is just a saved polgyon - does it need an original origin? Well, it might inherit  from the piece that get saved.
     var originalOrigin = PointZero
-    var contextDim: CGFloat = InitialPolygonDim
+    var originalDim: CGFloat = InitialPolygonDim
     var cancelDragging = false
     
     var pan: UIPanGestureRecognizer!
@@ -86,6 +85,7 @@ class DraggablePolygon: UIView {
     }
     
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        print("point inside",point)
         super.point(inside: point, with: event)
         if let p = polygonLayer.path {
             if p.contains(point) {
@@ -132,6 +132,11 @@ class DraggablePolygon: UIView {
             sender.setTranslation(CGPoint.zero, in: sender.view)
         }
         
+        if sender.state == .ended {
+            if AutoCheck == true {
+                putAllPolygonsTogether()
+            }
+        }
     }
     
     func drawTheLayer() {
