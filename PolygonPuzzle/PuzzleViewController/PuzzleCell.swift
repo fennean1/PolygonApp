@@ -9,9 +9,7 @@ class PuzzleCell: UICollectionViewCell {
 
      let nameText = UILabel()
      var puzzle = UIView()
-     // var
 
-    
     func clear() {
         puzzle.removeFromSuperview()
         nameText.removeFromSuperview()
@@ -28,7 +26,6 @@ class PuzzleCell: UICollectionViewCell {
             let h: CGFloat = 50
             
             return CGRect(x: x, y: y, width: w, height: h)
-            
         }
         
         nameText.frame = nameTextFrame
@@ -39,8 +36,6 @@ class PuzzleCell: UICollectionViewCell {
         puzzle = cache.puzzleView
         contentView.addSubview(puzzle)
         contentView.addSubview(nameText)
-        //contentView.backgroundColor = UIColor.purple
-        //nameText.backgroundColor = UIColor.white
 
     }
     
@@ -48,8 +43,7 @@ class PuzzleCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(puzzle)
         print("init called")
-        //puzzle.backgroundColor = UIColor.blue
-    
+        //contentView.backgroundColor = UIColor.blue
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,11 +57,9 @@ class PuzzleCell: UICollectionViewCell {
     }
     
     override func awakeFromNib() {
-
-        
         super.awakeFromNib()
         print("Awake From Nib, Setting Color To Blue")
-
+        contentView.backgroundColor = UIColor.white
     }
     
 }

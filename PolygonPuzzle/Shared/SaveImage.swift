@@ -38,7 +38,7 @@ class PurePolygon: CAShapeLayer {
         self.strokeColor = UIColor.white.cgColor
         
         if points.count >= 10 {
-            self.strokeColor = OneColor.cgColor
+            self.strokeColor = colorForOne.cgColor
         }
         
         self.fillColor = myColor

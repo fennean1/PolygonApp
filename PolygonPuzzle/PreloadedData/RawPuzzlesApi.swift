@@ -12,14 +12,12 @@ import UIKit
 
 func loadRawPuzzlesToCoreData() {
     
+    print("LOADING RAW PUZZLLLLLESSS!")
     for (i,rP) in RawPuzzles.enumerated() {
         let polys = buildPolygonsFromRawPuzzle(rawPuzzle: rP.0, _scale: InitialPolygonDim,origins: rP.1)
         savePuzzleToCoreData(polygons: polys, name: "First Puzzle",dim: InitialPolygonDim)
     }
 }
-
-//[{ollie: {x: 2,y: 2}},{kurt: {x: 3,y: 3}}]
-
 
 func printRandCoordinatesActivePolygonFrame(number: Int) {
     
@@ -93,7 +91,7 @@ func printRawPuzzle(polygons: [DraggablePolygon]) {
     print("These are the origins")
     
     for p in polygons {
-       print("[",p.originalOrigin.x,",",p.originalOrigin.y,"]")
+       print("[",p.originalOrigin.x/InitialPolygonDim,",",p.originalOrigin.y/InitialPolygonDim,"]")
     }
     
 }
@@ -107,7 +105,8 @@ func buildPolygonsFromRawPuzzle(rawPuzzle: [[(CGFloat,CGFloat,Int)]], _scale: CG
         let scaledPoints = rawPolygons.map({scalePoint(by: _scale, point: CGPoint(x:$0.0,y: $0.1))})
         let newPolygon = DraggablePolygon()
         let rawOrigin = origins[i]
-        let originalOriginAsCGPoint = CGPoint(x: CGFloat(rawOrigin.0), y: CGFloat(rawOrigin.1))
+        let originalOriginAsCGPoint = CGPoint(x: CGFloat(InitialPolygonDim*rawOrigin.0), y: CGFloat(InitialPolygonDim*rawOrigin.1))
+        print("originalOriginAsCGPoint",originalOriginAsCGPoint)
         newPolygon.frame = getFrame(of: scaledPoints)
         newPolygon.config(vertices: scaledPoints)
         newPolygon.originalOrigin = originalOriginAsCGPoint

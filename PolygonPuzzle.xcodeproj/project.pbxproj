@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0B2A7D21868C4200BA74E3 /* ViewSlicer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0B2A7C21868C4200BA74E3 /* ViewSlicer.swift */; };
+		1C0B2A7F21875B4E00BA74E3 /* NewPieceButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C0B2A7E21875B4E00BA74E3 /* NewPieceButton.png */; };
 		1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCCFB214C52BA00F92175 /* Parachute.swift */; };
 		1C0BCCFE214F321600F92175 /* DesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0BCCFD214F321600F92175 /* DesignViewController.swift */; };
 		1C0BCD01214F48FA00F92175 /* DesignViewButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C0BCD00214F48F900F92175 /* DesignViewButton.png */; };
@@ -40,11 +42,10 @@
 		1C66F60E21470E18006AA656 /* UndoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C66F60D21470E18006AA656 /* UndoButton.png */; };
 		1C74E2712103869400EBECC5 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2702103869400EBECC5 /* Shapes.swift */; };
 		1C74E2732103A62F00EBECC5 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2722103A62F00EBECC5 /* Helpers.swift */; };
-		1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2742106281400EBECC5 /* LandingViewController.swift */; };
+		1C74E2752106281400EBECC5 /* PickShapeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E2742106281400EBECC5 /* PickShapeViewController.swift */; };
 		1C74E27921063C6500EBECC5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74E27821063C6500EBECC5 /* Constants.swift */; };
 		1C74E27B2106417D00EBECC5 /* Octagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E27A2106417D00EBECC5 /* Octagon.png */; };
 		1C74E28321066B9500EBECC5 /* Hexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E27D21066B9400EBECC5 /* Hexagon.png */; };
-		1C74E28421066B9500EBECC5 /* Square.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E27E21066B9400EBECC5 /* Square.png */; };
 		1C74E28521066B9500EBECC5 /* Nonagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E27F21066B9400EBECC5 /* Nonagon.png */; };
 		1C74E28621066B9500EBECC5 /* Pentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28021066B9400EBECC5 /* Pentagon.png */; };
 		1C74E28721066B9500EBECC5 /* Triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C74E28121066B9400EBECC5 /* Triangle.png */; };
@@ -60,6 +61,13 @@
 		1C853DA921780DD100D8C574 /* BrokenSaveIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C853DA821780DD100D8C574 /* BrokenSaveIcon.png */; };
 		1C853DB7217D45AC00D8C574 /* EntryPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DB6217D45AC00D8C574 /* EntryPointViewController.swift */; };
 		1C853DB9217D463600D8C574 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DB8217D463600D8C574 /* OptionButton.swift */; };
+		1C853DBB217E3EB100D8C574 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DBA217E3EB100D8C574 /* Notifications.swift */; };
+		1C853DBE217E5A7400D8C574 /* FlipIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C853DBC217E5A7400D8C574 /* FlipIcon.png */; };
+		1C853DBF217E5A7400D8C574 /* ShapeKeyPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C853DBD217E5A7400D8C574 /* ShapeKeyPad.png */; };
+		1C853DCE21821FF500D8C574 /* Square.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C853DCD21821FF500D8C574 /* Square.png */; };
+		1C853DD12186537000D8C574 /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DD02186537000D8C574 /* ColorPickerButton.swift */; };
+		1C853DD32186547100D8C574 /* PuzzlePieceMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DD22186547100D8C574 /* PuzzlePieceMaker.swift */; };
+		1C853DD6218654B800D8C574 /* PieceMakerStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C853DD5218654B800D8C574 /* PieceMakerStyles.swift */; };
 		1CA6C88420FF7C4A0076E557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */; };
 		1CA6C88620FF7C4A0076E557 /* PuzzleEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C88520FF7C4A0076E557 /* PuzzleEditorViewController.swift */; };
 		1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CA6C88720FF7C4A0076E557 /* Main.storyboard */; };
@@ -97,6 +105,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0B2A7C21868C4200BA74E3 /* ViewSlicer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSlicer.swift; sourceTree = "<group>"; };
+		1C0B2A7E21875B4E00BA74E3 /* NewPieceButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NewPieceButton.png; sourceTree = "<group>"; };
 		1C0BCCFB214C52BA00F92175 /* Parachute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parachute.swift; sourceTree = "<group>"; };
 		1C0BCCFD214F321600F92175 /* DesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignViewController.swift; sourceTree = "<group>"; };
 		1C0BCD00214F48F900F92175 /* DesignViewButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DesignViewButton.png; sourceTree = "<group>"; };
@@ -130,11 +140,10 @@
 		1C66F60D21470E18006AA656 /* UndoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UndoButton.png; sourceTree = "<group>"; };
 		1C74E2702103869400EBECC5 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		1C74E2722103A62F00EBECC5 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		1C74E2742106281400EBECC5 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		1C74E2742106281400EBECC5 /* PickShapeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickShapeViewController.swift; sourceTree = "<group>"; };
 		1C74E27821063C6500EBECC5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1C74E27A2106417D00EBECC5 /* Octagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Octagon.png; sourceTree = "<group>"; };
 		1C74E27D21066B9400EBECC5 /* Hexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hexagon.png; sourceTree = "<group>"; };
-		1C74E27E21066B9400EBECC5 /* Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Square.png; sourceTree = "<group>"; };
 		1C74E27F21066B9400EBECC5 /* Nonagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nonagon.png; sourceTree = "<group>"; };
 		1C74E28021066B9400EBECC5 /* Pentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pentagon.png; sourceTree = "<group>"; };
 		1C74E28121066B9400EBECC5 /* Triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle.png; sourceTree = "<group>"; };
@@ -150,6 +159,13 @@
 		1C853DA821780DD100D8C574 /* BrokenSaveIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BrokenSaveIcon.png; path = "../../../Polygon App Assets/BrokenSaveIcon.png"; sourceTree = "<group>"; };
 		1C853DB6217D45AC00D8C574 /* EntryPointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPointViewController.swift; sourceTree = "<group>"; };
 		1C853DB8217D463600D8C574 /* OptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
+		1C853DBA217E3EB100D8C574 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		1C853DBC217E5A7400D8C574 /* FlipIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FlipIcon.png; sourceTree = "<group>"; };
+		1C853DBD217E5A7400D8C574 /* ShapeKeyPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShapeKeyPad.png; sourceTree = "<group>"; };
+		1C853DCD21821FF500D8C574 /* Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Square.png; sourceTree = "<group>"; };
+		1C853DD02186537000D8C574 /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
+		1C853DD22186547100D8C574 /* PuzzlePieceMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlePieceMaker.swift; sourceTree = "<group>"; };
+		1C853DD5218654B800D8C574 /* PieceMakerStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceMakerStyles.swift; sourceTree = "<group>"; };
 		1CA6C88020FF7C4A0076E557 /* PolygonPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolygonPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA6C88320FF7C4A0076E557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CA6C88520FF7C4A0076E557 /* PuzzleEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEditorViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +233,7 @@
 				1C12B350215A971D00C8EFA4 /* SaveImage.swift */,
 				1C0BCCFB214C52BA00F92175 /* Parachute.swift */,
 				1C74E27821063C6500EBECC5 /* Constants.swift */,
+				1C853DBA217E3EB100D8C574 /* Notifications.swift */,
 				1C0BCD382150103700F92175 /* SharedState.swift */,
 				1C74E28921066D7D00EBECC5 /* Styles.swift */,
 				1C74E2722103A62F00EBECC5 /* Helpers.swift */,
@@ -255,10 +272,13 @@
 		1C74E27C2106418A00EBECC5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1C0B2A7E21875B4E00BA74E3 /* NewPieceButton.png */,
 				1C853D49217510FA00D8C574 /* PuzzlePieces.png */,
 				1C853DA821780DD100D8C574 /* BrokenSaveIcon.png */,
 				1C12B358215D25A500C8EFA4 /* PrintIcon.png */,
 				1C12B354215C5ECF00C8EFA4 /* RotateIcon.png */,
+				1C853DBC217E5A7400D8C574 /* FlipIcon.png */,
+				1C853DBD217E5A7400D8C574 /* ShapeKeyPad.png */,
 				1C12B356215C5ED800C8EFA4 /* TrashIcon.png */,
 				1C12B352215C5EC800C8EFA4 /* ArtistsPallete.png */,
 				1C12B35A215D727E00C8EFA4 /* GoBack.png */,
@@ -272,6 +292,7 @@
 				1C66F60D21470E18006AA656 /* UndoButton.png */,
 				1C4FC5D1213C46E900652354 /* Nine.png */,
 				1C4FC5D8213C46E900652354 /* One.png */,
+				1C853DCD21821FF500D8C574 /* Square.png */,
 				1C4FC5D4213C46E900652354 /* Seven.png */,
 				1C4FC5D5213C46E900652354 /* Six.png */,
 				1C4FC5D7213C46E900652354 /* Three.png */,
@@ -284,7 +305,6 @@
 				1C74E2A02108CAB000EBECC5 /* closed-scissors-clipart.png */,
 				1C74E29E2108C82900EBECC5 /* scissors-clipart.png */,
 				1C74E28221066B9400EBECC5 /* Septagon.png */,
-				1C74E27E21066B9400EBECC5 /* Square.png */,
 				1C74E29A2106712500EBECC5 /* light-blue-background.png */,
 				1C74E28121066B9400EBECC5 /* Triangle.png */,
 				1C74E27A2106417D00EBECC5 /* Octagon.png */,
@@ -299,6 +319,26 @@
 				1C853D64217670EE00D8C574 /* RawPuzzleOne.swift */,
 			);
 			path = PreloadedData;
+			sourceTree = "<group>";
+		};
+		1C853DCF2186519D00D8C574 /* EntryPoint */ = {
+			isa = PBXGroup;
+			children = (
+				1C853DB6217D45AC00D8C574 /* EntryPointViewController.swift */,
+				1C853DB8217D463600D8C574 /* OptionButton.swift */,
+			);
+			path = EntryPoint;
+			sourceTree = "<group>";
+		};
+		1C853DD42186549000D8C574 /* PieceMaker */ = {
+			isa = PBXGroup;
+			children = (
+				1C853DD02186537000D8C574 /* ColorPickerButton.swift */,
+				1C853DD22186547100D8C574 /* PuzzlePieceMaker.swift */,
+				1C0B2A7C21868C4200BA74E3 /* ViewSlicer.swift */,
+				1C853DD5218654B800D8C574 /* PieceMakerStyles.swift */,
+			);
+			path = PieceMaker;
 			sourceTree = "<group>";
 		};
 		1CA6C87720FF7C490076E557 = {
@@ -327,13 +367,13 @@
 		1CA6C88220FF7C4A0076E557 /* PolygonPuzzle */ = {
 			isa = PBXGroup;
 			children = (
-				1C853DB6217D45AC00D8C574 /* EntryPointViewController.swift */,
-				1C853DB8217D463600D8C574 /* OptionButton.swift */,
+				1C0BCD372150100D00F92175 /* Shared */,
+				1C853DCF2186519D00D8C574 /* EntryPoint */,
+				1C853DD42186549000D8C574 /* PieceMaker */,
 				1C853D66217670F900D8C574 /* PreloadedData */,
 				1C0C3FD2216DA5AE00E4DCBB /* PuzzleViewController */,
 				1C0C3FCF216D8E4A00E4DCBB /* PuzzleSolverViewController */,
-				1C0BCD372150100D00F92175 /* Shared */,
-				1CBA905C212207D7000FCB9D /* LandingViewController */,
+				1CBA905C212207D7000FCB9D /* PickShapeViewController */,
 				1CFB47FC211A346000635139 /* PuzzleEditorViewController */,
 				1C0BCD3C2150145D00F92175 /* PalletteViewController */,
 				1C0BCCFF214F36A700F92175 /* DesignViewControler */,
@@ -363,12 +403,12 @@
 			path = PolygonPuzzleUITests;
 			sourceTree = "<group>";
 		};
-		1CBA905C212207D7000FCB9D /* LandingViewController */ = {
+		1CBA905C212207D7000FCB9D /* PickShapeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1C74E2742106281400EBECC5 /* LandingViewController.swift */,
+				1C74E2742106281400EBECC5 /* PickShapeViewController.swift */,
 			);
-			path = LandingViewController;
+			path = PickShapeViewController;
 			sourceTree = "<group>";
 		};
 		1CFB47FC211A346000635139 /* PuzzleEditorViewController */ = {
@@ -496,6 +536,8 @@
 				1C4FC5E1213C46E900652354 /* Three.png in Resources */,
 				1CA6C89120FF7C4A0076E557 /* LaunchScreen.storyboard in Resources */,
 				1C853D4A217510FA00D8C574 /* PuzzlePieces.png in Resources */,
+				1C853DBF217E5A7400D8C574 /* ShapeKeyPad.png in Resources */,
+				1C853DBE217E5A7400D8C574 /* FlipIcon.png in Resources */,
 				1C74E27B2106417D00EBECC5 /* Octagon.png in Resources */,
 				1C4FC5E2213C46E900652354 /* One.png in Resources */,
 				1C0BCD01214F48FA00F92175 /* DesignViewButton.png in Resources */,
@@ -505,11 +547,12 @@
 				1C12B353215C5EC900C8EFA4 /* ArtistsPallete.png in Resources */,
 				1C12B357215C5ED800C8EFA4 /* TrashIcon.png in Resources */,
 				1C74E29F2108C82900EBECC5 /* scissors-clipart.png in Resources */,
+				1C853DCE21821FF500D8C574 /* Square.png in Resources */,
 				1C4FC5DB213C46E900652354 /* Nine.png in Resources */,
 				1C74E28621066B9500EBECC5 /* Pentagon.png in Resources */,
 				1CA6C88E20FF7C4A0076E557 /* Assets.xcassets in Resources */,
-				1C74E28421066B9500EBECC5 /* Square.png in Resources */,
 				1C4FC5DD213C46E900652354 /* Five.png in Resources */,
+				1C0B2A7F21875B4E00BA74E3 /* NewPieceButton.png in Resources */,
 				1C12B31E21518A7200C8EFA4 /* SaveIcon.png in Resources */,
 				1C4FC5E3213C46E900652354 /* Two.png in Resources */,
 				1CA6C88920FF7C4A0076E557 /* Main.storyboard in Resources */,
@@ -562,7 +605,8 @@
 				1CA6C88620FF7C4A0076E557 /* PuzzleEditorViewController.swift in Sources */,
 				1C0BCCFC214C52BA00F92175 /* Parachute.swift in Sources */,
 				1CBA905E2122135C000FCB9D /* Node.swift in Sources */,
-				1C74E2752106281400EBECC5 /* LandingViewController.swift in Sources */,
+				1C853DD12186537000D8C574 /* ColorPickerButton.swift in Sources */,
+				1C74E2752106281400EBECC5 /* PickShapeViewController.swift in Sources */,
 				1C853DB7217D45AC00D8C574 /* EntryPointViewController.swift in Sources */,
 				1CBB3A3A2167E1A3006B9034 /* CoreDataApi.swift in Sources */,
 				1CBA9060212213FF000FCB9D /* Line.swift in Sources */,
@@ -577,8 +621,12 @@
 				1CFB4800211A371800635139 /* CuttingMethods.swift in Sources */,
 				1C853D482174F15E00D8C574 /* RawPuzzlesApi.swift in Sources */,
 				1C12B333215569A400C8EFA4 /* NumberFrame.swift in Sources */,
+				1C853DBB217E3EB100D8C574 /* Notifications.swift in Sources */,
 				1CFB47FE211A34CF00635139 /* CuttingView.swift in Sources */,
+				1C853DD6218654B800D8C574 /* PieceMakerStyles.swift in Sources */,
+				1C0B2A7D21868C4200BA74E3 /* ViewSlicer.swift in Sources */,
 				1C74E2712103869400EBECC5 /* Shapes.swift in Sources */,
+				1C853DD32186547100D8C574 /* PuzzlePieceMaker.swift in Sources */,
 				1CA6C8B520FF8F890076E557 /* DraggablePolygon.swift in Sources */,
 				1CB98D17213705590020427F /* Vectors.swift in Sources */,
 				1C0D55A821656E62005918F9 /* PolygonPuzzle.xcdatamodeld in Sources */,

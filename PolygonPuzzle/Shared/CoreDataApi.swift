@@ -82,13 +82,6 @@ func firstLoad() -> Bool {
     if let firstLoadState = try? context.fetch(firstLoadFetchRequest) {
         print("firstLoadState",firstLoadState)
         
-        for object in firstLoadState {
-            print("deleting an object here")
-            context.delete(object as! NSManagedObject)
-        }
-        
-        print("firstLoadState afer Delete",firstLoadState)
-        
         // Check to see if it's empty.
         if let loadFirst = firstLoadState.first {
             let x = loadFirst as! FirstLoad

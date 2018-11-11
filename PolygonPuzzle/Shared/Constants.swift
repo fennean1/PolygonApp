@@ -14,9 +14,13 @@ let PointZero = CGPoint(x: 0, y: 0)
 
 let niceColor = UIColor(red: 50, green: 20, blue: 30, alpha: 1.0)
 // #139341
-let OneColor = UIColor(red:0.96, green:0.90, blue:0.00, alpha: 1.0)
+let colorForZero = UIColor(red:1.00, green:0.80, blue:0.00, alpha:1.0)
 //
-let colorForThree = UIColor(red:0.07, green:0.58, blue:0.25, alpha:1.0)
+let colorForOne = UIColor(red:0.96, green:0.90, blue:0.00, alpha: 1.0)
+//
+let colorForTwo = UIColor(red:0.77, green:0.84, blue:0.00, alpha:1.0)
+//
+let colorForThree = UIColor(red:0.07, green:0.58, blue:0.25, alpha: 1.0)
 //#1DAFEC
 let colorForFour = UIColor(red:0.11, green:0.69, blue:0.93, alpha:1.0)
 // #042286
@@ -68,6 +72,9 @@ let PalleteIcon = UIImage(named: "ArtistsPallete")
 let PrintIcon = UIImage(named: "PrintIcon")
 let PuzzleIcon = UIImage(named: "PuzzlePieces")
 let BrokenSaveIcon = UIImage(named:"BrokenSaveIcon")
+let FlipIconImage = UIImage(named: "FlipIcon")
+let KeyPadImage = UIImage(named: "ShapeKeyPad")
+let NewPieceButton = UIImage(named: "NewPieceButton")
 
 
 // For putting markers out of sight.

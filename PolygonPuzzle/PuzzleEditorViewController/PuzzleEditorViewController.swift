@@ -36,7 +36,6 @@ class PuzzleEditor: UIViewController {
     
     @objc func printPuzzle(sender: UIButton) {
         saveAllPolygonsToPhotos()
-        savePuzzleToCoreData(polygons: AllPolygons, name: "MyFirstPuzzle",dim: InitialPolygonDim)
         parachute.setText(message: "Puzzle Saved To Photos")
         parachute.showParachute()
     }
@@ -422,7 +421,7 @@ class PuzzleEditor: UIViewController {
         view.addSubview(cuttingView)
         view.addSubview(printButton)
         view.addSubview(backButton)
-        view.addSubview(savePolygonButton)
+        //view.addSubview(savePolygonButton)
         
         // -------------- Setting State ---------------
 
@@ -470,15 +469,7 @@ class PuzzleEditor: UIViewController {
         
         
         AllPolygons.append(initialPolygon)
-        
-        /*
-        AllPolygons = buildPolygonsFromRawPuzzle(_scale: InitialPolygonDim)
-        
-        for p in AllPolygons {
-            view.addSubview(p)
-        }
- 
-        */
+
         
         // Gotta reset this when we start over. (this will be depracated)
         SisterIndex = 0
@@ -489,7 +480,7 @@ class PuzzleEditor: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         parachute = Parachute(frame: self.view.frame)
-        parachute.setText(message: "Hello Again!")
+        parachute.frame.styleHideParachute(container: self.view.frame)
         view.addSubview(parachute)
         view.bringSubview(toFront: parachute)
         

@@ -23,30 +23,45 @@ class DesignViewController: UIViewController  {
     var rotateButton = UIButton()
     var trashButton = UIButton()
     var palleteButton = UIButton()
+    var flipButton = UIButton()
     var notification: Parachute!
     var rotateCounter: Double = 0
+    var newPieceButton = UIButton()
+    var n = 1
+    
+    var rotationOfCurrentPiece: CGFloat = 0
+    let scaleXOfCurrentPiece: CGFloat = 1
+    let scaleYOfCurrentPiece: CGFloat = 1
+    
     
 
     @objc func rotate(sender: UIButton) {
         
-        print("trying to rotate")
         
-        let currentRotation = atan2(ActivePolygon.transform.b, ActivePolygon.transform.a)
-        let newRotation = currentRotation + CGFloat((90.0 * .pi) / 180.0)
         
-        UIView.animate(withDuration: 1, animations: {ActivePolygon.transform = CGAffineTransform(rotationAngle: newRotation)})
+        print("trying to rotate and the current rotation is",rotationOfCurrentPiece)
+        if AllPolygons.count != 0 {
         
-   
-       
-        // Reset the transform so it rotates again the second time.
-      
-   
+            let currentScaleX = ActivePolygon.transform.a
+            let currentScaleY = ActivePolygon.transform.d
+            print("currentScaleX,currentScaleY",currentScaleX,currentScaleY)
+            let newRotation = rotationOfCurrentPiece + CGFloat((90.0 * .pi) / 180.0)
+            print("newRotation",newRotation)
+        
+            UIView.animate(withDuration: 1, animations: {ActivePolygon.transform = CGAffineTransform(rotationAngle: newRotation)})
+            
+        
+        
+        }
+        
+        rotationOfCurrentPiece = atan2(ActivePolygon.transform.b, ActivePolygon.transform.a)
+        
+        
     }
     
     @objc func trash(sender: UIButton) {
         print("trash clicked")
         if AllPolygons.count != 0 {
-            print("trying to remove from trash")
             ActivePolygon.removeFromSuperview()
             AllPolygons.remove(at: ActivePolygonIndex)
             PolygonsOnPallette = AllPolygons
@@ -54,9 +69,17 @@ class DesignViewController: UIViewController  {
     }
     
     @objc func segueToPallete(sender: UIButton) {
-        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "PalleteViewController")
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "PalletteViewController")
         
         self.show(vc as! UIViewController, sender: vc)
+    }
+    
+    @objc func flip(sender: UIButton){
+     sender.isEnabled = false
+        let _ = Timer.scheduledTimer(withTimeInterval: 1.1, repeats: false, block: {_ in sender.isEnabled = true})
+ 
+        ActivePolygon.polygonLayer.flip()
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -67,7 +90,14 @@ class DesignViewController: UIViewController  {
     
     @objc func goBack(sender: UIButton) {
 
-        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "LandingViewController")
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "EntryPointViewController")
+        self.show(vc as! UIViewController, sender: vc)
+        
+    }
+    
+    @objc func segueToNewPieceViewController(sender: UIButton) {
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "PieceMakerViewController")
         self.show(vc as! UIViewController, sender: vc)
         
     }
@@ -87,15 +117,7 @@ class DesignViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Can I do this programmatically?
-        //collectionView.dataSource = self as? UICollectionViewDataSource
-        //collectionView.delegate = self as? UICollectionViewDelegate
-        
         view.tag = 1
-        
-        // AllPolygons is so global that it works kind of like a "Scratch Pad" We can just assign it whatever polygons we want to work on and they behave just like they would in the cutting view. Even if there is no cutting. 
-        
-        AllPolygons = PolygonsOnPallette
         
         // ----------- init ----------------------
 
@@ -108,7 +130,9 @@ class DesignViewController: UIViewController  {
         backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
         trashButton.addTarget(self, action: #selector(trash(sender:)), for: .touchUpInside)
         rotateButton.addTarget(self, action: #selector(rotate(sender:)), for: .touchUpInside)
+        flipButton.addTarget(self, action: #selector(flip(sender:)), for: .touchUpInside)
         palleteButton.addTarget(self, action: #selector(segueToPallete(sender:)), for: .touchUpInside)
+        newPieceButton.addTarget(self, action: #selector(segueToNewPieceViewController(sender:)), for: .touchUpInside)
         
         // ---------- Adding The Views -----------
         
@@ -117,6 +141,12 @@ class DesignViewController: UIViewController  {
         view.addSubview(trashButton)
         view.addSubview(rotateButton)
         view.addSubview(palleteButton)
+        view.addSubview(newPieceButton)
+        view.addSubview(flipButton)
+        
+        // AllPolygons is so global that it works kind of like a "Scratch Pad" We can just assign it whatever polygons we want to work on and they behave just like they would in the cutting view. Even if there is no cutting.
+        
+        AllPolygons = PolygonsOnPallette
         
         if AllPolygons.count != 0 {
             for p in AllPolygons {
@@ -125,13 +155,17 @@ class DesignViewController: UIViewController  {
         }
         
         
+        
+        
         // -------------- Setting State ---------------
         
         backButton.setImage(BackImage, for: .normal)
         backGround.image = BackGround
         trashButton.setImage(TrashIcon, for: .normal)
         rotateButton.setImage(RotateIcon, for: .normal)
-        palleteButton.setImage(DesignButtonImage, for: .normal)
+        palleteButton.setImage(KeyPadImage, for: .normal)
+        flipButton.setImage(FlipIconImage, for: .normal)
+        newPieceButton.setImage(NewPieceButton, for: .normal)
 
 
         // -----  Ordering Views ------------
@@ -144,7 +178,9 @@ class DesignViewController: UIViewController  {
         backGround.frame.styleFillContainer(container: view.frame)
         trashButton.frame.styleBottomLeft(container: view.frame)
         rotateButton.frame.styleBottomRight(container: view.frame)
-        palleteButton.frame.styleBottomMiddle(container: view.frame)
+        //palleteButton.frame.styleTopRight(container: view.frame)
+        flipButton.frame.styleBottomMiddle(container: view.frame)
+        newPieceButton.frame.styleTopRight(container: view.frame)
 
         // ----- Finishing Touches ---------------
     }

@@ -47,6 +47,8 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
         // segue to solving view controller.
         // Need to start naming puzzle.
         
+        print("puzzle selected")
+        
         let i = indexPath.row
         
         let puzzleName = FetchedPuzzles[i].name
@@ -70,6 +72,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "puzzleCell", for: indexPath) as! PuzzleCell
     
+        print("puzzleCollectionview data source count",puzzleCollectionViewDataSource.count)
 
         cell.drawPuzzle(cache: puzzleCollectionViewDataSource[i])
         
@@ -79,7 +82,7 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     @objc func goBack(sender: UIButton) {
         
-        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "LandingViewController")
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "EntryPointViewController")
         
         self.show(vc as! UIViewController, sender: vc)
         
@@ -115,22 +118,18 @@ class PuzzleViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         
         // -----  Ordering Views ------------
-        
-        //view.bringSubview(toFront: ActivePolygon)
+    
         view.sendSubview(toBack: backGround)
         
         
         // ------------ Adding Styles ----------------------
         
-        //ActivePolygon.center = self.view.center
         backGround.frame.styleFillContainer(container: view.frame)
         backButton.frame.styleTopLeft(container: view.frame)
         
         // ----- Finishing Touches ---------------
         
-        
-        print("fetchedPuzzleCount",FetchedPuzzles.count)
-        
+    
     }
     
     override func didReceiveMemoryWarning() {

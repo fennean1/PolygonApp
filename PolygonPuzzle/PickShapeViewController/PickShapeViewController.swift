@@ -9,77 +9,47 @@
 
 // ----------- Action Items --------------
 
-/*
- 
- 
- NEXT) Make it so that the button views get added again
- NEXT) Shrink the undo button and make it animate!
- 
- 
- 0) Start and End can't be the same point*
- 
- 1) Must be able to delete saved puzzle
- 
- 1) Bug where an endpoint is inside of the polygon but it still tried to clip to node. Might need a function that tells me
- if a point is on the border of the polygon. UPDATE: This appears to be resolved but keep an eye on it.
- 
- 2) Need support for when a cut occurs along a single edge (i.e. trying to cut parallel to an edge)
- 
- 3) Note: When a straight line is formed by the vertex and the endpoints
- 
- 4) Back Button needs to be active when cutting and also successfully reset when exited.
- 
- 5) Back button needs to save current cutting state for that view - need a different cutting state for each time the vc has been entered.
- 
- 6) Need to handle situation where the vertex & endpoints form a straight line. - Check the angle formed by the vertex and end points and if i'ts 180, revert to a straight line cut.
- 
- 7) Triangle is not centered.
- 
- 8) Handle case where StartOfCut = EndOfCut
- 
- 9) Border color has to match color for tens place
- 
- 10) Should be able to flip polygons in design view. - Polygons need to store whether or not their flipped and also the angle
- 
- 11) Should be able to save tanagram as wireframe to phone.
- 
- 12) Watch out for the issue where the cutting line hangs around - really not sure why this happens.
- 
- 13) When two points are extremely close, remove one of them.
- 
- 14) When the puzzle is put together we need to make sure that the rotation is also zero. A piece could have an origin in the right spot
- but it's rotated the wrong way.
- 
- */
-
-// ------------- Concerns ----------------
-
-/*
- 
- Currently using "remove duplicate nodes" to fix  - not sure if this is safer or more dangerous.
- 
- UPDATE: No issues yet.
- 
- */
-
 
 import Foundation
 import UIKit
 import Darwin
 
+var numberOfSides = 3
 
-class EntryPointViewController: UIViewController {
+class ShapeButton: UIButton {
+    
+    var n = 0
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        let cx = frame.origin.x
+        let cy = frame.origin.y
+        self.center = CGPoint(x: cx, y: cy)
+        self.frame.size = frame.size
+        
+    }
+    
+}
+
+
+class LandingViewController: UIViewController {
     
     var shapeButtons: [ShapeButton] = []
     var segueToDesignViewController = UIButton()
     var segueToPuzzleViewController = UIButton()
     var backGround = UIImageView()
-    
-    var optionSolve = OptionButton()
-    var optionCreate = OptionButton()
-    var optionDesign = OptionButton()
-    
+
     var screenWidth: CGFloat = 0
+    
+    
+    var backButton = UIButton()
     
     
     @objc func segueGameViewController(sender: ShapeButton){
@@ -94,7 +64,7 @@ class EntryPointViewController: UIViewController {
     
     @objc func segueToDesignViewController(sender: UIButton){
         print("segue to DesignViewController")
-        
+
         let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "DesignViewController")
         
         self.show(vc as! UIViewController, sender: vc)
@@ -109,6 +79,14 @@ class EntryPointViewController: UIViewController {
         self.show(vc as! UIViewController, sender: vc)
         
     }
+    
+    @objc func goBack(sender: UIButton) {
+        
+        let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "EntryPointViewController")
+        self.show(vc as! UIViewController, sender: vc)
+        
+    }
+    
     
     func initShapeButtons(r: CGFloat){
         
@@ -139,23 +117,14 @@ class EntryPointViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        view.addSubview(optionSolve)
-        optionSolve.frame.styleOptionButton(order: 1, container: view.frame)
-        
-        
-        
-        // Init
-        
-        
         
         InitialPolygonDim = 0.8*view.frame.width
         ViewControllerFrame = view.frame
-        
+
         backGround.image = BackGround
         screenWidth = view.frame.width
         let r = screenWidth/3
-        
+
         segueToPuzzleViewController.setImage(PuzzleIcon, for: .normal)
         segueToDesignViewController.setImage(PalleteIcon, for: .normal)
         
@@ -163,8 +132,7 @@ class EntryPointViewController: UIViewController {
         
         view.addSubview(segueToDesignViewController)
         view.addSubview(backGround)
-        view.addSubview(segueToPuzzleViewController)
-        
+   
         // Style
         
         backGround.frame.styleFillContainer(container: view.frame)
@@ -183,22 +151,16 @@ class EntryPointViewController: UIViewController {
         segueToDesignViewController.addTarget(self, action: #selector(segueToDesignViewController(sender:)), for: .touchUpInside)
         segueToPuzzleViewController.addTarget(self, action: #selector(segueToPuzzleViewController(sender:)), for: .touchUpInside)
         
-        view.bringSubview(toFront: segueToDesignViewController)
+        backButton.addTarget(self, action: #selector(goBack(sender:)), for: .touchUpInside)
+        
         view.bringSubview(toFront: segueToPuzzleViewController)
         
+
         
-        /*
-         if firstLoad() {
-         loadRawPuzzlesToCoreData()
-         }
-         */
-        
-        if let p = fetchAllPuzzles() {
-            FetchedPuzzles = p
-            puzzleCollectionViewDataSource = initPuzzleCollectionViewDataSource(puzzles: p,dim: 250)
-        }
-        
-        
+        view.addSubview(backButton)
+        backButton.frame.styleTopLeft(container: view.frame)
+        backButton.setImage(BackImage, for: .normal)
+    
     }
     
     override func didReceiveMemoryWarning() {

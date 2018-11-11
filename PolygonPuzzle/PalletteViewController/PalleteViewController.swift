@@ -104,14 +104,7 @@ class PalleteViewController: UIViewController, UICollectionViewDelegate, UIColle
         //ActivePolygon.center = self.view.center
         backGround.frame.styleFillContainer(container: view.frame)
         backButton.frame.styleTopLeft(container: view.frame)
-        
-        // ----- Finishing Touches ---------------
-        
-        // Need to fetch PallettePuzzle
-        
-        
-        
-    
+ 
     }
     
     override func didReceiveMemoryWarning() {

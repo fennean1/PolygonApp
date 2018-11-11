@@ -8,6 +8,7 @@
 
 // Determines what fraction we take in order to create the dimensions of action buttons
 let compressionFactor: CGFloat = 10
+let topMarginFactor: CGFloat = 0.75
 
 import Foundation
 import UIKit
@@ -19,8 +20,9 @@ extension CGRect {
         
         let h = container.height/7
         let w = 0.8*container.width
-        let y = CGFloat(order)*h
+        let y = CGFloat(order)*1.2*h
         let x = container.width/2 - w/2
+
         
         self = CGRect(x: x, y: y, width: w, height: h)
         
@@ -35,7 +37,7 @@ extension CGRect {
         let w = h
     
         let x: CGFloat = container.width - 1.5*w
-        let y: CGFloat = 0.5*h
+        let y: CGFloat = topMarginFactor*h
     
         self = CGRect(x: x, y: y, width: w, height: h)
     
@@ -48,7 +50,7 @@ extension CGRect {
         let w = h
         
         let x: CGFloat = 0.5*w
-        let y: CGFloat = 0.5*h
+        let y: CGFloat = topMarginFactor*h
         
         self = CGRect(x: x, y: y, width: w, height: h)
         
@@ -152,7 +154,7 @@ extension CGRect {
         let w = h
 
         let x: CGFloat = container.width - 1.5*w
-        let y: CGFloat = 1.5*h
+        let y: CGFloat = h+topMarginFactor*h
         
         self = CGRect(x: x, y: y, width: w, height: h)
         

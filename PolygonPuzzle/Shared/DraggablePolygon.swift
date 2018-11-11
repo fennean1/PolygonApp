@@ -13,38 +13,82 @@ class PolygonLayer: CAShapeLayer {
     
     public var myColor: CGColor!
     public var myBorderColor: CGColor!
+    var myNodes: [Node] = []
+    var colorOverride = false
     
-    func drawPolygon(at _nodes: [Node]){
+    func flip() {
+        let theNewPath = UIBezierPath()
+        let d = self.frame.height
+        print("height of polygon when flipping",d)
         
-        // Calculate the color based on the number of nodes
-        myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
+        var tempNodes = myNodes
         
-        var tempNodes = _nodes
-
-        self.opacity = 1
-        self.lineWidth = 1
-        self.strokeColor = UIColor.black.cgColor
+        theNewPath.move(to: CGPoint(x: tempNodes[0].location.x,y: d - tempNodes[0].location.y))
+        myNodes[0].location = CGPoint(x: tempNodes[0].location.x,y: d - tempNodes[0].location.y)
+        tempNodes.remove(at: 0)
         
-        if _nodes.count >= 10 {
-            self.lineWidth = self.frame.width/50
-            self.strokeColor = OneColor.cgColor
+        for (i,n) in tempNodes.enumerated() {
+            let addTo = CGPoint(x: n.location.x, y: d -  n.location.y)
+            myNodes[i+1].location = CGPoint(x: n.location.x, y: d -  n.location.y)
+            theNewPath.addLine(to: addTo)
         }
         
+        CATransaction.begin()
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.toValue = theNewPath.cgPath
+        animation.duration = 1
+        
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut) // animation curve is Ease Out
+        animation.fillMode = kCAFillModeBoth // keep to value after finishing
+        animation.isRemovedOnCompletion = false
+        
+        // Callback function
+        CATransaction.setCompletionBlock {
+            self.drawPolygon(at: self.myNodes)
+        }
+        
+        self.add(animation, forKey: animation.keyPath)
+        
+        CATransaction.commit()
+        
+     
+    
+    }
+    
+    func drawPolygon(at _nodes: [Node]){
+        myNodes = _nodes
+        self.lineWidth = 0
+        
+        
+        // Calculate the color based on the number of nodes
+        if colorOverride == false {
+            self.opacity = 1
+            self.lineWidth = 1
+            self.strokeColor = UIColor.black.cgColor
+            myColor = getColorFromNumberOfSides(n: _nodes.count,opacity: 1.0)
+            if _nodes.count >= 10 {
+                self.lineWidth = self.frame.width/50
+                self.strokeColor = colorForOne.cgColor
+            }
+        }
+        
+        var tempNodes = _nodes
+        
         self.fillColor = myColor    
+    
+        let thePath = UIBezierPath()
         
-        let path = UIBezierPath()
-        
-        path.move(to: CGPoint(x: tempNodes[0].location.x,y: tempNodes[0].location.y))
+        thePath.move(to: CGPoint(x: tempNodes[0].location.x,y: tempNodes[0].location.y))
         tempNodes.remove(at: 0)
         
         for n in tempNodes {
             let addTo = CGPoint(x: n.location.x, y: n.location.y)
-            path.addLine(to: addTo)
+            thePath.addLine(to: addTo)
         }
         
-        path.close()
-        // Don't need this anymore I don't think.
-        self.path = path.cgPath
+        thePath.close()
+        
+        self.path = thePath.cgPath
         
     }
     
